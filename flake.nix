@@ -51,7 +51,7 @@
 
         nixosConfigurations = {
           kickstart-nixos = { pkgs, ... }: withSystem pkgs.stdenv.hostPlatform.system (ctx@{ config, inputs', ... }:
-            {
+            inputs.nixpkgs.lib.nixosSystem {
               # modules: allows for reusable code
               modules = [
                 {
