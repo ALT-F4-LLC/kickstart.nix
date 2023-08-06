@@ -59,11 +59,16 @@
               # modules: allows for reusable code
               modules = [
                 {
+                  boot.loader.systemd-boot.enable = true;
+                  boot.loader.efi.canTouchEfiVariables = true;
                   users.mutableUsers = false;
-                  users.users."${username}".extraGroups = [ "wheel" ];
-                  users.users."${username}".password = "password";
-                  users.users."${username}".home = "/home/${username}";
-                  users.users."${username}".isNormalUser = true;
+                  users.users."${username}" = {
+                    extraGroups = [ "wheel" ];
+                    home = "/home/${username}";
+                    isNormalUser = true;
+                    password = "password";
+                  };
+                  system.stateVersion = "23.05";
                 }
                 hardware-config
                 system-config
