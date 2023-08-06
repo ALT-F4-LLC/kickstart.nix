@@ -12,18 +12,14 @@
   outputs = inputs@{ flake-parts, self, ... }:
     let
       ### START OPTIONS ###
-      # system: aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
-      system = "<insert system here>";
-      # username: should match your host username
-      username = "<insert username here>";
+      system = "<insert system here>"; # aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
+      username = "<insert username here>"; # should match your host username
       ### END OPTIONS ###
 
-      ### START FUNCTIONS ###
-      # system-config: maintains all nix system options
-      system-config = import ./modules/configuration.nix { inherit username; };
-      # home-manager-config: maintains all home-manager user options
-      home-manager-config = import ./modules/home-manager.nix;
-      ### END FUNCTIONS ###
+      ### START MODULES ###
+      system-config = import ./modules/configuration.nix { inherit username; }; # maintains nix options
+      home-manager-config = import ./modules/home-manager.nix; # maintains home-manager user options
+      ### END MODULES ###
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       # systems: archs this flake supports (can be more than 1 system)
