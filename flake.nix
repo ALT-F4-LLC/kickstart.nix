@@ -12,7 +12,6 @@
   outputs = inputs@{ flake-parts, self, ... }:
     let
       ### START OPTIONS ###
-      system = "<insert system here>"; # aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
       username = "<insert username here>"; # should match your host username
       ### END OPTIONS ###
 
@@ -22,40 +21,37 @@
       home-manager-config = import ./modules/home-manager.nix; # maintains home-manager user options
       ### END MODULES ###
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ config, withSystem, flake-parts-lib, ... }: {
       # systems: archs this flake supports (can be more than 1 system)
       systems = [ "aarch64-darwin" "aarch64-linux" ];
       flake = {
         darwinConfigurations = {
-          kickstart-darwin = inputs.darwin.lib.darwinSystem
-            {
-              # system: supports only 1 system
-              system = "aarch64-darwin";
-              # modules: allows for reusable code
-              modules = [
-                {
-                  services.nix-daemon.enable = true;
-                  users.users.${username}.home = "/Users/${username}";
-                }
-                system-config
+          kickstart-darwin = { pkgs, ... }: withSystem pkgs.stdenv.hostPlatform.system (ctx@{ config, inputs', ... }:
+            inputs.darwin.lib.darwinSystem
+              {
+                # modules: allows for reusable code
+                modules = [
+                  {
+                    services.nix-daemon.enable = true;
+                    users.users.${username}.home = "/Users/${username}";
+                  }
+                  system-config
 
-                inputs.home-manager.darwinModules.home-manager
-                {
-                  # add home-manager settings here
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users."${username}" = home-manager-config;
-                }
-                # add more nix modules here
-              ];
-            };
+                  inputs.home-manager.darwinModules.home-manager
+                  {
+                    # add home-manager settings here
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.users."${username}" = home-manager-config;
+                  }
+                  # add more nix modules here
+                ];
+              });
         };
 
         nixosConfigurations = {
-          kickstart-nixos = inputs.nixpkgs.lib.nixosSystem
+          kickstart-nixos = { pkgs, ... }: withSystem pkgs.stdenv.hostPlatform.system (ctx@{ config, inputs', ... }:
             {
-              # system: supports only 1 system
-              system = "aarch64-linux";
               # modules: allows for reusable code
               modules = [
                 {
@@ -79,10 +75,10 @@
                 system-config
                 # add more nix modules here
               ];
-            };
+            });
         };
       };
-    };
+    });
 }
 
 
