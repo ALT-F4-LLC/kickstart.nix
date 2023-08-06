@@ -8,7 +8,7 @@ Kickstart your Nix environment.
 
 ## Setup
 
-Below provides multiple ways kickstart your Nix environment depending on your operating system.
+Below provides multiple ways to setup your Nix environment depending on your operating system.
 
 ### macOS
 
@@ -77,6 +77,8 @@ darwin-rebuild switch --flake ".#kickstart-darwin"
 ```
 
 ## Customize
+
+Below provides multiple ways to customize your Nix environment depending on your operating system.
 
 ### Nix
 
