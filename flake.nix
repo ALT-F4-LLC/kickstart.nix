@@ -17,21 +17,25 @@
       ### END OPTIONS ###
 
       ### START MODULES ###
-      system-config = import ./modules/configuration.nix { inherit username; }; # maintains nix options
+      system-config = import ./modules/configuration.nix; # maintains nix options
       home-manager-config = import ./modules/home-manager.nix; # maintains home-manager user options
       ### END MODULES ###
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       # systems: archs this flake supports (can be more than 1 system)
-      systems = [ system ];
+      systems = [ "aarch64-darwin" "aarch64-linux" ];
       flake = {
         darwinConfigurations = {
           kickstart-darwin = inputs.darwin.lib.darwinSystem
             {
               # system: supports only 1 system
-              system = system;
+              system = "aarch64-darwin";
               # modules: allows for reusable code
               modules = [
+                {
+                  services.nix-daemon.enable = true;
+                  users.users.${username}.home = "/Users/${username}";
+                }
                 system-config
 
                 inputs.home-manager.darwinModules.home-manager
@@ -44,7 +48,22 @@
                 # add more nix modules here
               ];
             };
+
+          nixosConfigurations = {
+            kickstart-nixos = inputs.nixpkgs.lib.nixosSystem
+              {
+                # system: supports only 1 system
+                system = "aarch64-linux";
+                # modules: allows for reusable code
+                modules = [
+                  /etc/nixos/hardware-configuration.nix
+                  system-config
+                  # add more nix modules here
+                ];
+              };
+          };
         };
       };
     };
 }
+

@@ -1,5 +1,3 @@
-{ username }:
-
 {
   # add more nix-darwin settings here
   nix = {
@@ -18,6 +16,4 @@
     };
   };
   programs.zsh.enable = true;
-  services.nix-daemon.enable = true;
-  users.users.${username}.home = "/Users/${username}";
 }
