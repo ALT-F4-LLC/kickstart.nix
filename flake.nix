@@ -17,6 +17,7 @@
       ### END OPTIONS ###
 
       ### START MODULES ###
+      hardware-config = import ./modules/hardware-configuration.nix; # maintains hardware options
       system-config = import ./modules/configuration.nix; # maintains nix options
       home-manager-config = import ./modules/home-manager.nix; # maintains home-manager user options
       ### END MODULES ###
@@ -56,7 +57,14 @@
                 system = "aarch64-linux";
                 # modules: allows for reusable code
                 modules = [
-                  /etc/nixos/hardware-configuration.nix
+                  {
+                    users.mutableUsers = false;
+                    users.users."${username}".extraGroups = [ "wheel" ];
+                    users.users."${username}".password = "password";
+                    users.users."${username}".home = "/home/${username}";
+                    users.users."${username}".isNormalUser = true;
+                  }
+                  hardware-config
                   system-config
                   # add more nix modules here
                 ];
