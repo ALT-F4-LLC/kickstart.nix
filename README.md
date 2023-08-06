@@ -49,7 +49,7 @@ gh repo fork ALT-F4-LLC/kickstart.nix
 
 - Clone your new fork locally to customize before applying:
 
-> NOTE: You should be able to run the command below now.
+> NOTE: You should be able to run the following command by enabling features above.
 
 ```bash
 nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
@@ -58,10 +58,10 @@ nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
 - Update the following values in `flake.nix` configuration:
 
 ```nix
-    let
-        system = "<insert-archtype>"; # replace
-        username = "<insert-username>"; # replace
-    in
+let
+    system = "<insert-archtype>"; # replace
+    username = "<insert-username>"; # replace
+in
 ```
 
 - Switch to `kickstart.nix` environment with flake configuration:

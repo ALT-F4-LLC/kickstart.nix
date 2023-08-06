@@ -11,8 +11,10 @@
 
   outputs = inputs@{ flake-parts, self, ... }:
     let
-      system = "example";
-      username = "example";
+      # system: aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
+      system = "<insert-system>";
+      # username: should match your host username
+      username = "<insert-username>";
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ system ];
@@ -22,35 +24,38 @@
             {
               system = system;
               modules = [
+                {
+                  nix = {
+                    settings = {
+                      auto-optimise-store = true;
+                      builders-use-substitutes = true;
+                      experimental-features = [ "nix-command" "flakes" ];
+                      substituters = [
+                        "https://nix-community.cachix.org"
+                      ];
+                      trusted-public-keys = [
+                        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                      ];
+                      trusted-users = [ "@wheel" ];
+                      warn-dirty = false;
+                    };
+                  };
+                  programs.zsh.enable = true;
+                  services.nix-daemon.enable = true;
+                  users.users.${username}.home = "/Users/${username}";
+                }
+
                 inputs.home-manager.darwinModules.home-manager
                 {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
                   home-manager.users."${username}" = { pkgs, ... }: {
-                    home.packages = [ pkgs.neovim ];
+                    home.packages = [ pkgs.git pkgs.neovim ];
+                    home.stateVersion = "23.05";
                   };
                 }
               ];
             };
-        };
-
-        nixosConfigurations = {
-          kickstart-nixos = inputs.nixpkgs.lib.nixosSystem {
-            inherit system;
-            modules = [
-              # copy this from your NixOS host at /etc/nix/hardward-configuration.nix
-              # ./hardware-configuration.nix
-
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users."${username}" = { pkgs, ... }: {
-                  home.packages = [ pkgs.neovim ];
-                };
-              }
-            ];
-          };
         };
       };
     };
