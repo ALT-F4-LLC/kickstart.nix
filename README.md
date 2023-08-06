@@ -26,7 +26,7 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 Would you like to edit the default configuration.nix before starting? [y/n] y
 ```
 
-- Add the following `configuration.nix` to enable `nix-command` and `flakes` features:
+- Add the following to `configuration.nix` to enable `nix-command` and `flakes` features:
 
 ```nix
 {
