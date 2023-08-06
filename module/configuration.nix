@@ -1,5 +1,5 @@
 {
-  # add more nix-darwin settings here
+  # add more system settings here
   nix = {
     settings = {
       auto-optimise-store = true;
