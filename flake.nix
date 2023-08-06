@@ -49,27 +49,27 @@
                 # add more nix modules here
               ];
             };
+        };
 
-          nixosConfigurations = {
-            kickstart-nixos = inputs.nixpkgs.lib.nixosSystem
-              {
-                # system: supports only 1 system
-                system = "aarch64-linux";
-                # modules: allows for reusable code
-                modules = [
-                  {
-                    users.mutableUsers = false;
-                    users.users."${username}".extraGroups = [ "wheel" ];
-                    users.users."${username}".password = "password";
-                    users.users."${username}".home = "/home/${username}";
-                    users.users."${username}".isNormalUser = true;
-                  }
-                  hardware-config
-                  system-config
-                  # add more nix modules here
-                ];
-              };
-          };
+        nixosConfigurations = {
+          kickstart-nixos = inputs.nixpkgs.lib.nixosSystem
+            {
+              # system: supports only 1 system
+              system = "aarch64-linux";
+              # modules: allows for reusable code
+              modules = [
+                {
+                  users.mutableUsers = false;
+                  users.users."${username}".extraGroups = [ "wheel" ];
+                  users.users."${username}".password = "password";
+                  users.users."${username}".home = "/home/${username}";
+                  users.users."${username}".isNormalUser = true;
+                }
+                hardware-config
+                system-config
+                # add more nix modules here
+              ];
+            };
         };
       };
     };
