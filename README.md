@@ -20,7 +20,7 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
 
-- Answer the following with `y` to edit your existing `nix.conf`:
+- Answer the following with `y` to edit your default `configuration.nix` file:
 
 ```bash
 Would you like to edit the default configuration.nix before starting? [y/n] y
