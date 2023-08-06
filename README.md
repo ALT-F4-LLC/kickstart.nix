@@ -43,7 +43,7 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 Would you like to manage <darwin> with nix-channel? [y/n] y
 ```
 
-- Fork this repository to create your own flake to start with.
+6. Fork this repository to create your own flake to start with.
 
 > NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
 
@@ -51,7 +51,7 @@ Would you like to manage <darwin> with nix-channel? [y/n] y
 gh repo fork ALT-F4-LLC/kickstart.nix
 ```
 
-6. Clone your new fork locally to customize before applying:
+7. Clone your new fork locally to customize before applying:
 
 > NOTE: You should be able to run the following command by enabling features above.
 
@@ -59,7 +59,7 @@ gh repo fork ALT-F4-LLC/kickstart.nix
 nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
 ```
 
-7. Update the following values in `flake.nix` configuration:
+8. Update the following values in `flake.nix` configuration:
 
 ```nix
 let
@@ -68,7 +68,7 @@ let
 in
 ```
 
-8. Switch to `kickstart.nix` environment with flake configuration:
+9. Switch to `kickstart.nix` environment with flake configuration:
 
 > NOTE: You must be inside your forked repository directory.
 
