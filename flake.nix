@@ -61,6 +61,11 @@
                 {
                   boot.loader.systemd-boot.enable = true;
                   boot.loader.efi.canTouchEfiVariables = true;
+                  security.sudo.enable = true;
+                  security.sudo.wheelNeedsPassword = false;
+                  services.openssh.enable = true;
+                  services.openssh.passwordAuthentication = false;
+                  services.openssh.permitRootLogin = "no";
                   users.mutableUsers = false;
                   users.users."${username}" = {
                     extraGroups = [ "wheel" ];
@@ -79,4 +84,5 @@
       };
     };
 }
+
 
