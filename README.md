@@ -1,10 +1,6 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
-## Overview
-
-We want to provide multiple examples on how to setup Nix on various systems.
-
 ## Setup
 
 Below provides multiple ways kickstart your Nix environment depending on your operating system.
