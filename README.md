@@ -20,7 +20,13 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
 
-- Add the following to `~/.nixpkgs/darwin-configuration.nix` to enable `nix-command` and `flakes` features:
+- Answer the following with `y` to edit your default `configuration.nix` file:
+
+```bash
+Would you like to edit the default configuration.nix before starting? [y/n] y
+```
+
+- Add the following to `configuration.nix` to enable `nix-command` and `flakes` features:
 
 ```nix
 {
@@ -28,10 +34,10 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 }
 ```
 
-- Update your environment with `darwin-rebuild` to apply changes:
+- Answer the following with `y` to setup `<darwin>` in `nix-channel` (though it won't be used):
 
 ```bash
-darwin-rebuild switch
+Would you like to manage <darwin> with nix-channel? [y/n] y
 ```
 
 - Fork this repository to create your own flake to start with.
