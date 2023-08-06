@@ -11,10 +11,19 @@
 
   outputs = inputs@{ flake-parts, self, ... }:
     let
+      ### START OPTIONS ###
       # system: aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
-      system = "<insert-system>";
+      system = "<insert system here>";
       # username: should match your host username
-      username = "<insert-username>";
+      username = "<insert username here>";
+      ### END OPTIONS ###
+
+      ### START FUNCTIONS ###
+      # system-config: maintains all nix system options
+      system-config = import ./modules/configuration.nix { inherit username; };
+      # home-manager-config: maintains all home-manager user options
+      home-manager-config = import ./modules/home-manager.nix;
+      ### END FUNCTIONS ###
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       # systems: archs this flake supports (can be more than 1 system)
@@ -25,43 +34,17 @@
             {
               # system: supports only 1 system
               system = system;
+              # modules: allows for reusable code
               modules = [
-                {
-                  nix = {
-                    settings = {
-                      auto-optimise-store = true;
-                      builders-use-substitutes = true;
-                      experimental-features = [ "nix-command" "flakes" ];
-                      substituters = [
-                        "https://nix-community.cachix.org"
-                      ];
-                      trusted-public-keys = [
-                        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                      ];
-                      trusted-users = [ "@wheel" ];
-                      warn-dirty = false;
-                    };
-                  };
-                  programs.zsh.enable = true;
-                  services.nix-daemon.enable = true;
-                  users.users.${username}.home = "/Users/${username}";
-
-                  # add more nix-darwin settings here
-                }
+                system-config
 
                 inputs.home-manager.darwinModules.home-manager
                 {
                   # add home-manager settings here
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
-
-                  # add home-manager user settings here
-                  home-manager.users."${username}" = { pkgs, ... }: {
-                    home.packages = with pkgs; [ git neovim ];
-                    home.stateVersion = "23.05";
-                  };
+                  home-manager.users."${username}" = home-manager-config;
                 }
-
                 # add more nix modules here
               ];
             };
