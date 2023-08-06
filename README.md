@@ -5,7 +5,11 @@ Kickstart your Nix environment.
 
 We want to provide multiple examples on how to setup Nix on various systems.
 
-## Setup
+## Installation
+
+Below provides multiple ways kickstart your Nix environment depending on your operating system.
+
+### macOS
 
 - Install `nixpkgs` with official script
 
@@ -13,16 +17,17 @@ We want to provide multiple examples on how to setup Nix on various systems.
 sh <(curl -L https://nixos.org/nix/install)
 ```
 
-- Install `nix-darwin` (only for macOS)
+- Install `nix-darwin` with official steps
 
 ```bash
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
 
-- Create a simple flake using one of the examples below:
+- Create a simple flake using the examples below:
 
-#### macOS (using nix-darwin)
+> NOTE: Update any `<insert>` values with your own.
+
 ```nix
 {
   description = "Example kickstart Nix development setup.";
@@ -36,36 +41,48 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
   };
 
   outputs = inputs@{ flake-parts, self, ... }:
+    let
+      system = "<insert-archtype>";
+      username = "<insert-username>";
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-darwin" ];
-      flake =
-        let
-          system = "<insert-archtype>";
-          username = "<insert-username>";
-        in
-        {
-          darwinConfigurations = {
-            kickstart = inputs.darwin.lib.darwinSystem
-              {
-                system = system;
-                modules = [
-                  inputs.home-manager.darwinModules.home-manager
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.users."${username}" = { pkgs, ... }: {
-                      home.packages = [ pkgs.neovim ];
-                    };
-                  }
-                ];
-              };
-          };
+      systems = [ system ];
+      flake = {
+        darwinConfigurations = {
+          kickstart = inputs.darwin.lib.darwinSystem
+            {
+              system = system;
+              modules = [
+                inputs.home-manager.darwinModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users."${username}" = { pkgs, ... }: {
+                    home.packages = [ pkgs.neovim ];
+                  };
+                }
+              ];
+            };
         };
+      };
     };
 }
 ```
 
-#### NixOS 
+- Switch to `kickstart.nix` environment with flake configuration
+
+```bash
+darwin-rebuild switch --flake ".#kickstart"
+```
+
+### NixOS
+
+- Enable `nix-command` and `flakes` as `experimental-features` in your `nix.conf`
+
+- Create a simple flake using the examples below:
+
+> NOTE: Update any `<insert>` values with your own.
+
 ```nix
 {
   description = "Example kickstart Nix development setup.";
@@ -110,14 +127,6 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 }
 ```
 
-- Switch to `kickstart.nix` environment with flake configuration
-
-#### macOS
-```bash
-darwin-rebuild switch --flake ".#kickstart"
-```
-
-#### NixOS
 ```bash
 nixos-rebuild switch --flake ".#kickstart"
 ```
