@@ -17,11 +17,13 @@
       username = "<insert-username>";
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
+      # systems: archs this flake supports (can be more than 1 system)
       systems = [ system ];
       flake = {
         darwinConfigurations = {
           kickstart-darwin = inputs.darwin.lib.darwinSystem
             {
+              # system: supports only 1 system
               system = system;
               modules = [
                 {
@@ -43,17 +45,24 @@
                   programs.zsh.enable = true;
                   services.nix-daemon.enable = true;
                   users.users.${username}.home = "/Users/${username}";
+
+                  # add more nix-darwin settings here
                 }
 
                 inputs.home-manager.darwinModules.home-manager
                 {
+                  # add home-manager settings here
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
+
+                  # add home-manager user settings here
                   home-manager.users."${username}" = { pkgs, ... }: {
-                    home.packages = [ pkgs.git pkgs.neovim ];
+                    home.packages = with pkgs; [ git neovim ];
                     home.stateVersion = "23.05";
                   };
                 }
+
+                # add more nix modules here
               ];
             };
         };
