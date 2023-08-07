@@ -1,7 +1,5 @@
-{ username }:
-
 {
-  # add more nix-darwin settings here
+  # add more system settings here
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -18,6 +16,4 @@
     };
   };
   programs.zsh.enable = true;
-  services.nix-daemon.enable = true;
-  users.users.${username}.home = "/Users/${username}";
 }

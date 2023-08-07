@@ -1,14 +1,24 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
+
 ## Table of Contents
 
-- [Setup](#setup)
-- [Customize](#customize)
+- [Prerequisites](#prerequisites)
+- [Initial Setup](#initial-setup)
+- [Personalizing Your Environment](#personalizing-your-environment)
 
-## Setup
 
-Below provides multiple ways to setup your Nix environment depending on your operating system.
+## Prerequisites
+
+- Familiarity with terminal commands.
+- An account on [GitHub](https://github.com/) for forking the repository.
+- [GitHub CLI](https://github.com/cli/cli) (`gh`) installed for some commands.
+
+
+## Initial Setup
+
+Choose the appropriate setup instructions based on your operating system.
 
 ### macOS
 
@@ -43,7 +53,7 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 Would you like to manage <darwin> with nix-channel? [y/n] y
 ```
 
-6. Fork this repository to create your own flake to start with.
+6. Fork this repository to create your own flake kickstart.
 
 > NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
 
@@ -51,7 +61,7 @@ Would you like to manage <darwin> with nix-channel? [y/n] y
 gh repo fork ALT-F4-LLC/kickstart.nix
 ```
 
-7. Clone your new fork locally to customize before applying:
+7. Clone your new fork locally to customize:
 
 > NOTE: You should be able to run the following command by enabling features above.
 
@@ -59,34 +69,83 @@ gh repo fork ALT-F4-LLC/kickstart.nix
 nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
 ```
 
-8. Update the following values in `flake.nix` configuration:
+8. Update the following value(s) in `flake.nix` configuration:
 
 ```nix
 let
-    system = "<insert-archtype>"; # replace
     username = "<insert-username>"; # replace
 in
 ```
 
-9. Switch to `kickstart.nix` environment with flake configuration:
-
-> NOTE: You must be inside your forked repository directory.
+9. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-darwin-rebuild switch --flake ".#kickstart-darwin"
+darwin-rebuild switch --flake ".#darwin-aarch64" # for M1/M2 Chipsets
+darwin-rebuild switch --flake ".#darwin-x86_64" # for Intel Chipsets
 ```
 
-## Customize
+### NixOS
 
-Below provides multiple ways to customize your Nix environment depending on your operating system.
+1. Add the following to `/etc/nixos/configuration.nix` to enable `nix-command` and `flakes` features:
 
-### Nix
+```nix
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
 
-Nix system related options exist in `./modules/configuration.nix`.
+2. Update you system to reflect the changes:
 
-### Home Manager
+```bash
+nixos-rebuild switch
+```
 
-Home Manager related options exist in two places:
+3. Fork this repository to create your own flake kickstart.
 
-- global options in `./flake.nix`
-- user options in `./modules/home-manager.nix`
+> NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
+
+```bash
+gh repo fork ALT-F4-LLC/kickstart.nix
+```
+
+4. Clone your new fork locally to customize:
+
+> NOTE: You should be able to run the following command by enabling features above.
+
+```bash
+nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
+```
+
+5. Update the following value(s) in `flake.nix` configuration:
+
+```nix
+let
+    username = "<insert-username>"; # replace
+in
+```
+
+6. Switch to `kickstart.nix` environment for your system with flake configuration:
+
+```bash
+nixos-rebuild switch --flake ".#nixos-aarch64" # for ARM Chipsets
+nixos-rebuild switch --flake ".#nixos-x86_64" # for Intel Chipsets
+```
+
+
+## Personalizing Your Environment
+
+You can further tailor your Nix environment through configurations.
+
+### Darwin
+
+- `nix-darwin` system options exist in `./system/darwin.nix`
+- `home-manager` system options exist in `./system/darwin.nix`
+
+### NixOS
+
+- `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
+- `nixos` system options exist in `./system/nixos.nix`
+- `home-manager` system options exist in `./system/nixos.nix`
+
+### Shared
+
+- `nix` system options exist in `./module/configuration.nix`
+- `home-manager` user options exist in `./module/home-manager.nix`

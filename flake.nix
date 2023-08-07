@@ -9,42 +9,26 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   };
 
-  outputs = inputs@{ flake-parts, self, ... }:
+  outputs = inputs@{ self, darwin, home-manager, nixpkgs, ... }:
     let
       ### START OPTIONS ###
-      system = "<insert system here>"; # aarch64-darwin aarch64-linux x86_64-darwin x86_64-linux
-      username = "<insert username here>"; # should match your host username
+      username = "<insert username>"; # should match your host username
       ### END OPTIONS ###
 
-      ### START MODULES ###
-      system-config = import ./modules/configuration.nix { inherit username; }; # maintains nix options
-      home-manager-config = import ./modules/home-manager.nix; # maintains home-manager user options
-      ### END MODULES ###
+      ### START SYSTEMS ###
+      darwin-system = import ./system/darwin.nix { inherit inputs username; };
+      nixos-system = import ./system/nixos.nix { inherit inputs username; };
+      ### END SYSTEMS ###
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      # systems: archs this flake supports (can be more than 1 system)
-      systems = [ system ];
-      flake = {
-        darwinConfigurations = {
-          kickstart-darwin = inputs.darwin.lib.darwinSystem
-            {
-              # system: supports only 1 system
-              system = system;
-              # modules: allows for reusable code
-              modules = [
-                system-config
+    {
+      darwinConfigurations = {
+        darwin-aarch64 = darwin-system "aarch64-darwin";
+        darwin-x86_64 = darwin-system "x86_64-darwin";
+      };
 
-                inputs.home-manager.darwinModules.home-manager
-                {
-                  # add home-manager settings here
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users."${username}" = home-manager-config;
-                }
-                # add more nix modules here
-              ];
-            };
-        };
+      nixosConfigurations = {
+        nixos-aarch64 = nixos-system "aarch64-linux";
+        nixos-x86_64 = nixos-system "x86_64-linux";
       };
     };
 }
