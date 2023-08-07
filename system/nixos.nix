@@ -16,8 +16,8 @@ inputs.nixpkgs.lib.nixosSystem {
       security.sudo.enable = true;
       security.sudo.wheelNeedsPassword = false;
       services.openssh.enable = true;
-      services.openssh.settings.passwordAuthentication = false;
-      services.openssh.settings.permitRootLogin = "no";
+      services.openssh.settings.PasswordAuthentication = false;
+      services.openssh.settings.PermitRootLogin = "no";
       users.mutableUsers = false;
       users.users."${username}" = {
         extraGroups = [ "wheel" ];
