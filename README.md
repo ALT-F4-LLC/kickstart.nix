@@ -1,17 +1,20 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Initial Setup](#initial-setup)
 - [Personalizing Your Environment](#personalizing-your-environment)
 
+
 ## Prerequisites
 
 - Familiarity with terminal commands.
 - An account on [GitHub](https://github.com/) for forking the repository.
 - [GitHub CLI](https://github.com/cli/cli) (`gh`) installed for some commands.
+
 
 ## Initial Setup
 
@@ -79,6 +82,51 @@ in
 ```bash
 darwin-rebuild switch --flake ".#darwin-aarch64" # for M1/M2 Chipsets
 darwin-rebuild switch --flake ".#darwin-x86_64" # for Intel Chipsets
+```
+
+### NixOS
+
+1. Add the following to `/etc/nixos/configuration.nix` to enable `nix-command` and `flakes` features:
+
+```nix
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
+
+2. Update you system to reflect the changes:
+
+```bash
+nixos-rebuild switch
+```
+
+3. Fork this repository to create your own flake kickstart.
+
+> NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
+
+```bash
+gh repo fork ALT-F4-LLC/kickstart.nix
+```
+
+4. Clone your new fork locally to customize:
+
+> NOTE: You should be able to run the following command by enabling features above.
+
+```bash
+nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
+```
+
+5. Update the following value(s) in `flake.nix` configuration:
+
+```nix
+let
+    username = "<insert-username>"; # replace
+in
+```
+
+6. Switch to `kickstart.nix` environment for your system with flake configuration:
+
+```bash
+nixos-rebuild switch --flake ".#nixos-aarch64" # for ARM Chipsets
+nixos-rebuild switch --flake ".#nixos-x86_64" # for Intel Chipsets
 ```
 
 
