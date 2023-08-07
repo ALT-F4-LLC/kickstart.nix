@@ -55,7 +55,8 @@ Would you like to manage <darwin> with nix-channel? [y/n] y
 
 6. Fork this repository to create your own flake kickstart.
 
-> NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
+> **Note**
+> This can be done in the Github UI at: https://github.com/ALT-F4-LLC/kickstart.nix
 
 ```bash
 gh repo fork ALT-F4-LLC/kickstart.nix
@@ -63,7 +64,8 @@ gh repo fork ALT-F4-LLC/kickstart.nix
 
 7. Clone your new fork locally to customize:
 
-> NOTE: You should be able to run the following command by enabling features above.
+> **Note**
+> If the following command does not work revist steps 1 & 2.
 
 ```bash
 nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
@@ -100,7 +102,8 @@ nixos-rebuild switch
 
 3. Fork this repository to create your own flake kickstart.
 
-> NOTE: This can be done in the Github UI at https://github.com/ALT-F4-LLC/kickstart.nix
+> **Note**
+> This can be done in the Github UI at: https://github.com/ALT-F4-LLC/kickstart.nix
 
 ```bash
 gh repo fork ALT-F4-LLC/kickstart.nix
@@ -108,7 +111,8 @@ gh repo fork ALT-F4-LLC/kickstart.nix
 
 4. Clone your new fork locally to customize:
 
-> NOTE: You should be able to run the following command by enabling features above.
+> **Note**
+> If the following command does not work revist steps 1 & 2.
 
 ```bash
 nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
@@ -140,6 +144,9 @@ You can further tailor your Nix environment through configurations.
 - `home-manager` system options exist in `./system/darwin.nix`
 
 ### NixOS
+
+> **Important**
+> The default user password can be found and updated in `./system/nixos.nix`. 
 
 - `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
 - `nixos` system options exist in `./system/nixos.nix`
