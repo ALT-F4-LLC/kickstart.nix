@@ -86,12 +86,18 @@ darwin-rebuild switch --flake ".#darwin-x86_64" # for Intel Chipsets
 
 You can further tailor your Nix environment through configurations.
 
-### Nix
+### Darwin
 
-Nix system related options exist in `./module/configuration.nix`.
+- `nix-darwin` system options exist in `./system/darwin.nix`
+- `home-manager` system options exist in `./system/darwin.nix`
 
-### Home Manager
+### NixOS
 
-Home Manager related options exist in two places:
+- `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
+- `nixos` system options exist in `./system/nixos.nix`
+- `home-manager` system options exist in `./system/nixos.nix`
 
-- user options in `./modules/home-manager.nix`
+### Shared
+
+- `nix` system options exist in `./module/configuration.nix`
+- `home-manager` user options exist in `./module/home-manager.nix`

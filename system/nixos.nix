@@ -3,7 +3,7 @@
 system:
 
 let
-  hardware-configuration = import ../module/hardware-configuration.nix;
+  hardware-configuration = import ./nixos-hardware-configuration.nix;
   configuration = import ../module/configuration.nix;
 in
 inputs.nixpkgs.lib.nixosSystem {
