@@ -1,5 +1,5 @@
 {
-  description = "My NixOS configuration";
+  description = "Example kickstart Nix development setup.";
 
   inputs = {
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,7 +12,7 @@
   outputs = inputs@{ self, darwin, home-manager, nixpkgs, ... }:
     let
       ### START OPTIONS ###
-      username = "erikreinert"; # should match your host username
+      username = "<insert username>"; # should match your host username
       ### END OPTIONS ###
 
       ### START SYSTEMS ###
