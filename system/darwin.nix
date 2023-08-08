@@ -7,7 +7,7 @@ let
   home-manager-config = import ../module/home-manager.nix;
 in
 inputs.darwin.lib.darwinSystem {
-  system = system;
+  inherit system;
   # modules: allows for reusable code
   modules = [
     {
