@@ -1,8 +1,4 @@
-system:
-
-{ config, lib, pkgs, modulesPath, ... }:
-
-{
+{ config, lib, pkgs, modulesPath, ... }: {
   imports = [ ];
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
@@ -30,6 +26,4 @@ system:
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.ens160.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault system;
 }

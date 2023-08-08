@@ -3,11 +3,11 @@
 system:
 
 let
-  hardware-configuration = import ./nixos-hardware-configuration.nix { inherit system };
+  hardware-configuration = import ./nixos-hardware-configuration.nix;
   configuration = import ../module/configuration.nix;
 in
 inputs.nixpkgs.lib.nixosSystem {
-  system = system;
+  inherit system;
   # modules: allows for reusable code
   modules = [
     {
