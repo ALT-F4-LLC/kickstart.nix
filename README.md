@@ -146,11 +146,11 @@ You can further tailor your Nix environment through configurations.
 ### NixOS
 
 > **Important**
-> The default user password can be found and updated in `./system/nixos.nix`. 
+> The default user password can be found and updated in `./system/nixos.nix`.
 
 - `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
 - `nixos` system options exist in `./system/nixos.nix`
-- `home-manager` system options exist in `./system/nixos.nix`
+- `home-manager` system options exist in `./module/home-manager.nix`
 
 ### Shared
 
