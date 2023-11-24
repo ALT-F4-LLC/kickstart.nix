@@ -31,14 +31,12 @@
         nixos-x86_64 = nixos-system "x86_64-linux";
       };
 
-      flake = {
-        templates = {
-          go = {
-            path = ./template/go;
-            description = ''
-              A minimal Go flake using flake-parts.
-            '';
-          };
+      templates = {
+        go = {
+          path = ./template/go;
+          description = ''
+            A minimal Go flake using flake-parts.
+          '';
         };
       };
     };
