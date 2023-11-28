@@ -63,16 +63,7 @@ cd ~/Desktop/kickstart.nix
 7. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix
-```
-
-7. Clone your new fork locally to customize:
-
-> **Note**
-> If the following command does not work revist steps 1 & 2.
-
-```bash
-nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
 ```
 
 8. Update the following value(s) in `flake.nix` configuration:
@@ -86,9 +77,17 @@ in
 9. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-darwin-rebuild switch --flake ".#darwin-aarch64" # for M1/M2 Chipsets
-darwin-rebuild switch --flake ".#darwin-x86_64" # for Intel Chipsets
+darwin-rebuild switch --flake ".#aarch64" # M Series Chipsets
+darwin-rebuild switch --flake ".#x86_64" # Intel Chipsets
 ```
+
+Congrats! You've setup Nix with Home Manager on macOS!
+
+Be sure to explore the files below to get started customizing:
+
+- `system/darwin.nix` for all `nix-darwin` related settings
+- `module/configuration.nix` for `Nix` related settings
+- `module/home-manager.nix` for `Home Manager` related settings
 
 ### NixOS
 
