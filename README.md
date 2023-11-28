@@ -53,13 +53,17 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 Would you like to manage <darwin> with nix-channel? [y/n] y
 ```
 
-6. Fork this repository to create your own flake kickstart.
-
-> **Note**
-> This can be done in the Github UI at: https://github.com/ALT-F4-LLC/kickstart.nix
+6. Create a new directory for your `flake.nix` configuration:
 
 ```bash
-gh repo fork ALT-F4-LLC/kickstart.nix
+mkdir -p ~/Desktop/kickstart.nix
+cd ~/Desktop/kickstart.nix
+```
+
+7. Using `nix flake init` generate the `kickstart.nix` template locally:
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix
 ```
 
 7. Clone your new fork locally to customize:
