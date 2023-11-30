@@ -4,12 +4,12 @@ Kickstart your Nix environment.
 
 ## Table of Contents
 
-- [Languages](#languages)
+- Languages
     - [Go](#go)
-- [Systems](#systems)
+- Systems
     - [macOS](#macos)
     - [nixOS](#nixos)
-- [Guides](#guides)
+- Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
 
