@@ -1,9 +1,9 @@
-{ inputs, username }:
+{ inputs, username, password }:
 
 system:
 
 let
-  hardware-configuration = import ./nixos-hardware-configuration.nix;
+  hardware-configuration = import ./hardware-configuration.nix;
   configuration = import ../module/configuration.nix;
 in
 inputs.nixpkgs.lib.nixosSystem {
@@ -23,7 +23,7 @@ inputs.nixpkgs.lib.nixosSystem {
         extraGroups = [ "wheel" ];
         home = "/home/${username}";
         isNormalUser = true;
-        password = "password";
+        password = password;
       };
       system.stateVersion = "23.05";
     }

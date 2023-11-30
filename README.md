@@ -5,8 +5,8 @@ Kickstart your Nix environment.
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Initial Setup](#initial-setup)
-- [Personalizing Your Environment](#personalizing-your-environment)
+- [Setup macOS](#setup-macos)
+- [Setup NixOS](#setup-nixos)
 
 
 ## Prerequisites
@@ -16,11 +16,7 @@ Kickstart your Nix environment.
 - [GitHub CLI](https://github.com/cli/cli) (`gh`) installed for some commands.
 
 
-## Initial Setup
-
-Choose the appropriate setup instructions based on your operating system.
-
-### macOS
+## Setup macOS 
 
 1. Install `nixpkgs` with official script:
 
@@ -53,106 +49,96 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 Would you like to manage <darwin> with nix-channel? [y/n] y
 ```
 
-6. Fork this repository to create your own flake kickstart.
-
-> **Note**
-> This can be done in the Github UI at: https://github.com/ALT-F4-LLC/kickstart.nix
+6. Create a new directory for your `flake.nix` configuration:
 
 ```bash
-gh repo fork ALT-F4-LLC/kickstart.nix
+mkdir -p ~/kickstart.nix
+cd ~/kickstart.nix
 ```
 
-7. Clone your new fork locally to customize:
-
-> **Note**
-> If the following command does not work revist steps 1 & 2.
+7. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
 ```
 
 8. Update the following value(s) in `flake.nix` configuration:
 
 ```nix
 let
-    username = "<insert-username>"; # replace
+    password = throw "<username>"; # TODO: replace with password and remove throw 
+    username = throw "<username>"; # TODO: replace with user name and remove throw 
 in
 ```
 
 9. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-darwin-rebuild switch --flake ".#darwin-aarch64" # for M1/M2 Chipsets
-darwin-rebuild switch --flake ".#darwin-x86_64" # for Intel Chipsets
+darwin-rebuild switch --flake ".#aarch64" # M Series Chipsets
+darwin-rebuild switch --flake ".#x86_64" # Intel Chipsets
 ```
 
-### NixOS
+Congrats! You've setup Nix with Home Manager on macOS!
 
-1. Add the following to `/etc/nixos/configuration.nix` to enable `nix-command` and `flakes` features:
+Be sure to explore the files below to get started customizing:
+
+- `system/darwin.nix` for all `nix-darwin` related settings
+- `module/configuration.nix` for `Nix` related settings
+- `module/home-manager.nix` for `Home Manager` related settings
+
+## Setup NixOS
+
+1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso) for your system.
+
+2. Add the following to `/etc/nixos/configuration.nix` to enable `nix-command` and `flakes` features:
 
 ```nix
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+nix.extraOptions = "experimental-features = nix-command flakes";
 ```
 
-2. Update you system to reflect the changes:
+3. Update you system to reflect the changes:
 
 ```bash
 nixos-rebuild switch
 ```
 
-3. Fork this repository to create your own flake kickstart.
-
-> **Note**
-> This can be done in the Github UI at: https://github.com/ALT-F4-LLC/kickstart.nix
+4. Create a new directory for your `flake.nix` configuration:
 
 ```bash
-gh repo fork ALT-F4-LLC/kickstart.nix
+mkdir -p ~/kickstart.nix
+cd ~/kickstart.nix
 ```
 
-4. Clone your new fork locally to customize:
-
-> **Note**
-> If the following command does not work revist steps 1 & 2.
+5. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix run nixpkgs#git clone https://github.com/<username>/kickstart.nix
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
 ```
 
-5. Update the following value(s) in `flake.nix` configuration:
+6. Update the following value(s) in `flake.nix` configuration:
+
+> **Important**
+> The default user password can be found in `flake.nix`.
 
 ```nix
 let
-    username = "<insert-username>"; # replace
+    password = throw "<username>"; # TODO: replace with password and remove throw 
+    username = throw "<username>"; # TODO: replace with user name and remove throw 
 in
 ```
 
-6. Switch to `kickstart.nix` environment for your system with flake configuration:
+7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-nixos-rebuild switch --flake ".#nixos-aarch64" # for ARM Chipsets
-nixos-rebuild switch --flake ".#nixos-x86_64" # for Intel Chipsets
+nixos-rebuild switch --flake ".#aarch64" # M Series Chipsets
+nixos-rebuild switch --flake ".#x86_64" # Intel Chipsets
 ```
 
+Congrats! You've setup NixOS with Home Manager!
 
-## Personalizing Your Environment
+Be sure to explore the files below to get started customizing:
 
-You can further tailor your Nix environment through configurations.
-
-### Darwin
-
-- `nix-darwin` system options exist in `./system/darwin.nix`
-- `home-manager` system options exist in `./system/darwin.nix`
-
-### NixOS
-
-> **Important**
-> The default user password can be found and updated in `./system/nixos.nix`.
-
-- `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
-- `nixos` system options exist in `./system/nixos.nix`
-- `home-manager` system options exist in `./module/home-manager.nix`
-
-### Shared
-
-- `nix` system options exist in `./module/configuration.nix`
-- `home-manager` user options exist in `./module/home-manager.nix`
+- `system/hardware-configuration.nix` for `NixOS` hardware related settings
+- `system/nixos.nix` for `NixOS` system related settings
+- `module/configuration.nix` for more `NixOS` system related settings
+- `module/home-manager.nix` for `Home Manager` related settings
