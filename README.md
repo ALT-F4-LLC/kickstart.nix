@@ -4,19 +4,40 @@ Kickstart your Nix environment.
 
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Setup macOS](#setup-macos)
-- [Setup NixOS](#setup-nixos)
+- [Languages](#languages)
+    - [Go](#go)
+- [Systems](#systems)
+    - [macOS](#macos)
+    - [nixOS](#nixos)
+- [Guides](#guides)
+    - [Setup macOS](#setup-macos)
+    - [Setup NixOS](#setup-nixos)
 
+### Languages
 
-## Prerequisites
+#### Go
 
-- Familiarity with terminal commands.
-- An account on [GitHub](https://github.com/) for forking the repository.
-- [GitHub CLI](https://github.com/cli/cli) (`gh`) installed for some commands.
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
+```
 
+### Systems
 
-## Setup macOS 
+#### macOS
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
+```
+
+#### NixOS
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
+```
+
+### Guides
+
+### Setup macOS
 
 1. Install `nixpkgs` with official script:
 
@@ -86,7 +107,7 @@ Be sure to explore the files below to get started customizing:
 - `module/configuration.nix` for `Nix` related settings
 - `module/home-manager.nix` for `Home Manager` related settings
 
-## Setup NixOS
+### Setup NixOS
 
 1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso) for your system.
 
