@@ -86,7 +86,7 @@ Be sure to explore the files below to get started customizing:
 - `module/configuration.nix` for `Nix` related settings
 - `module/home-manager.nix` for `Home Manager` related settings
 
-### Setup NixOS
+## Setup NixOS
 
 1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso).
 
@@ -142,26 +142,3 @@ Be sure to explore the files below to get started customizing:
 - `system/nixos.nix` for `NixOS` system related settings
 - `module/configuration.nix` for more `NixOS` system related settings
 - `module/home-manager.nix` for `Home Manager` related settings
-
-## Personalizing Your Environment
-
-You can further tailor your Nix environment through configurations.
-
-### Darwin
-
-- `nix-darwin` system options exist in `./system/darwin.nix`
-- `home-manager` system options exist in `./system/darwin.nix`
-
-### NixOS
-
-> **Important**
-> The default user password can be found and updated in `./system/nixos.nix`.
-
-- `nixos` system hardware options exist in `./system/nixos-hardware-configuration.nix`
-- `nixos` system options exist in `./system/nixos.nix`
-- `home-manager` system options exist in `./module/home-manager.nix`
-
-### Shared
-
-- `nix` system options exist in `./module/configuration.nix`
-- `home-manager` user options exist in `./module/home-manager.nix`
