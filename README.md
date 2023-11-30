@@ -88,7 +88,7 @@ Be sure to explore the files below to get started customizing:
 
 ## Setup NixOS
 
-1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso).
+1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso) for your system.
 
 2. Add the following to `/etc/nixos/configuration.nix` to enable `nix-command` and `flakes` features:
 
