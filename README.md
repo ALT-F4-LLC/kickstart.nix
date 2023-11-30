@@ -1,6 +1,7 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
+![kickstart.nix](preview/kickstart.nix.webp)
 
 ## Table of Contents
 
