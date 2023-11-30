@@ -9,14 +9,15 @@
 
   outputs = inputs@{ self, home-manager, nixpkgs, ... }:
     let
-      username = "<insert username>"; # should match your host username
+      password = throw "<username>"; # TODO: replace with password and remove throw 
+      username = throw "<username>"; # TODO: replace with user name and remove throw 
 
-      nixos-system = import ./system/nixos.nix { inherit inputs username; };
+      nixos-system = import ./system/nixos.nix { inherit inputs password username; };
     in
     {
       nixosConfigurations = {
-        nixos-aarch64 = nixos-system "aarch64-linux";
-        nixos-x86_64 = nixos-system "x86_64-linux";
+        aarch64 = nixos-system "aarch64-linux";
+        x86_64 = nixos-system "x86_64-linux";
       };
     };
 }

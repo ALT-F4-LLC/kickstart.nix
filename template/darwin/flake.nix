@@ -16,8 +16,8 @@
     in
     {
       darwinConfigurations = {
-        darwin-aarch64 = darwin-system "aarch64-darwin";
-        darwin-x86_64 = darwin-system "x86_64-darwin";
+        aarch64 = darwin-system "aarch64-darwin";
+        x86_64 = darwin-system "x86_64-darwin";
       };
     };
 }
