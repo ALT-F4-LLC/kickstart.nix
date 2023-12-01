@@ -121,7 +121,8 @@ nix.extraOptions = "experimental-features = nix-command flakes";
 3. Update you system to reflect the changes:
 
 ```bash
-nixos-rebuild switch
+sudo nixos-rebuild test
+sudo nixos-rebuild switch
 ```
 
 4. Create a new directory for your `flake.nix` configuration:
@@ -144,7 +145,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
 
 ```nix
 let
-    password = throw "<username>"; # TODO: replace with password and remove throw 
+    password = throw "<password>"; # TODO: replace with password and remove throw 
     username = throw "<username>"; # TODO: replace with user name and remove throw 
 in
 ```
@@ -152,8 +153,11 @@ in
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-nixos-rebuild switch --flake ".#aarch64" # M Series Chipsets
-nixos-rebuild switch --flake ".#x86_64" # Intel Chipsets
+sudo nixos-rebuild test --flake ".#aarch64" # M Series Chipsets
+sudo nixos-rebuild switch --flake ".#aarch64" # M Series Chipsets
+
+sudo nixos-rebuild test --flake ".#x86_64" # Intel Chipsets
+sudo nixos-rebuild switch --flake ".#x86_64" # Intel Chipsets
 ```
 
 Congrats! You've setup NixOS with Home Manager!
