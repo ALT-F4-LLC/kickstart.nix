@@ -5,6 +5,7 @@ system:
 let
   hardware-configuration = import ./hardware-configuration.nix;
   configuration = import ../module/configuration.nix;
+  home-manager = import ../module/home-manager.nix;
 in
 inputs.nixpkgs.lib.nixosSystem {
   inherit system;
@@ -25,10 +26,18 @@ inputs.nixpkgs.lib.nixosSystem {
         isNormalUser = true;
         password = password;
       };
-      system.stateVersion = "23.05";
+      system.stateVersion = "23.11";
     }
     hardware-configuration
     configuration
+
+    inputs.home-manager.nixosModules.home-manager
+    {
+      # add home-manager settings here
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users."${username}" = home-manager;
+    }
     # add more nix modules here
   ];
 }
