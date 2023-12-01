@@ -3,7 +3,7 @@ name: 'Test NixOS Flake Template'
 
 on:
   push:
-    branches: [main]
+    # branches: [main]
   pull_request:
 
 jobs:
