@@ -16,10 +16,9 @@ cd "$dir"
 
 nix flake init -t "$root#darwin"
 
-sed -i "s/<password>/password/g" flake.nix
-sed -i "s/<username>/user/g" flake.nix
-sed -i "s/throw //g" flake.nix
-sed -i "s/ # TODO.*$//g" flake.nix
+sed -i '' "s/<username>/user/g" flake.nix
+sed -i '' "s/throw //g" flake.nix
+sed -i '' "s/ # TODO.*$//g" flake.nix
 
 cat flake.nix
 
