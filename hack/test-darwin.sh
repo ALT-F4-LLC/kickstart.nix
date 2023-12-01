@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+# Hacky solution to macos not having a `realpath` command
+realpath() {
+    path=`eval echo "$1"`
+    folder=$(dirname "$path")
+    echo $(cd "$folder"; pwd)/$(basename "$path"); 
+}
+
 # Get the relative path of the script -> the script's dir -> the dir's parent
 # (i.e. the repo root) and convert it to an absolute path
 root="$(realpath $(dirname $(dirname ${BASH_SOURCE[0]})))"
