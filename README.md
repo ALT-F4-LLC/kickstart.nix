@@ -1,6 +1,9 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
+[![Test NixOS Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
+[![Test Darwin Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
+
 ![kickstart.nix](preview/kickstart.nix.webp)
 
 ## Table of Contents
