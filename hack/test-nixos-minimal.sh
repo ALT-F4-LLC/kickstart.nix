@@ -18,4 +18,4 @@ cat flake.nix
 
 echo "Initialized in $dir, proceeding with build step"
 
-nix build --json .#nixosConfigurations.x86_64.config.system.build.toplevel
+nix build --impure --json .#nixosConfigurations.x86_64.config.system.build.toplevel
