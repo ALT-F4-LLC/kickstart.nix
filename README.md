@@ -1,8 +1,8 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
-[![Test NixOS Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
-[![Test Darwin Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
+[![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
+[![Test Darwin Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
 
 ![kickstart.nix](preview/kickstart.nix.webp)
 
@@ -30,13 +30,18 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
 
 #### macOS
 
+The macOS template allows you to run Nix tools on your native Mac hardware.
+
+> [!NOTE]
+> This setup is ideal for developers already using macOS.
+
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 ```
 
 #### NixOS minimal
 
-The NixOS minimal installer includes the base operating system without any windows manager.
+The NixOS minimal template includes the base operating system without any windows manager.
 
 > [!NOTE]
 > This setup is ideal for servers and other headless tasks.
@@ -47,7 +52,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 
 #### NixOS GNOME
 
-The NixOS GNOME installer includes the base operating sytsem with GNOME windows manager included.
+The NixOS GNOME template includes the base operating sytsem with GNOME windows manager included.
 
 > [!NOTE]
 > This setup is ideal for getting started moving to NixOS as your main desktop.
