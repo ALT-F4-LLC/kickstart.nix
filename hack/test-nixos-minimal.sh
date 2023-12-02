@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 
-# Get the relative path of the script -> the script's dir -> the dir's parent
-# (i.e. the repo root) and convert it to an absolute path
-root="$(realpath $(dirname $(dirname ${BASH_SOURCE[0]})))"
-dir="$(mktemp -d)"
-
-cd "$dir"
-
-nix flake init -t "$root#nixos-minimal"
-
-sudo mkdir -p /etc/nixos
-
-sudo cat > /etc/nixos/hardware-configuration.nix <<EOF
+# Setup a temporary hardare-configuration.nix file to properly build derivation
+# This should be replaced with a proper hardware-configuration.nix file
+cat > hardware-configuration.nix <<EOF
 { config, lib, pkgs, modulesPath, ... }: {
   imports = [ ];
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
@@ -33,7 +24,20 @@ sudo cat > /etc/nixos/hardware-configuration.nix <<EOF
 }
 EOF
 
-cat /etc/nixos/hardware-configuration.nix
+sudo mkdir -p /etc/nixos
+
+sudo mv hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+
+sudo cat /etc/nixos/hardware-configuration.nix
+
+# Get the relative path of the script -> the script's dir -> the dir's parent
+# (i.e. the repo root) and convert it to an absolute path
+root="$(realpath $(dirname $(dirname ${BASH_SOURCE[0]})))"
+dir="$(mktemp -d)"
+
+cd "$dir"
+
+nix flake init -t "$root#nixos-minimal"
 
 sed -i "s/<password>/password/g" flake.nix
 sed -i "s/<username>/user/g" flake.nix
