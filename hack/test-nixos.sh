@@ -39,6 +39,10 @@ cd "$dir"
 
 nix flake init -t "$root#$1"
 
+if [ "$2" != "" ]; then
+    sed -i "s/desktop \= \"gnome\"/desktop \= \"$2\"/g" flake.nix
+fi
+
 sed -i "s/<password>/password/g" flake.nix
 sed -i "s/<username>/user/g" flake.nix
 sed -i "s/throw //g" flake.nix

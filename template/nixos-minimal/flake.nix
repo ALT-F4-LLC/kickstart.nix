@@ -9,10 +9,11 @@
 
   outputs = inputs@{ self, home-manager, nixpkgs, ... }:
     let
-      password = throw "<password>"; # TODO: replace with password and remove throw
-      username = throw "<username>"; # TODO: replace with user name and remove throw
-
-      nixos-system = import ./system/nixos.nix { inherit inputs password username; };
+      nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
+        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+      };
     in
     {
       nixosConfigurations = {

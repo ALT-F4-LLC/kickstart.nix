@@ -12,8 +12,8 @@ Kickstart your Nix environment.
     - [Go](#go)
 - Systems
     - [macOS](#macos)
+    - [NixOS (desktop)](#nixos-desktop)
     - [NixOS (minimal)](#nixos-minimal)
-    - [NixOS (GNOME)](#nixos-gnome)
 - Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
@@ -39,7 +39,18 @@ The macOS template allows you to run Nix tools on your native Mac hardware.
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 ```
 
-#### NixOS minimal
+#### NixOS Desktop
+
+The NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `Plasma` by changing the `desktop` value in the `flake.nix` file.
+
+> [!NOTE]
+> This setup is ideal for getting started moving to NixOS as your main desktop.
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+```
+
+#### NixOS Minimal
 
 The NixOS minimal template includes the base operating system without any windows manager.
 
@@ -48,17 +59,6 @@ The NixOS minimal template includes the base operating system without any window
 
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
-```
-
-#### NixOS GNOME
-
-The NixOS GNOME template includes the base operating sytsem with GNOME windows manager included.
-
-> [!NOTE]
-> This setup is ideal for getting started moving to NixOS as your main desktop.
-
-```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-gnome
 ```
 
 ### Guides
@@ -160,9 +160,8 @@ cd ~/kickstart.nix
 5. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-gnome # desktop
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal # headless
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-plasma # desktop
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 ```
 
 6. Update the following value(s) in `flake.nix` configuration:

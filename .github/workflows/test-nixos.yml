@@ -7,15 +7,23 @@ on:
       - main
 
 jobs:
-  build:
+  build-desktop:
     strategy:
       matrix:
-        profile:
-          - nixos-gnome
-          - nixos-minimal
+        desktop:
+          - gnome
+          - plasma5
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: actions/checkout@v3
-      - run: bash hack/test-nixos.sh ${{ matrix.profile }}
+      - run: bash hack/test-nixos.sh nixos-desktop ${{ matrix.desktop }}
+
+  build-minimal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: actions/checkout@v3
+      - run: bash hack/test-nixos.sh nixos-minimal
