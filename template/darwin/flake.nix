@@ -11,9 +11,10 @@
 
   outputs = inputs@{ self, darwin, home-manager, nixpkgs, ... }:
     let
-      username = throw "<username>"; # TODO: replace with user name and remove throw 
-
-      darwin-system = import ./system/darwin.nix { inherit inputs username; };
+      darwin-system = import ./system/darwin.nix {
+        inherit inputs;
+        username = throw "replace with user name and remove throw"; 
+       };
     in
     {
       darwinConfigurations = {

@@ -11,8 +11,8 @@
     let
       nixos-system = import ./system/nixos.nix {
         inherit inputs;
-        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
-        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+        hashedPassword = throw "replace with password hash from mkpasswd(1) and remove throw";
+        username = throw "replace with user name and remove throw"; 
       };
     in
     {
