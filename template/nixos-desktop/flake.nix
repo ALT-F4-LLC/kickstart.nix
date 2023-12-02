@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart NixOS with desktop environment.";
+  description = "Example kickstart NixOS desktop environment.";
 
   inputs = {
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

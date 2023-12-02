@@ -167,12 +167,30 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 6. Update the following value(s) in `flake.nix` configuration:
 
 > **Important**
-> The default user password can be found in `flake.nix`.
+> Be sure to update the relevent `flake.nix` for your desired template before rebuilding:
+
+6a. For `desktop` flake template:
 
 ```nix
 let
-    password = throw "<password>"; # TODO: replace with password and remove throw 
-    username = throw "<username>"; # TODO: replace with user name and remove throw 
+    nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
+        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+        desktop = "gnome"; # optional: "gnome" by default, or "plasma5" for KDE Plasma
+    };
+in
+```
+
+6b. For `minimal` flake template:
+
+```nix
+let
+    nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
+        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+    };
 in
 ```
 
