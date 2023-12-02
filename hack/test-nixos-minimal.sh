@@ -7,7 +7,7 @@ dir="$(mktemp -d)"
 
 cd "$dir"
 
-nix flake init -t "$root#nixos"
+nix flake init -t "$root#nixos-minimal"
 
 sed -i "s/<password>/password/g" flake.nix
 sed -i "s/<username>/user/g" flake.nix
