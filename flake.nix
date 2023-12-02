@@ -13,9 +13,14 @@
         path = ./template/go;
       };
 
-      nixos = {
+      nixos-gnome = {
+        description = "A minimal NixOS development environment flake with GNOME.";
+        path = ./template/nixos-gnome;
+      };
+
+      nixos-minimal = {
         description = "A minimal NixOS development environment flake.";
-        path = ./template/nixos;
+        path = ./template/nixos-minimal;
       };
     };
   };

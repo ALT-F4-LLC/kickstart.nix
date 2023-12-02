@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart Nix development setup.";
+  description = "Example kickstart Nix with Gnome development setup.";
 
   inputs = {
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
