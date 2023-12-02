@@ -4,7 +4,7 @@ system:
 
 let
   configuration = import ../module/configuration.nix;
-  hardware-configuration = import ./hardware-configuration.nix;
+  hardware-configuration = import /etc/nixos/hardware-configuration.nix; # copy this locally to no longer run --impure
   home-manager = import ../module/home-manager.nix;
   pkgs = inputs.nixpkgs.legacyPackages.${system};
 in
