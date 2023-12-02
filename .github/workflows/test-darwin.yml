@@ -1,18 +1,16 @@
----
-name: 'Test Darwin Flake Template'
+name: 'Test Darwin Template'
 
 on:
-  push:
-    branches: [main]
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
-  build-nixos-deriv:
-    name: 'Build Darwin template derivation'
+  build:
     runs-on: macos-latest
     steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
       - run: bash hack/test-darwin.sh

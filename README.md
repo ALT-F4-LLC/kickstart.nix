@@ -12,7 +12,8 @@ Kickstart your Nix environment.
     - [Go](#go)
 - Systems
     - [macOS](#macos)
-    - [nixOS](#nixos)
+    - [NixOS (minimal)](#nixos-minimal)
+    - [NixOS (GNOME)](#nixos-gnome)
 - Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
@@ -33,10 +34,26 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 ```
 
-#### NixOS
+#### NixOS minimal
+
+The NixOS minimal installer includes the base operating system without any windows manager.
+
+> [!NOTE]
+> This setup is ideal for servers and other headless tasks.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
+```
+
+#### NixOS GNOME
+
+The NixOS GNOME installer includes the base operating sytsem with GNOME windows manager included.
+
+> [!NOTE]
+> This setup is ideal for getting started moving to NixOS as your main desktop.
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-gnome
 ```
 
 ### Guides
@@ -138,7 +155,9 @@ cd ~/kickstart.nix
 5. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-gnome # desktop
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal # headless
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-plasma # desktop
 ```
 
 6. Update the following value(s) in `flake.nix` configuration:
@@ -156,18 +175,17 @@ in
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 ```bash
-sudo nixos-rebuild test --flake ".#aarch64" # M Series Chipsets
-sudo nixos-rebuild switch --flake ".#aarch64" # M Series Chipsets
+sudo nixos-rebuild test --flake ".#aarch64" --impure # M Series Chipsets
+sudo nixos-rebuild switch --flake ".#aarch64" --impure # M Series Chipsets
 
-sudo nixos-rebuild test --flake ".#x86_64" # Intel Chipsets
-sudo nixos-rebuild switch --flake ".#x86_64" # Intel Chipsets
+sudo nixos-rebuild test --flake ".#x86_64"  --impure # Intel Chipsets
+sudo nixos-rebuild switch --flake ".#x86_64" --impure # Intel Chipsets
 ```
 
 Congrats! You've setup NixOS with Home Manager!
 
 Be sure to explore the files below to get started customizing:
 
-- `system/hardware-configuration.nix` for `NixOS` hardware related settings
-- `system/nixos.nix` for `NixOS` system related settings
 - `module/configuration.nix` for more `NixOS` system related settings
 - `module/home-manager.nix` for `Home Manager` related settings
+- `system/nixos.nix` for `NixOS` system related settings

@@ -1,9 +1,10 @@
-name: 'Test NixOS Flake Template(s)'
+name: 'Test NixOS Template(s)'
 
 on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
