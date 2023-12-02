@@ -6,10 +6,15 @@ on:
     branches: [main]
 
 jobs:
-  build-nixos-minimal:
+  build:
+    strategy:
+      matrix:
+        profile:
+          - nixos-gnome
+          - nixos-minimal
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: actions/checkout@v3
-      - run: bash hack/test-nixos-minimal.sh
+      - run: bash hack/test-nixos.sh ${{ matrix.profile }}

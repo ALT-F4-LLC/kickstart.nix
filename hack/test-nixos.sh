@@ -37,7 +37,7 @@ dir="$(mktemp -d)"
 
 cd "$dir"
 
-nix flake init -t "$root#nixos-minimal"
+nix flake init -t "$root#$1"
 
 sed -i "s/<password>/password/g" flake.nix
 sed -i "s/<username>/user/g" flake.nix
@@ -50,4 +50,4 @@ echo "Initialized in $dir, proceeding with build step"
 
 nix build --impure --json .#nixosConfigurations.x86_64.config.system.build.toplevel
 
-rm -rf /etc/nixos
+sudo rm -rf /etc/nixos
