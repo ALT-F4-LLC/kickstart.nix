@@ -32,7 +32,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
 
 The macOS template allows you to run Nix tools on your native Mac hardware.
 
-> [!NOTE]
+> [!TIP]
 > This setup is ideal for developers already using macOS.
 
 ```bash
@@ -43,7 +43,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 
 The NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `Plasma` by changing the `desktop` value in the `flake.nix` file.
 
-> [!NOTE]
+> [!TIP]
 > This setup is ideal for getting started moving to NixOS as your main desktop.
 
 ```bash
@@ -54,7 +54,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 
 The NixOS minimal template includes the base operating system without any windows manager.
 
-> [!NOTE]
+> [!TIP]
 > This setup is ideal for servers and other headless tasks.
 
 ```bash
@@ -157,7 +157,7 @@ mkdir -p ~/kickstart.nix
 cd ~/kickstart.nix
 ```
 
-5. Using `nix flake init` generate the `kickstart.nix` template locally:
+7. Using `nix flake init` generate the `kickstart.nix` template of your choice locally:
 
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
@@ -166,10 +166,10 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 
 6. Update the following value(s) in `flake.nix` configuration:
 
-> **Important**
-> Be sure to update the relevent `flake.nix` for your desired template before rebuilding:
+> [!WARNING]
+> Be sure to update relevent `flake.nix` for your desired template before rebuilding:
 
-6a. For `desktop` flake template:
+a. For `desktop` flake template:
 
 ```nix
 let
@@ -182,7 +182,7 @@ let
 in
 ```
 
-6b. For `minimal` flake template:
+b. For `minimal` flake template:
 
 ```nix
 let
@@ -196,10 +196,19 @@ in
 
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
+> [!IMPORTANT]
+> We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on NixOS. To avoid using the flag, simply copy the `hardware-configuration.nix` file locally and replace the import in the template.
+
+a. For `aarch64` platforms:
+
 ```bash
 sudo nixos-rebuild test --flake ".#aarch64" --impure # M Series Chipsets
 sudo nixos-rebuild switch --flake ".#aarch64" --impure # M Series Chipsets
+```
 
+a. For `x86_64` platforms:
+
+```bash
 sudo nixos-rebuild test --flake ".#x86_64"  --impure # Intel Chipsets
 sudo nixos-rebuild switch --flake ".#x86_64" --impure # Intel Chipsets
 ```
