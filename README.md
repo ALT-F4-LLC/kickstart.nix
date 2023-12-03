@@ -41,7 +41,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 
 #### NixOS Desktop
 
-NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
+NixOS desktop template includes the base operating system with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
 
 > [!TIP]
 > This setup is ideal for getting started moving to NixOS as your main desktop.
@@ -196,14 +196,14 @@ in
 > [!IMPORTANT]
 > We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template.
 
-a. For `aarch64` platforms:
+- For `aarch64` platforms:
 
 ```bash
 sudo nixos-rebuild test --flake ".#aarch64" --impure # M Series Chipsets
 sudo nixos-rebuild switch --flake ".#aarch64" --impure # M Series Chipsets
 ```
 
-a. For `x86_64` platforms:
+- For `x86_64` platforms:
 
 ```bash
 sudo nixos-rebuild test --flake ".#x86_64"  --impure # Intel Chipsets
