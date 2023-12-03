@@ -1,13 +1,16 @@
-name: "Check flake"
+name: "Check templates flake"
+
 on:
   pull_request:
   push:
+    branches:
+      - main
+
 jobs:
-  tests:
+  check-flake:
     runs-on: ubuntu-latest
     steps:
+    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: DeterminateSystems/magic-nix-cache-action@main
     - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v22
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
     - run: nix flake check

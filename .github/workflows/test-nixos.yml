@@ -1,18 +1,29 @@
----
-name: 'Test NixOS Flake Template'
+name: 'Test NixOS Template(s)'
 
 on:
-  push:
-    branches: [main]
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
-  build-nixos-deriv:
-    name: 'Build NixOS template derivation'
+  build-desktop:
+    strategy:
+      matrix:
+        desktop:
+          - gnome
+          - plasma5
     runs-on: ubuntu-latest
     steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-      - run: bash hack/test-nixos.sh
+      - run: bash hack/test-nixos.sh nixos-desktop ${{ matrix.desktop }}
+
+  build-minimal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: actions/checkout@v3
+      - run: bash hack/test-nixos.sh nixos-minimal

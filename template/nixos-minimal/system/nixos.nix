@@ -3,12 +3,13 @@
 system:
 
 let
-  hardware-configuration = import ./hardware-configuration.nix;
   configuration = import ../module/configuration.nix;
+  hardware-configuration = import /etc/nixos/hardware-configuration.nix; # copy this locally to no longer run --impure
   home-manager = import ../module/home-manager.nix;
 in
 inputs.nixpkgs.lib.nixosSystem {
   inherit system;
+
   # modules: allows for reusable code
   modules = [
     {

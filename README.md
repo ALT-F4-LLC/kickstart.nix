@@ -1,8 +1,8 @@
 # kickstart.nix
 Kickstart your Nix environment.
 
-[![Test NixOS Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
-[![Test Darwin Flake Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
+[![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
+[![Test Darwin Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
 
 ![kickstart.nix](preview/kickstart.nix.webp)
 
@@ -12,7 +12,8 @@ Kickstart your Nix environment.
     - [Go](#go)
 - Systems
     - [macOS](#macos)
-    - [nixOS](#nixos)
+    - [NixOS (desktop)](#nixos-desktop)
+    - [NixOS (minimal)](#nixos-minimal)
 - Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
@@ -29,14 +30,35 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
 
 #### macOS
 
+macOS template allows you to run Nix tools on your native Mac hardware.
+
+> [!TIP]
+> This setup is ideal for developers already using macOS.
+
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 ```
 
-#### NixOS
+#### NixOS Desktop
+
+NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
+
+> [!TIP]
+> This setup is ideal for getting started moving to NixOS as your main desktop.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+```
+
+#### NixOS Minimal
+
+NixOS minimal template includes the base operating system without any windows manager.
+
+> [!TIP]
+> This setup is ideal for servers and other headless tasks.
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 ```
 
 ### Guides
@@ -91,7 +113,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
 
 ```nix
 let
-    password = throw "<username>"; # TODO: replace with password and remove throw 
+    password = throw "<password>"; # TODO: replace with password and remove throw 
     username = throw "<username>"; # TODO: replace with user name and remove throw 
 in
 ```
@@ -135,39 +157,63 @@ mkdir -p ~/kickstart.nix
 cd ~/kickstart.nix
 ```
 
-5. Using `nix flake init` generate the `kickstart.nix` template locally:
+7. Using `nix flake init` generate the `kickstart.nix` template of your choice locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 ```
 
 6. Update the following value(s) in `flake.nix` configuration:
 
-> **Important**
-> The default user password can be found in `flake.nix`.
+- For `desktop` flake template:
 
 ```nix
 let
-    password = throw "<password>"; # TODO: replace with password and remove throw 
-    username = throw "<username>"; # TODO: replace with user name and remove throw 
+    nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
+        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+        desktop = "gnome"; # optional: "gnome" by default, or "plasma5" for KDE Plasma
+    };
+in
+```
+
+- For `minimal` flake template:
+
+```nix
+let
+    nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
+        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+    };
 in
 ```
 
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
-```bash
-sudo nixos-rebuild test --flake ".#aarch64" # M Series Chipsets
-sudo nixos-rebuild switch --flake ".#aarch64" # M Series Chipsets
+> [!IMPORTANT]
+> We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template.
 
-sudo nixos-rebuild test --flake ".#x86_64" # Intel Chipsets
-sudo nixos-rebuild switch --flake ".#x86_64" # Intel Chipsets
+a. For `aarch64` platforms:
+
+```bash
+sudo nixos-rebuild test --flake ".#aarch64" --impure # M Series Chipsets
+sudo nixos-rebuild switch --flake ".#aarch64" --impure # M Series Chipsets
+```
+
+a. For `x86_64` platforms:
+
+```bash
+sudo nixos-rebuild test --flake ".#x86_64"  --impure # Intel Chipsets
+sudo nixos-rebuild switch --flake ".#x86_64" --impure # Intel Chipsets
 ```
 
 Congrats! You've setup NixOS with Home Manager!
 
 Be sure to explore the files below to get started customizing:
 
-- `system/hardware-configuration.nix` for `NixOS` hardware related settings
-- `system/nixos.nix` for `NixOS` system related settings
 - `module/configuration.nix` for more `NixOS` system related settings
 - `module/home-manager.nix` for `Home Manager` related settings
+- `system/nixos.nix` for `NixOS` system related settings

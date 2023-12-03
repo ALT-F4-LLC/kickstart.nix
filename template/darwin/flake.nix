@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart Nix development setup.";
+  description = "Example kickstart Nix w/ Home-brew on macOS environment.";
 
   inputs = {
     darwin.inputs.nixpkgs.follows = "nixpkgs";
