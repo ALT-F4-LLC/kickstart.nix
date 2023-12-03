@@ -30,7 +30,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
 
 #### macOS
 
-The macOS template allows you to run Nix tools on your native Mac hardware.
+macOS template allows you to run Nix tools on your native Mac hardware.
 
 > [!TIP]
 > This setup is ideal for developers already using macOS.
@@ -41,7 +41,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 
 #### NixOS Desktop
 
-The NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `Plasma` by changing the `desktop` value in the `flake.nix` file.
+NixOS desktop template includes the base operating sytsem with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
 
 > [!TIP]
 > This setup is ideal for getting started moving to NixOS as your main desktop.
@@ -52,7 +52,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 
 #### NixOS Minimal
 
-The NixOS minimal template includes the base operating system without any windows manager.
+NixOS minimal template includes the base operating system without any windows manager.
 
 > [!TIP]
 > This setup is ideal for servers and other headless tasks.
@@ -166,10 +166,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 
 6. Update the following value(s) in `flake.nix` configuration:
 
-> [!WARNING]
-> Be sure to update relevent `flake.nix` for your desired template before rebuilding:
-
-a. For `desktop` flake template:
+- For `desktop` flake template:
 
 ```nix
 let
@@ -182,7 +179,7 @@ let
 in
 ```
 
-b. For `minimal` flake template:
+- For `minimal` flake template:
 
 ```nix
 let
@@ -197,7 +194,7 @@ in
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 > [!IMPORTANT]
-> We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on NixOS. To avoid using the flag, simply copy the `hardware-configuration.nix` file locally and replace the import in the template.
+> We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template.
 
 a. For `aarch64` platforms:
 
