@@ -28,7 +28,7 @@ Kickstart your Nix environment.
 Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use the `go-pkg` template.
 
 > [!IMPORTANT]
-> Be sure to update `go.mod` with proper repository after running `init` command (see more here)[https://nixos.wiki/wiki/Go#buildGoPackage].
+> Be sure to update `go.mod` with proper repository after running `init` command.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-mod
@@ -39,7 +39,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-mod
 Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go apps, use the `go-mod` template.
 
 > [!IMPORTANT]
-> Be sure to update `deps.nix` with vendor dependencies after running `init` command.
+> Be sure to update `deps.nix` with vendor dependencies after running `init` command [(read more)](https://nixos.wiki/wiki/Go#buildGoPackage).
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
