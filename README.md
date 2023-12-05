@@ -38,6 +38,9 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-mod
 
 Used with legacy Go applications **not** using with `go.mod` system. To build modern Go apps, use the `go-mod` template.
 
+> [!IMPORTANT]
+> Be sure to update `deps.nix` with vendor dependencies after running `init` command.
+
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-pkg
 ```
