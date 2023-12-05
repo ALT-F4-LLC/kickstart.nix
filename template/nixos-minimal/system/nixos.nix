@@ -1,4 +1,4 @@
-{ inputs, username, password }:
+{ inputs, username, hashedPassword }:
 
 system:
 
@@ -25,7 +25,7 @@ inputs.nixpkgs.lib.nixosSystem {
         extraGroups = [ "wheel" ];
         home = "/home/${username}";
         isNormalUser = true;
-        password = password;
+        inherit hashedPassword;
       };
       system.stateVersion = "23.11";
     }

@@ -113,8 +113,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
 
 ```nix
 let
-    password = throw "<password>"; # TODO: replace with password and remove throw 
-    username = throw "<username>"; # TODO: replace with user name and remove throw 
+    username = throw "replace with user name and remove throw"; 
 in
 ```
 
@@ -172,8 +171,8 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 let
     nixos-system = import ./system/nixos.nix {
         inherit inputs;
-        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
-        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+        hashedPassword = throw "replace with password hash from mkpasswd(1) and remove throw";
+        username = throw "replace with user name and remove throw"; 
         desktop = "gnome"; # optional: "gnome" by default, or "plasma5" for KDE Plasma
     };
 in
@@ -185,8 +184,8 @@ in
 let
     nixos-system = import ./system/nixos.nix {
         inherit inputs;
-        username = throw "<username>"; # REQUIRED: replace with user name and remove throw
-        password = throw "<password>"; # REQUIRED: replace with password and remove throw
+        hashedPassword = throw "replace with password hash from mkpasswd(1) and remove throw";
+        username = throw "replace with user name and remove throw"; 
     };
 in
 ```
