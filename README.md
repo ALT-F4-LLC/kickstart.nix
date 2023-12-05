@@ -9,9 +9,11 @@ Kickstart your Nix environment.
 ## Table of Contents
 
 - Languages
-    - [Go](#go)
+    - [Go (module)](#go-module)
+    - [Python (application)](#python-application)
+    - [Python (package)](#python-package)
 - Systems
-    - [macOS](#macos)
+    - [macOS (desktop)](#macos-desktop)
     - [NixOS (desktop)](#nixos-desktop)
     - [NixOS (minimal)](#nixos-minimal)
 - Guides
@@ -20,15 +22,31 @@ Kickstart your Nix environment.
 
 ### Languages
 
-#### Go
+#### Go (module)
+
+> [!IMPORTANT]
+> Be sure to update `go.mod` with the proper repository path.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#go
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-mod
 ```
+
+#### Python (application)
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-app
+```
+
+#### Python (package)
+
+```bash
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-pkg
+```
+
 
 ### Systems
 
-#### macOS
+#### macOS (desktop)
 
 macOS template allows you to run Nix tools on your native Mac hardware.
 
@@ -39,7 +57,7 @@ macOS template allows you to run Nix tools on your native Mac hardware.
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
 ```
 
-#### NixOS Desktop
+#### NixOS (desktop)
 
 NixOS desktop template includes the base operating system with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
 
@@ -50,7 +68,7 @@ NixOS desktop template includes the base operating system with GNOME (default) w
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 ```
 
-#### NixOS Minimal
+#### NixOS (minimal)
 
 NixOS minimal template includes the base operating system without any windows manager.
 

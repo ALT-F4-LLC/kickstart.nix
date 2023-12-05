@@ -1,8 +1,5 @@
-from mylib import greet
-
-
 def main():
-    print(greet("World"))
+    print("Hello World")
 
 
 if __name__ == "__main__":

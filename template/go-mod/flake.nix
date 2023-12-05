@@ -21,6 +21,7 @@
             default = pkgs.buildGoModule {
               name = name;
               src = ./.;
+              subPackages = [ "cmd/example" ];
               vendorHash = vendorHash;
             };
 
