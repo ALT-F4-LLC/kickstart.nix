@@ -25,7 +25,7 @@ Kickstart your Nix environment.
 
 #### Go (module)
 
-To be used with modern Go applications created with `go.mod` system. To build legacy Go applications use the `go-pkg` template.
+Used with modern Go applications using `go.mod` system. To build legacy Go apps, use the `go-pkg` template.
 
 > [!IMPORTANT]
 > Be sure to update `go.mod` with proper repository after running `init` command.
@@ -36,7 +36,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-mod
 
 #### Go (package)
 
-To be used with legacy Go applications that are **not** created with `go.mod` system. To build modern Go applications use the `go-mod` template.
+Used with legacy Go applications **not** using with `go.mod` system. To build modern Go apps, use the `go-mod` template.
 
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-pkg
@@ -44,16 +44,19 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-pkg
 
 #### Python (application)
 
+Used with modern Python applications using `setup.py` that includes wrapped console scripts which can be run directly from CLI. 
+
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-app
 ```
 
 #### Python (package)
 
+Used with modern Python packages using `setup.py` that can be re-used within other Nix-built applications or packages. 
+
 ```bash
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-pkg
 ```
-
 
 ### Systems
 
