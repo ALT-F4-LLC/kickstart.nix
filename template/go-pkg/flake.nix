@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart Go module project.";
+  description = "Example kickstart Go package project.";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -8,9 +8,8 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          name = "<package-name>";
+          name = "example";
           version = "latest";
-          vendorHash = null; # update whenever go.mod changes
         in
         {
           devShells = {
@@ -20,11 +19,12 @@
           };
 
           packages = {
-            default = pkgs.buildGoModule {
+            default = pkgs.buildGoPackage {
+              goDeps = ./deps.nix;
+              goPackagePath = "github.com/example/${name}";
               name = name;
               src = ./.;
               subPackages = [ "cmd/example" ];
-              vendorHash = vendorHash;
             };
 
             docker = pkgs.dockerTools.buildDockerImage {
