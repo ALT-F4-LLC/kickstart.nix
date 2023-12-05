@@ -71,7 +71,7 @@ macOS template allows you to run Nix tools on your native Mac hardware.
 > This setup is ideal for developers already using macOS.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#macos
+nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
 ```
 
 #### NixOS (desktop)
