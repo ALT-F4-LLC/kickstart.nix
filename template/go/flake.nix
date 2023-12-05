@@ -7,6 +7,7 @@
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
           name = "<package-name>";
+          version = "latest";
           vendorHash = null; # update whenever go.mod changes
         in
         {
@@ -21,6 +22,17 @@
               name = name;
               src = ./.;
               vendorHash = vendorHash;
+            };
+
+            docker = pkgs.dockerTools.buildDockerImage {
+              name = "${name}-docker";
+              tag = version;
+
+              config = {
+                Cmd = "${self'.packages.default}/bin/${name}";
+              };
+
+              created = "now";
             };
           };
         };
