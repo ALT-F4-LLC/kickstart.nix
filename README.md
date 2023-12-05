@@ -61,19 +61,6 @@ Used with modern Python packages using `setup.py` that can be re-used within oth
 nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-pkg
 ```
 
-#### Python (application)
-
-```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-app
-```
-
-#### Python (package)
-
-```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-pkg
-```
-
-
 ### Systems
 
 #### macOS (desktop)
