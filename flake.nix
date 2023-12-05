@@ -8,9 +8,9 @@
         path = ./template/darwin;
       };
 
-      go = {
-        description = "A minimal Go language flake.";
-        path = ./template/go;
+      go-mod = {
+        description = "A minimal Go language module flake.";
+        path = ./template/go-mod;
       };
 
       nixos-desktop = {
