@@ -31,7 +31,7 @@ Used with modern Go applications using `go.mod` system. To build legacy Go apps,
 > Be sure to update `go.mod` with proper repository after running `init` command.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-mod
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-mod
 ```
 
 #### Go (package)
@@ -42,7 +42,7 @@ Used with legacy Go applications **not** using with `go.mod` system. To build mo
 > Be sure to update `deps.nix` with vendor dependencies after running `init` command.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-pkg
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
 ```
 
 #### Python (application)
@@ -50,7 +50,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#go-pkg
 Used with modern Python applications using `setup.py` that includes wrapped console scripts which can be run directly from CLI. 
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-app
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-app
 ```
 
 #### Python (package)
@@ -58,7 +58,7 @@ nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-app
 Used with modern Python packages using `setup.py` that can be re-used within other Nix-built applications or packages. 
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#python-pkg
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-pkg
 ```
 
 ### Systems
@@ -71,7 +71,7 @@ macOS template allows you to run Nix tools on your native Mac hardware.
 > This setup is ideal for developers already using macOS.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#darwin
 ```
 
 #### NixOS (desktop)
@@ -82,7 +82,7 @@ NixOS desktop template includes the base operating system with GNOME (default) w
 > This setup is ideal for getting started moving to NixOS as your main desktop.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 ```
 
 #### NixOS (minimal)
@@ -93,7 +93,7 @@ NixOS minimal template includes the base operating system without any windows ma
 > This setup is ideal for servers and other headless tasks.
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 ```
 
 ### Guides
@@ -141,7 +141,7 @@ cd ~/kickstart.nix
 7. Using `nix flake init` generate the `kickstart.nix` template locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#darwin
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#darwin
 ```
 
 8. Update the following value(s) in `flake.nix` configuration:
@@ -195,8 +195,8 @@ cd ~/kickstart.nix
 7. Using `nix flake init` generate the `kickstart.nix` template of your choice locally:
 
 ```bash
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-desktop
-nix flake init --template github:ALT-F4-LLC/kickstart.nix#nixos-minimal
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-desktop
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 ```
 
 6. Update the following value(s) in `flake.nix` configuration:
