@@ -6,7 +6,7 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          name = "<package-name>";
+          name = "example";
           vendorHash = null; # update whenever go.mod changes
         in
         {
@@ -20,6 +20,7 @@
             default = pkgs.buildGoModule {
               name = name;
               src = ./.;
+              subPackages = [ "cmd/example" ];
               vendorHash = vendorHash;
             };
           };

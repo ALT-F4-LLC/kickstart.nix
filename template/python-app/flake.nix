@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart Python project";
+  description = "Example kickstart Python application project.";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -10,31 +10,23 @@
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
           inherit (pkgs) python3Packages;
-          inherit (python3Packages) buildPythonApplication buildPythonPackage;
+          inherit (python3Packages) buildPythonApplication;
         in
         {
           devShells = {
             default = pkgs.mkShell {
-              inputsFrom = [
-                self'.packages.myapp # only need to specify top-level packages
-              ];
+              inputsFrom = [ self'.packages.default ];
             };
           };
 
           packages = {
-            mylib = buildPythonPackage {
-              pname = "mylib";
-              src = ./package;
-              version = "1.0.0";
-            };
-
-            myapp = buildPythonApplication {
+            default = buildPythonApplication {
               buildInputs = [ ]; # build and/or run-time (ie. non-Python dependencies)
               nativeBuildInputs = [ ]; # build-time only (ie. setup_requires)
               nativeCheckInputs = [ ]; # checkPhase only (ie. tests_require)
-              pname = "myapp";
-              propagatedBuildInputs = [ self'.packages.mylib ];
-              src = ./application;
+              pname = "example";
+              propagatedBuildInputs = [ ]; # build-time only propogated (ie. install_requires)
+              src = ./.;
               version = "1.0.0";
             };
           };
