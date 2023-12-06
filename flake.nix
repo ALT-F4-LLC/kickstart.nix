@@ -62,6 +62,8 @@
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
           example-nixos-hardware = lib.flake.nixos-hardware system;
           example-nixos-minimal = lib.flake.nixos-minimal system;
+          example-python-app = lib.flake.python-app system;
+          example-python-pkg = lib.flake.python-pkg system;
         };
       };
 

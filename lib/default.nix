@@ -115,5 +115,31 @@
         cat $out/flake.nix
         cat $out/system/nixos.nix
       '';
+
+    python-app = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "python-app"
+        {
+          src = ../template/python-app;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
+    python-pkg = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "python-pkg"
+        {
+          src = ../template/python-pkg;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }
