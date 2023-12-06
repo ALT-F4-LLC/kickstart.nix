@@ -19,6 +19,9 @@ Kickstart your Nix environments.
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
 
+- [![Test root flake](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml)
+- [![Test system template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml)
+
 ### Languages
 
 #### Go (module)
@@ -63,7 +66,6 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-pkg
 
 #### macOS (desktop)
 
-[![Test Darwin Template](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-darwin.yml)
 
 macOS template allows you to run Nix tools on your native Mac hardware.
 
@@ -76,8 +78,6 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#darwin
 
 #### NixOS (desktop)
 
-[![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
-
 NixOS desktop template includes base operating system with GNOME (default) windows manager included. You can also use `plasma5` by changing `desktop` value in `flake.nix` file.
 
 > [!TIP]
@@ -88,8 +88,6 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 ```
 
 #### NixOS (minimal)
-
-[![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
 
 NixOS minimal template includes base operating system without any windows manager.
 
