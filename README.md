@@ -23,7 +23,7 @@ Kickstart your Nix environments.
 
 #### Go (module)
 
-Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use the `go-pkg` template.
+Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use `go-pkg` template.
 
 > [!IMPORTANT]
 > Be sure to update `go.mod` with proper repository after running `init` command.
@@ -34,7 +34,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-mod
 
 #### Go (package)
 
-Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go apps, use the `go-mod` template.
+Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go apps, use `go-mod` template.
 
 > [!IMPORTANT]
 > Be sure to update `deps.nix` with vendor dependencies after running `init` command [(read more)](https://nixos.wiki/wiki/Go#buildGoPackage).
@@ -45,7 +45,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
 
 #### Python (application)
 
-Used for runnable Python apps setup with `setup.py` and includes wrapped console scripts that can be executed from CLI. To build re-useable Python packages, use the `python-pkg` template. 
+Used for runnable Python apps setup with `setup.py` and includes wrapped console scripts that can be executed from CLI. To build re-useable Python packages, use `python-pkg` template. 
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-app
@@ -53,7 +53,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-app
 
 #### Python (package)
 
-Used for Python packages setup with `setup.py` that can be re-used within other Nix-built applications or packages. To build runnable Python apps, use the `python-app` template. 
+Used for Python packages setup with `setup.py` that can be re-used within other Nix-built applications or packages. To build runnable Python apps, use `python-app` template. 
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-pkg
@@ -78,7 +78,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#darwin
 
 [![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
 
-NixOS desktop template includes the base operating system with GNOME (default) windows manager included. You can also use `plasma5` by changing the `desktop` value in the `flake.nix` file.
+NixOS desktop template includes base operating system with GNOME (default) windows manager included. You can also use `plasma5` by changing `desktop` value in `flake.nix` file.
 
 > [!TIP]
 > This setup is ideal for getting started moving to NixOS as your main desktop.
@@ -91,7 +91,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 
 [![Test NixOS Template(s)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/test-nixos.yml)
 
-NixOS minimal template includes the base operating system without any windows manager.
+NixOS minimal template includes base operating system without any windows manager.
 
 > [!TIP]
 > This setup is ideal for servers and other headless tasks.
@@ -233,7 +233,7 @@ in
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 > [!IMPORTANT]
-> We use `--impure` due to the way `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template.
+> We use `--impure` due to how `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template [(see example here)](https://github.com/ALT-F4-LLC/dotfiles-nixos/blob/main/lib/default.nix#L30).
 
 - For `aarch64` platforms:
 
