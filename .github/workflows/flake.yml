@@ -1,4 +1,4 @@
-name: Test root flake
+name: Test flake
 
 on:
   pull_request:

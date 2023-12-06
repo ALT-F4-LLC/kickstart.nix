@@ -1,4 +1,4 @@
-name: Test system template(s)
+name: Test systems
 
 on:
   pull_request:

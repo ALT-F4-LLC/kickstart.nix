@@ -1,4 +1,4 @@
-name: Test language template(s)
+name: Test languages
 
 on:
   pull_request:
@@ -7,19 +7,32 @@ on:
       - main
 
 jobs:
-  build:
+  build-default:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         template:
           - go-mod
           - go-pkg
-        profile:
-          - default
-          - docker
+          - python-app
+          - python-pkg
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: extractions/setup-just@v1
       - uses: actions/checkout@v3
-      - run: just build-language "${{ matrix.template }}" "${{ matrix.profile }}"
+      - run: just build-language "${{ matrix.template }}" "default"
+
+  build-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        template:
+          - go-mod
+          - go-pkg
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v3
+      - run: just build-language "${{ matrix.template }}" "docker"
