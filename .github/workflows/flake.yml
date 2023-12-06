@@ -1,4 +1,4 @@
-name: "Check templates flake"
+name: Test flake
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  check-flake:
+  check:
     runs-on: ubuntu-latest
     steps:
     - uses: DeterminateSystems/nix-installer-action@main

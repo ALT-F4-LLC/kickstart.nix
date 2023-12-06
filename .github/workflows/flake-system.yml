@@ -1,4 +1,4 @@
-name: 'Test NixOS Template(s)'
+name: Test systems
 
 on:
   pull_request:
@@ -7,7 +7,16 @@ on:
       - main
 
 jobs:
-  build-desktop:
+  darwin:
+    runs-on: macos-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v3
+      - run: just build-darwin "x86_64"
+
+  nixos-desktop:
     strategy:
       matrix:
         desktop:
@@ -17,13 +26,15 @@ jobs:
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
       - uses: actions/checkout@v3
-      - run: bash hack/test-nixos.sh nixos-desktop ${{ matrix.desktop }}
+      - run: just build-nixos-desktop "x86_64" ${{ matrix.desktop }}
 
-  build-minimal:
+  nixos-minimal:
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
       - uses: actions/checkout@v3
-      - run: bash hack/test-nixos.sh nixos-minimal
+      - run: just build-nixos-minimal "x86_64"
