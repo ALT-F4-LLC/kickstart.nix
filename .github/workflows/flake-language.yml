@@ -13,6 +13,7 @@ jobs:
       matrix:
         template:
           - go-mod
+          - go-pkg
         profile:
           - default
           - docker

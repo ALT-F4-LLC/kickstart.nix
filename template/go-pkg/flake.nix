@@ -20,22 +20,20 @@
 
           packages = {
             default = pkgs.buildGoPackage {
+              inherit name;
               goDeps = ./deps.nix;
               goPackagePath = "github.com/example/${name}";
-              name = name;
               src = ./.;
               subPackages = [ "cmd/example" ];
             };
 
-            docker = pkgs.dockerTools.buildDockerImage {
-              name = "${name}-docker";
+            docker = pkgs.dockerTools.buildImage {
+              inherit name;
+              created = "now";
               tag = version;
-
               config = {
                 Cmd = "${self'.packages.default}/bin/${name}";
               };
-
-              created = "now";
             };
           };
         };

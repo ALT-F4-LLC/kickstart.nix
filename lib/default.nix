@@ -31,6 +31,19 @@
         cat $out/flake.nix
       '';
 
+    go-pkg = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "go-pkg"
+        {
+          src = ../template/go-pkg;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     nixos-desktop = system: desktop:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};

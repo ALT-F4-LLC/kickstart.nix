@@ -57,6 +57,7 @@
         packages = {
           example-darwin = lib.flake.darwin system;
           example-go-mod = lib.flake.go-mod system;
+          example-go-pkg = lib.flake.go-pkg system;
           example-nixos-desktop-gnome = lib.flake.nixos-desktop system "gnome";
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
           example-nixos-hardware = lib.flake.nixos-hardware system;
