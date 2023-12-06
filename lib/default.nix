@@ -8,6 +8,7 @@
       in
       pkgs.runCommand "darwin"
         {
+          buildInputs = with pkgs; [ coreutils ];
           src = ../template/darwin;
         } ''
         mkdir -p $out
