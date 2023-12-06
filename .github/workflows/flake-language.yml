@@ -21,4 +21,4 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: extractions/setup-just@v1
       - uses: actions/checkout@v3
-      - run: just build-language "x86_64" "${{ matrix.template }}" "${{ matrix.profile }}"
+      - run: just build-language "${{ matrix.template }}" "${{ matrix.profile }}"
