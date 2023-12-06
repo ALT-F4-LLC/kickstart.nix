@@ -8,15 +8,14 @@
       in
       pkgs.runCommand "darwin"
         {
-          buildInputs = with pkgs; [ coreutils ];
           src = ../template/darwin;
         } ''
         mkdir -p $out
-        $coreutils/bin/cp --no-preserve=mode -r $src/* $out
+        cp --no-preserve=mode -r $src/* $out
         sed -i -e "s/<username>/username/g" $out/flake.nix
         sed -i -e "s/throw //g" $out/flake.nix
         sed -i -e "s/ # TODO.*$//g" $out/flake.nix
-        $coreutils/bin/cat $out/flake.nix
+        cat $out/flake.nix
       '';
 
     nixos-desktop = system: desktop:

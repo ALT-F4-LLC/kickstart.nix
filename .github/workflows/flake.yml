@@ -1,3 +1,5 @@
+name: Test root flake
+
 on:
   pull_request:
   push:

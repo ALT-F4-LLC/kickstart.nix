@@ -1,3 +1,5 @@
+name: Test system template(s)
+
 on:
   pull_request:
   push:
