@@ -6,7 +6,7 @@ build-darwin system="x86_64": (clean-template "darwin")
     #!/usr/bin/env bash
     DERIVATION=$(nix build --json --no-link --print-build-logs ".#example-darwin")
     OUTPUT=$(echo $DERIVATION | jq -r ".[0].outputs.out")
-    cp --no-preserve=mode -r $OUTPUT/* /tmp/kickstart.nix/darwin
+    cp -r $OUTPUT/* /tmp/kickstart.nix/darwin
     nix build --json --no-link --print-build-logs \
         "/tmp/kickstart.nix/darwin#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
