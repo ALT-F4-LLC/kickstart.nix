@@ -30,6 +30,7 @@ jobs:
         template:
           - go-mod
           - go-pkg
+          - python-app
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main

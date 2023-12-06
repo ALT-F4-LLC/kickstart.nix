@@ -29,6 +29,15 @@
               src = ./.;
               version = "1.0.0";
             };
+
+            docker = pkgs.dockerTools.buildImage {
+              created = "now";
+              name = "example";
+              tag = "latest";
+              config = {
+                Cmd = "${self'.packages.default}/bin/start";
+              };
+            };
           };
         };
     };
