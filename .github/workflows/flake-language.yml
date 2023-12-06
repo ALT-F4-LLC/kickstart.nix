@@ -1,0 +1,24 @@
+name: Test language template(s)
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        profile:
+          - default
+          - docker
+        template:
+          - go-mod
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v3
+      - run: just build-language "x86_64" "${{ matrix.template }}" "${{ matrix.profile }}"

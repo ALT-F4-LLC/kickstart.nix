@@ -18,6 +18,19 @@
         cat $out/flake.nix
       '';
 
+    go-mod = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "go-mod"
+        {
+          src = ../template/go-mod;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     nixos-desktop = system: desktop:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};

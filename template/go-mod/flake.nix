@@ -6,9 +6,10 @@
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          name = "<package-name>";
+          name = "example";
           version = "latest";
           vendorHash = null; # update whenever go.mod changes
         in
@@ -21,21 +22,18 @@
 
           packages = {
             default = pkgs.buildGoModule {
-              name = name;
+              inherit name vendorHash;
               src = ./.;
               subPackages = [ "cmd/example" ];
-              vendorHash = vendorHash;
             };
 
-            docker = pkgs.dockerTools.buildDockerImage {
-              name = "${name}-docker";
+            docker = pkgs.dockerTools.buildImage {
+              inherit name;
+              created = "now";
               tag = version;
-
               config = {
                 Cmd = "${self'.packages.default}/bin/${name}";
               };
-
-              created = "now";
             };
           };
         };
