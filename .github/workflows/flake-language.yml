@@ -11,11 +11,11 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
+        template:
+          - go-mod
         profile:
           - default
           - docker
-        template:
-          - go-mod
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
