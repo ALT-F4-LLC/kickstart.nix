@@ -11,38 +11,43 @@
       flake = {
         templates = {
           darwin = {
-            description = "A kickstart macOS development environment flake.";
+            description = "Kickstart macOS development environment flake.";
             path = ./template/darwin;
           };
 
           go-mod = {
-            description = "A kickstart Go language module flake.";
+            description = "Kickstart Go language module flake.";
             path = ./template/go-mod;
           };
 
           go-pkg = {
-            description = "A kickstart Go language package flake.";
+            description = "Kickstart Go language package flake.";
             path = ./template/go-pkg;
           };
 
           nixos-desktop = {
-            description = "A kickstart NixOS desktop environment flake.";
+            description = "Kickstart NixOS desktop environment flake.";
             path = ./template/nixos-desktop;
           };
 
           nixos-minimal = {
-            description = "A kickstart NixOS minimal environment flake.";
+            description = "Kickstart NixOS minimal environment flake.";
             path = ./template/nixos-minimal;
           };
 
           python-app = {
-            description = "A kickstart Python application flake.";
+            description = "Kickstart Python application flake.";
             path = ./template/python-app;
           };
 
           python-pkg = {
-            description = "A kickstart Python package flake.";
+            description = "Kickstart Python package flake.";
             path = ./template/python-pkg;
+          };
+
+          rust = {
+            description = "Kickstart Rust package flake.";
+            path = ./template/rust;
           };
         };
       };
@@ -64,6 +69,7 @@
           example-nixos-minimal = lib.flake.nixos-minimal system;
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
+          example-rust = lib.flake.rust system;
         };
       };
 
