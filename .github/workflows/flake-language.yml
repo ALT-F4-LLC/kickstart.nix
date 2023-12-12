@@ -16,6 +16,7 @@ jobs:
           - go-pkg
           - python-app
           - python-pkg
+          - rust
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -31,6 +32,7 @@ jobs:
           - go-mod
           - go-pkg
           - python-app
+          - rust
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
