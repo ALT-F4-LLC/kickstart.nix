@@ -15,6 +15,7 @@ Kickstart your Nix environments.
     - [Go (package)](#go-package)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
+    - [Rust](#rust)
 - Systems
     - [macOS (desktop)](#macos-desktop)
     - [NixOS (desktop)](#nixos-desktop)
@@ -63,10 +64,17 @@ Used for Python packages setup with `setup.py` that can be re-used within other 
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#python-pkg
 ```
 
+#### Rust
+
+Used for Rust applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
+```
+
 ### Systems
 
 #### macOS (desktop)
-
 
 macOS template allows you to run Nix tools on your native Mac hardware.
 
