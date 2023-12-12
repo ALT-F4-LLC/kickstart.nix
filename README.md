@@ -10,19 +10,21 @@ Kickstart your Nix environments.
 
 ## Table of Contents
 
-- Languages
-    - [Go (module)](#go-module)
-    - [Go (package)](#go-package)
-    - [Python (application)](#python-application)
-    - [Python (package)](#python-package)
-    - [Rust](#rust)
-- Systems
-    - [macOS (desktop)](#macos-desktop)
-    - [NixOS (desktop)](#nixos-desktop)
-    - [NixOS (minimal)](#nixos-minimal)
 - Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
+
+- Templates
+    - Languages
+        - [Go (module)](#go-module)
+        - [Go (package)](#go-package)
+        - [Python (application)](#python-application)
+        - [Python (package)](#python-package)
+        - [Rust](#rust)
+    - Systems
+        - [macOS (desktop)](#macos-desktop)
+        - [NixOS (desktop)](#nixos-desktop)
+        - [NixOS (minimal)](#nixos-minimal)
 
 ### Languages
 
