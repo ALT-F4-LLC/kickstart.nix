@@ -13,7 +13,6 @@ Kickstart your Nix environments.
 - Guides
     - [Setup macOS](#setup-macos)
     - [Setup NixOS](#setup-nixos)
-
 - Templates
     - Languages
         - [Go (module)](#go-module)
