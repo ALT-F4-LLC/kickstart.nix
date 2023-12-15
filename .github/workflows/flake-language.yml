@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         template:
+          - bash
           - go-mod
           - go-pkg
           - ocaml
@@ -30,6 +31,7 @@ jobs:
     strategy:
       matrix:
         template:
+          - bash
           - go-mod
           - go-pkg
           - ocaml

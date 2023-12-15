@@ -2,6 +2,19 @@
 
 {
   flake = rec {
+    bash = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "bash"
+        {
+          src = ../template/bash;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     darwin = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};

@@ -10,6 +10,11 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         templates = {
+          bash = {
+            description = "Kickstart Bash language module flake.";
+            path = ./template/bash;
+          };
+
           darwin = {
             description = "Kickstart macOS development environment flake.";
             path = ./template/darwin;
@@ -65,6 +70,7 @@
         };
 
         packages = {
+          example-bash = lib.flake.bash system;
           example-darwin = lib.flake.darwin system;
           example-go-mod = lib.flake.go-mod system;
           example-go-pkg = lib.flake.go-pkg system;
