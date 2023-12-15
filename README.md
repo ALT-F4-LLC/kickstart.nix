@@ -13,6 +13,7 @@ Kickstart your Nix environments.
 - [Setup NixOS](#setup-nixos)
 ## Templates
 - Languages
+    - [Bash](#bash)
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
     - [OCaml](#ocaml)
@@ -182,6 +183,14 @@ Be sure to explore the files below to get started customizing:
 - `system/nixos.nix` for `NixOS` system related settings
 
 ### Languages
+
+#### Bash
+
+Used for Bash scripts.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#bash
+```
 
 #### Go (module)
 
