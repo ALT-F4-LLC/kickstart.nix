@@ -14,6 +14,7 @@ jobs:
         template:
           - go-mod
           - go-pkg
+          - ocaml
           - python-app
           - python-pkg
           - rust
@@ -31,6 +32,7 @@ jobs:
         template:
           - go-mod
           - go-pkg
+          - ocaml
           - python-app
           - rust
     steps:

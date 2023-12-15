@@ -45,6 +45,11 @@
             path = ./template/python-pkg;
           };
 
+          ocaml = {
+            description = "Kickstart OCaml package flake.";
+            path = ./template/ocaml;
+          };
+
           rust = {
             description = "Kickstart Rust package flake.";
             path = ./template/rust;
@@ -67,6 +72,7 @@
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
           example-nixos-hardware = lib.flake.nixos-hardware system;
           example-nixos-minimal = lib.flake.nixos-minimal system;
+          example-ocaml = lib.flake.ocaml system;
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
