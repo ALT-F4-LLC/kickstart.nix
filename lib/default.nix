@@ -116,6 +116,19 @@
         cat $out/system/nixos.nix
       '';
 
+    ocaml = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "ocaml"
+        {
+          src = ../template/ocaml;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     python-app = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};

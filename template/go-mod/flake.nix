@@ -29,7 +29,6 @@
 
             docker = pkgs.dockerTools.buildImage {
               inherit name;
-              created = "now";
               tag = version;
               config = {
                 Cmd = "${self'.packages.default}/bin/${name}";

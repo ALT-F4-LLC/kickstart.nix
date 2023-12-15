@@ -15,6 +15,7 @@ Kickstart your Nix environments.
 - Languages
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
+    - [OCaml](#ocaml)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
@@ -202,6 +203,14 @@ Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go a
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
+```
+
+#### OCaml
+
+Used for OCaml applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#ocaml
 ```
 
 #### Python (application)
