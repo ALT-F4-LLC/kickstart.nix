@@ -20,6 +20,7 @@ Kickstart your Nix environments.
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
+    - [Node.js (backend)](#nodejs-backend)
 - Systems
     - [macOS (desktop)](#macos-desktop)
     - [NixOS (desktop)](#nixos-desktop)
@@ -245,6 +246,24 @@ Used for Rust applications.
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
 ```
+
+#### Node.js (backend)
+
+Used for Node.js backend applications. The template builds using `npm`, and does
+not assume you use TypeScript.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
+```
+
+To update your dependencies, install/upgrade them as normal via NPM, then use
+the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
+to generate a new `npmDepsHash` value in `packages.default` in the Flake.
+
+> [!TIP]
+> To add TypeScript, install it with `npm install --save-dev typescript`, add a
+> `build` script to `package.json` that calls `tsc`, and then remove
+> `dontNpmBuild = true;` from `packages.default` in your Flake.
 
 ### Systems
 
