@@ -180,5 +180,18 @@
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
+
+    nodejs-backend = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "nodejs-backend"
+        {
+          src = ../template/nodejs-backend;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }

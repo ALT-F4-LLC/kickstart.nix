@@ -59,6 +59,11 @@
             description = "Kickstart Rust package flake.";
             path = ./template/rust;
           };
+
+          nodejs-backend = {
+            description = "Kickstart Node.js backend package flake.";
+            path = ./template/nodejs-backend;
+          };
         };
       };
 
@@ -82,6 +87,7 @@
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
+          example-nodejs-backend = lib.flake.nodejs-backend system;
         };
       };
 

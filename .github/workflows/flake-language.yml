@@ -19,6 +19,7 @@ jobs:
           - python-app
           - python-pkg
           - rust
+          - nodejs-backend
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -37,6 +38,7 @@ jobs:
           - ocaml
           - python-app
           - rust
+          - nodejs-backend
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
