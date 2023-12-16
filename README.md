@@ -253,12 +253,18 @@ Used for Node.js backend applications. The template builds using `npm`, and does
 not assume you use TypeScript.
 
 ```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nodejs-backend
 ```
 
 To update your dependencies, install/upgrade them as normal via NPM, then use
 the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
-to generate a new `npmDepsHash` value in `packages.default` in the Flake.
+to generate a new `npmDepsHash` value for `packages.default` in the Flake.
+
+```bash
+$ nix shell 'nixpkgs#prefetch-npm-deps' -c prefetch-npm-deps package-lock.json
+...
+sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
+```
 
 > [!TIP]
 > To add TypeScript, install it with `npm install --save-dev typescript`, add a
