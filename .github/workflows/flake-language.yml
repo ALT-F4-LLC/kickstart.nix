@@ -13,14 +13,14 @@ jobs:
       matrix:
         template:
           - bash
-          - cmake-cpp
+          - cpp-cmake
           - go-mod
           - go-pkg
+          - nodejs-backend
           - ocaml
           - python-app
           - python-pkg
           - rust
-          - nodejs-backend
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -37,10 +37,10 @@ jobs:
           - cmake-cpp
           - go-mod
           - go-pkg
+          - nodejs-backend
           - ocaml
           - python-app
           - rust
-          - nodejs-backend
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
