@@ -193,5 +193,18 @@
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
+
+    cmake-cpp = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "cmake-cpp"
+        {
+          src = ../template/cmake-cpp;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }
