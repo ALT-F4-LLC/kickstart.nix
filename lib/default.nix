@@ -15,6 +15,19 @@
         cat $out/flake.nix
       '';
 
+    cpp-cmake = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "cpp-cmake"
+        {
+          src = ../template/cpp-cmake;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     darwin = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -188,19 +201,6 @@
       pkgs.runCommand "nodejs-backend"
         {
           src = ../template/nodejs-backend;
-        } ''
-        mkdir -p $out
-        cp --no-preserve=mode -r $src/* $out
-        cat $out/flake.nix
-      '';
-
-    cmake-cpp = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
-      pkgs.runCommand "cmake-cpp"
-        {
-          src = ../template/cmake-cpp;
         } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out

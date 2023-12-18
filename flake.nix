@@ -15,9 +15,9 @@
             path = ./template/bash;
           };
 
-          cmake-cpp = {
+          cpp-cmake = {
             description = "Kickstart C++ CMake project flake.";
-            path = ./template/cmake-cpp;
+            path = ./template/cpp-cmake;
           };
 
           darwin = {
@@ -81,6 +81,7 @@
 
         packages = {
           example-bash = lib.flake.bash system;
+          example-cpp-cmake = lib.flake.cpp-cmake system;
           example-darwin = lib.flake.darwin system;
           example-go-mod = lib.flake.go-mod system;
           example-go-pkg = lib.flake.go-pkg system;
@@ -88,11 +89,11 @@
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
           example-nixos-hardware = lib.flake.nixos-hardware system;
           example-nixos-minimal = lib.flake.nixos-minimal system;
+          example-nodejs-backend = lib.flake.nodejs-backend system;
           example-ocaml = lib.flake.ocaml system;
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
-          example-nodejs-backend = lib.flake.nodejs-backend system;
         };
       };
 
