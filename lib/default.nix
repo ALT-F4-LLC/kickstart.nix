@@ -15,6 +15,19 @@
         cat $out/flake.nix
       '';
 
+    cpp-cmake = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "cpp-cmake"
+        {
+          src = ../template/cpp-cmake;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     darwin = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
