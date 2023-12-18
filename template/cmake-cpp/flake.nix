@@ -8,7 +8,7 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          inherit (pkgs) dockerTools cmake just;
+          inherit (pkgs) dockerTools cmake;
           inherit (dockerTools) buildImage;
           name = "example";
           version = "0.1.0";
