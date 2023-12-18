@@ -13,6 +13,7 @@ jobs:
       matrix:
         template:
           - bash
+          - cmake-cpp
           - go-mod
           - go-pkg
           - ocaml
@@ -33,6 +34,7 @@ jobs:
       matrix:
         template:
           - bash
+          - cmake-cpp
           - go-mod
           - go-pkg
           - ocaml
