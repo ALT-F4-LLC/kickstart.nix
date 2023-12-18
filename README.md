@@ -199,7 +199,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#bash
 Used for C++ projects using CMake as a build system.
 
 ```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#cmake-cpp
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#cpp-cmake
 ```
 
 #### Go (module)
