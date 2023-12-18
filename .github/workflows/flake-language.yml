@@ -34,7 +34,7 @@ jobs:
       matrix:
         template:
           - bash
-          - cmake-cpp
+          - cpp-cmake
           - go-mod
           - go-pkg
           - nodejs-backend
