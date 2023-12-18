@@ -15,6 +15,11 @@
             path = ./template/bash;
           };
 
+          cmake-cpp = {
+            description = "Kickstart C++ CMake project flake.";
+            path = ./template/cmake-cpp;
+          };
+
           darwin = {
             description = "Kickstart macOS development environment flake.";
             path = ./template/darwin;
