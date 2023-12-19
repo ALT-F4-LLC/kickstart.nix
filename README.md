@@ -14,7 +14,7 @@ Kickstart your Nix environments.
 ## Templates
 - Languages
     - [Bash](#bash)
-    - [CMake/C++](#cmake-c++)
+    - [C++ (cmake)](#cpp-cmake)
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
     - [Node.js (backend)](#nodejs-backend)
@@ -194,7 +194,7 @@ Used for Bash scripts.
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#bash
 ```
 
-#### CMake/C++
+#### <a name="cpp-cmake"></a> C++ (cmake)
 
 Used for C++ projects using CMake as a build system.
 
