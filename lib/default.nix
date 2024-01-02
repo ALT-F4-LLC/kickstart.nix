@@ -70,6 +70,19 @@
         cat $out/flake.nix
       '';
 
+    lua-app = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "lua-app"
+        {
+          src = ../template/lua-app;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     nixos-desktop = system: desktop:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -142,6 +155,19 @@
         cat $out/system/nixos.nix
       '';
 
+    nodejs-backend = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "nodejs-backend"
+        {
+          src = ../template/nodejs-backend;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
     ocaml = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -188,19 +214,6 @@
       pkgs.runCommand "rust"
         {
           src = ../template/rust;
-        } ''
-        mkdir -p $out
-        cp --no-preserve=mode -r $src/* $out
-        cat $out/flake.nix
-      '';
-
-    nodejs-backend = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
-      pkgs.runCommand "nodejs-backend"
-        {
-          src = ../template/nodejs-backend;
         } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out

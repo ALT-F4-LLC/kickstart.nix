@@ -16,6 +16,7 @@ jobs:
           - cpp-cmake
           - go-mod
           - go-pkg
+          - lua-app
           - nodejs-backend
           - ocaml
           - python-app

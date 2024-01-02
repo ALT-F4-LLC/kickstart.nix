@@ -35,6 +35,11 @@
             path = ./template/go-pkg;
           };
 
+          lua-app = {
+            description = "Kickstart Lua application flake.";
+            path = ./template/lua-app;
+          };
+
           nixos-desktop = {
             description = "Kickstart NixOS desktop environment flake.";
             path = ./template/nixos-desktop;
@@ -85,6 +90,7 @@
           example-darwin = lib.flake.darwin system;
           example-go-mod = lib.flake.go-mod system;
           example-go-pkg = lib.flake.go-pkg system;
+          example-lua-app = lib.flake.lua-app system;
           example-nixos-desktop-gnome = lib.flake.nixos-desktop system "gnome";
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
           example-nixos-hardware = lib.flake.nixos-hardware system;

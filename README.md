@@ -17,6 +17,7 @@ Kickstart your Nix environments.
     - [C++ (cmake)](#cpp-cmake)
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
+    - [Lua (application)](#lua-application)
     - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
     - [Python (application)](#python-application)
@@ -221,6 +222,17 @@ Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go a
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
+```
+
+#### Lua (application)
+
+Used for Lua script applications. This template creates a shell script wrapper which executes your Lua code. See `flake.nix` for more.
+
+> [!NOTE]
+> We wrap Lua because we are using an interpreted language which requires both binary and code to run. This is similar to `console scripts` in the `python-app` template.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#lua-app
 ```
 
 #### Node.js (backend)
