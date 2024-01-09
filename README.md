@@ -37,7 +37,7 @@ Kickstart your Nix environments.
 1. Install `nixpkgs` with official script:
 
 > [!NOTE]
-> The offical docs suggest using `daemon` mode to install with this approach.
+> The offical docs suggest using `daemon` mode to install with this approach. Nix currently does not support SELINUX enabled.
 
 
 ```bash
