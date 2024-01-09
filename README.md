@@ -67,8 +67,8 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#home-manager
 
 ```nix
 homeManagerModule = import ./module/home-manager.nix {
-  homeDirectory = throw "<enter homeDirectory in flake.nix>"; # REQUIRED: home directory of the user
-  username = throw "<enter username in flake.nix>"; # REQUIRED: username of the user
+  homeDirectory = throw "<enter homeDirectory in flake.nix>"; # TODO: home directory of the user
+  username = throw "<enter username in flake.nix>"; # TODO: username of the user
 };
 ```
 
