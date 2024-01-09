@@ -35,6 +35,11 @@
             path = ./template/go-pkg;
           };
 
+          home-manager = {
+            description = "Kickstart Home Manager environment flake.";
+            path = ./template/home-manager;
+          };
+
           lua-app = {
             description = "Kickstart Lua application flake.";
             path = ./template/lua-app;
@@ -90,6 +95,7 @@
           example-darwin = lib.flake.darwin system;
           example-go-mod = lib.flake.go-mod system;
           example-go-pkg = lib.flake.go-pkg system;
+          example-home-manager = lib.flake.home-manager system;
           example-lua-app = lib.flake.lua-app system;
           example-nixos-desktop-gnome = lib.flake.nixos-desktop system "gnome";
           example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";

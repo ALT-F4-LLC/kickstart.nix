@@ -3,14 +3,16 @@
 Kickstart your Nix environments.
 
 [![Test flake](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml)
+[![Test home-manager](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-home-manager.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-home-manager.yml)
 [![Test languages](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-language.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-language.yml)
 [![Test systems](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml)
 
 ![kickstart.nix](preview/kickstart.nix.webp)
 
 ## Guides
-- [Setup macOS](#setup-macos)
+- [Setup Home Manager](#setup-home-manager)
 - [Setup NixOS](#setup-nixos)
+- [Setup macOS](#setup-macos)
 ## Templates
 - Languages
     - [Bash](#bash)
@@ -29,6 +31,77 @@ Kickstart your Nix environments.
     - [NixOS (minimal)](#nixos-minimal)
 
 ### Guides
+
+#### Setup Home Manager
+
+1. Install `nixpkgs` with official script:
+
+> [!NOTE]
+> The offical docs suggest using `daemon` mode to install with this approach. Nix currently does not support SELINUX enabled.
+
+
+```bash
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+2. Edit `/etc/nix/nix.conf` to enable the following settings:
+
+```bash
+experimental-features = nix-command flakes
+```
+
+3. Create a new directory for your `flake.nix` configuration:
+
+```bash
+mkdir -p ~/kickstart.nix
+cd ~/kickstart.nix
+```
+
+4. Using `nix flake init` generate the `kickstart.nix` template locally:
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#home-manager
+```
+
+5. Update following value(s) in `flake.nix` configuration:
+
+```nix
+homeManagerModule = import ./module/home-manager.nix {
+  homeDirectory = throw "<enter homeDirectory in flake.nix>"; # TODO: home directory of the user
+  username = throw "<enter username in flake.nix>"; # TODO: username of the user
+};
+```
+
+6. Run `home-manager` from `nixpkgs` to build and switch environments:
+
+> [!IMPORTANT]
+> This template supports the following systems: `aarch64-darwin`, `aarch64-linux`, `x86_64-darwin` and `x86_64-linux`.
+
+```bash
+# for ARM systems running macOS
+nix run nixpkgs#home-manager -- build --flake .#aarch64-darwin
+nix run nixpkgs#home-manager -- switch --flake .#aarch64-darwin
+
+# for ARM systems running Linux
+nix run nixpkgs#home-manager -- build --flake .#aarch64-linux
+nix run nixpkgs#home-manager -- switch --flake .#aarch64-linux
+
+# for Intel systems running macOS
+nix run nixpkgs#home-manager -- build --flake .#x86_64-darwin
+nix run nixpkgs#home-manager -- switch --flake .#x86_64-darwin
+
+# for Intel systems running Linux
+nix run nixpkgs#home-manager -- build --flake .#x86_64-linux
+nix run nixpkgs#home-manager -- switch --flake .#x86_64-linux
+```
+
+Congrats! You've setup Home Manager on your existing operating system!
+
+Be sure to explore the files below to get started customizing:
+
+- `module/home-manager.nix` for `Home Manager` related settings
+- `flake.nix` for flake related settings
+
 
 #### Setup macOS
 
@@ -98,6 +171,7 @@ Be sure to explore the files below to get started customizing:
 - `system/darwin.nix` for all `nix-darwin` related settings
 - `module/configuration.nix` for `Nix` related settings
 - `module/home-manager.nix` for `Home Manager` related settings
+- `flake.nix` for flake related settings
 
 #### Setup NixOS
 
@@ -183,6 +257,7 @@ Be sure to explore the files below to get started customizing:
 - `module/configuration.nix` for more `NixOS` system related settings
 - `module/home-manager.nix` for `Home Manager` related settings
 - `system/nixos.nix` for `NixOS` system related settings
+- `flake.nix` for flake related settings
 
 ### Languages
 

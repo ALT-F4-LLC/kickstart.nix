@@ -38,7 +38,7 @@
         } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
-        sed -i -e "s/<username>/username/g" $out/flake.nix
+        sed -i -e "s/<enter username in flake.nix>/username/g" $out/flake.nix
         sed -i -e "s/throw //g" $out/flake.nix
         sed -i -e "s/ # TODO.*$//g" $out/flake.nix
         cat $out/flake.nix
@@ -70,6 +70,23 @@
         cat $out/flake.nix
       '';
 
+    home-manager = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "home-manager"
+        {
+          src = ../template/home-manager;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        sed -i -e "s/<enter homeDirectory in flake.nix>/\/home\/username/g" $out/flake.nix
+        sed -i -e "s/<enter username in flake.nix>/username/g" $out/flake.nix
+        sed -i -e "s/throw //g" $out/flake.nix
+        sed -i -e "s/ # TODO.*$//g" $out/flake.nix
+        cat $out/flake.nix
+      '';
+
     lua-app = system:
       let
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -95,8 +112,8 @@
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cp --no-preserve=mode $hardware_configuration $out/system/hardware-configuration.nix
-        sed -i -e "s/<username>/username/g" $out/flake.nix
-        sed -i -e "s/<password>/password/g" $out/flake.nix
+        sed -i -e "s/<enter username in flake.nix>/username/g" $out/flake.nix
+        sed -i -e "s/<enter password in flake.nix>/password/g" $out/flake.nix
         sed -i -e "s/throw //g" $out/flake.nix
         sed -i -e "s/ # TODO.*$//g" $out/flake.nix
         sed -i -e "s/desktop = \"gnome\"/desktop = \"${desktop}\"/g" $out/flake.nix
@@ -146,8 +163,8 @@
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cp --no-preserve=mode $hardware_configuration $out/system/hardware-configuration.nix
-        sed -i -e "s/<username>/username/g" $out/flake.nix
-        sed -i -e "s/<password>/password/g" $out/flake.nix
+        sed -i -e "s/<enter username in flake.nix>/username/g" $out/flake.nix
+        sed -i -e "s/<enter password in flake.nix>/password/g" $out/flake.nix
         sed -i -e "s/throw //g" $out/flake.nix
         sed -i -e "s/ # TODO.*$//g" $out/flake.nix
         sed -i -e "s/\/etc\/nixos\/hardware-configuration.nix/\.\/hardware-configuration.nix/g" $out/system/nixos.nix

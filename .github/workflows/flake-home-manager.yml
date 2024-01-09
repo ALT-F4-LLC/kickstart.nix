@@ -1,0 +1,26 @@
+name: Test home-manager
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  darwin:
+    runs-on: macos-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v3
+      - run: just build-home-manager "x86_64-darwin"
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: extractions/setup-just@v1
+      - uses: actions/checkout@v3
+      - run: just build-home-manager "x86_64-linux"
