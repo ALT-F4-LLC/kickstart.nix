@@ -10,6 +10,14 @@ build-darwin system="x86_64": (clean-template "darwin")
     nix build --json --no-link --print-build-logs \
         "/tmp/kickstart.nix/darwin#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
+build-home-manager system="x86_64-linux": (clean-template "home-manager")
+    #!/usr/bin/env bash
+    DERIVATION=$(nix build --json --no-link --print-build-logs ".#example-home-manager")
+    OUTPUT=$(echo $DERIVATION | jq -r ".[0].outputs.out")
+    cp -r $OUTPUT/* /tmp/kickstart.nix/home-manager
+    nix build --json --no-link --print-build-logs \
+        "/tmp/kickstart.nix/home-manager#homeConfigurations.{{ system }}.activationPackage"
+
 build-language template profile="default": (clean-template template)
     #!/usr/bin/env bash
     DERIVATION=$(nix build --json --no-link --print-build-logs ".#example-{{ template }}")

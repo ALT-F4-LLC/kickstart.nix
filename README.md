@@ -3,6 +3,7 @@
 Kickstart your Nix environments.
 
 [![Test flake](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake.yml)
+[![Test home-manager](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-home-manager.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-home-manager.yml)
 [![Test languages](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-language.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-language.yml)
 [![Test systems](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml/badge.svg)](https://github.com/ALT-F4-LLC/kickstart.nix/actions/workflows/flake-system.yml)
 
@@ -74,7 +75,7 @@ homeManagerModule = import ./module/home-manager.nix {
 6. Run `home-manager` from `nixpkgs` to build and switch environments:
 
 > [!IMPORTANT]
-> This template supports follow architectures: `aarch64-darwin`, `aarch64-linux`, `x86_64-darwin` and `x86_64-linux`.
+> This template supports the following systems: `aarch64-darwin`, `aarch64-linux`, `x86_64-darwin` and `x86_64-linux`.
 
 ```bash
 # for ARM systems running macOS
