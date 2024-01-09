@@ -74,7 +74,7 @@ homeManagerModule = import ./module/home-manager.nix {
 6. Run `home-manager` from `nixpkgs` to build and switch environments:
 
 > [!IMPORTANT]
-> This flake supports any of the follow architectures: `aarch64-darwin`, `aarch64-linux`, `x86_64-darwin` and ``x86_64-linux`.
+> This template supports the follow architectures: `aarch64-darwin`, `aarch64-linux`, `x86_64-darwin` and `x86_64-linux`.
 
 ```bash
 nix run nixpkgs#home-manager -- build --flake .#<architecture>
