@@ -35,6 +35,11 @@
             path = ./template/go-pkg;
           };
 
+          home-manager = {
+            description = "Kickstart Home Manager environment flake.";
+            path = ./template/home-manager;
+          };
+
           nixos-desktop = {
             description = "Kickstart NixOS desktop environment flake.";
             path = ./template/nixos-desktop;
