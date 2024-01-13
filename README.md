@@ -71,6 +71,9 @@ homeManagerModule = import ./module/home-manager.nix {
   username = throw "<enter username in flake.nix>"; # TODO: username of the user
 };
 ```
+NOTE: Dont forget to remove the throw statements when inserting your homeDirectory and username. Otherwise you will get an error similar to the below where 'bwsdm' is the username
+
+![nixThrowError](images/nixThrowError.png)
 
 6. Run `home-manager` from `nixpkgs` to build and switch environments:
 
