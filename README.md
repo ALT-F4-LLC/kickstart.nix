@@ -10,9 +10,9 @@ Kickstart your Nix environments.
 ![kickstart.nix](preview/kickstart.nix.webp)
 
 ## Guides
-- [Setup Home Manager](#setup-home-manager)
-- [Setup NixOS](#setup-nixos)
+- [Setup Linux](#setup-linux)
 - [Setup macOS](#setup-macos)
+- [Setup NixOS](#setup-nixos)
 ## Templates
 - Languages
     - [Bash](#bash)
@@ -32,7 +32,7 @@ Kickstart your Nix environments.
 
 ### Guides
 
-#### Setup Home Manager
+#### Setup Linux
 
 1. Install `nixpkgs` with official script:
 
