@@ -28,8 +28,9 @@ Kickstart your Nix environments.
 - Systems
     - [Home Manager](#home-manager)
     - [macOS](#macos-desktop)
-    - [NixOS (desktop)](#nixos-desktop)
-    - [NixOS (headless)](#nixos-headless)
+    - NixOS
+        - [Desktop](#nixos-desktop)
+        - [Headless](#nixos-headless)
 
 ### Guides
 
@@ -248,7 +249,7 @@ in
 7. Switch to `kickstart.nix` environment for your system with flake configuration:
 
 > [!IMPORTANT]
-> We use `--impure` due to how `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template [(see example here)](https://github.com/ALT-F4-LLC/dotfiles-nixos/blob/main/lib/default.nix#L30).
+> We use `--impure` due to how `/etc/nixos/hardware-configuration.nix` is generated and stored on the system after installation. To avoid using this flag, copy `hardware-configuration.nix` file locally and replace import in the template [see example](https://github.com/ALT-F4-LLC/dotfiles-nixos/blob/main/lib/default.nix#L54).
 
 - For `aarch64` platforms:
 
