@@ -26,8 +26,10 @@ Kickstart your Nix environments.
     - [Python (package)](#python-package)
     - [Rust](#rust)
 - Systems
-    - [Home Manager](#home-manager)
-    - [macOS](#macos-desktop)
+    - Linux
+        - [Home Manager](#home-manager)
+    - macOS
+        - [Desktop](#macos-desktop)
     - NixOS
         - [Desktop](#nixos-desktop)
         - [Headless](#nixos-headless)
