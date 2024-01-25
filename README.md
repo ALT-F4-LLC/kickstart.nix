@@ -26,19 +26,21 @@ Kickstart your Nix environments.
     - [Python (package)](#python-package)
     - [Rust](#rust)
 - Systems
-    - [macOS (desktop)](#macos-desktop)
+    - [Home Manager](#home-manager)
+    - [macOS](#macos-desktop)
     - [NixOS (desktop)](#nixos-desktop)
-    - [NixOS (minimal)](#nixos-minimal)
+    - [NixOS (headless)](#nixos-headless)
 
 ### Guides
 
 #### Setup Linux
 
+Guide for setting up Nix on non-NixOS based Linux systems.
+
 1. Install `nixpkgs` with official script:
 
 > [!NOTE]
 > The offical docs suggest using `daemon` mode to install with this approach. Nix currently does not support SELINUX enabled.
-
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
@@ -64,6 +66,9 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#home-manager
 ```
 
 5. Update following value(s) in `flake.nix` configuration:
+
+> [!IMPORTANT]
+> Both `homeDirectory` and `username` must be updated with your user home directory and username. Once updated, remove `throw` before each value to remove errors while switching.
 
 ```nix
 homeManagerModule = import ./module/home-manager.nix {
@@ -102,8 +107,9 @@ Be sure to explore the files below to get started customizing:
 - `module/home-manager.nix` for `Home Manager` related settings
 - `flake.nix` for flake related settings
 
-
 #### Setup macOS
+
+Guide for setting up Nix on macOS based systems.
 
 1. Install `nixpkgs` with official script:
 
@@ -151,6 +157,9 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#darwin
 
 8. Update the following value(s) in `flake.nix` configuration:
 
+> [!IMPORTANT]
+> The `username` value must be updated with your system username. Once updated, remove `throw` to remove error while switching.
+
 ```nix
 let
     username = throw "<username>"; # TODO: replace with user name and remove throw 
@@ -174,6 +183,8 @@ Be sure to explore the files below to get started customizing:
 - `flake.nix` for flake related settings
 
 #### Setup NixOS
+
+Guide for setting up NixOS based systems.
 
 1. Install NixOS using the [latest ISO image](https://nixos.org/download#nixos-iso) for your system.
 
@@ -207,6 +218,9 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-minimal
 6. Update the following value(s) in `flake.nix` configuration:
 
 - For `desktop` flake template:
+
+> [!IMPORTANT]
+> Both `username` and `password` must be updated with your user username. Once updated, remove `throw` before each value to remove errors while switching. If you'd rather use a [hashed password](https://nixpkgs-manual-sphinx-markedown-example.netlify.app/generated/options-db.xml.html?highlight=hashedpassword#users-users-name-hashedpassword) replace `password` with `hashedPassword` with your password hash.
 
 ```nix
 let
@@ -368,9 +382,19 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
 
 ### Systems
 
-#### macOS (desktop)
+#### Home Manager
 
-macOS template allows you to run Nix tools on your native Mac hardware.
+Home Manager template allows you to run Nix with Home Manager on non-NixOS based Linux systems.
+
+> [!TIP]
+> This setup is ideal for developers interested in running Linux distros other than NixOS.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-minimal
+```
+#### macOS
+
+macOS template allows you to run Nix tools on native Apple hardware.
 
 > [!TIP]
 > This setup is ideal for developers already using macOS.
@@ -390,9 +414,9 @@ NixOS desktop template includes base operating system with GNOME (default) windo
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#nixos-desktop
 ```
 
-#### NixOS (minimal)
+#### NixOS (headless)
 
-NixOS minimal template includes base operating system without any windows manager.
+NixOS headless (minimal) template includes base operating system without any windows manager.
 
 > [!TIP]
 > This setup is ideal for servers and other headless tasks.
