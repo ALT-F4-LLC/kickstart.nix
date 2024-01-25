@@ -29,7 +29,7 @@ Kickstart your Nix environments.
     - Linux
         - [Home Manager](#home-manager)
     - macOS
-        - [Desktop](#macos-desktop)
+        - [Desktop](#macos)
     - NixOS
         - [Desktop](#nixos-desktop)
         - [Headless](#nixos-headless)
