@@ -22,8 +22,9 @@
 
           packages = {
             default = buildDartApplication {
-              pname = name;
+              inherit name;
               inherit version;
+              pname = name;
               src = ./.;
               autoPubspecLock = ./pubspec.lock;
             };
