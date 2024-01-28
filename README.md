@@ -25,6 +25,7 @@ Kickstart your Nix environments.
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
+    - [Dart](#dart)
 - Systems
     - Linux
         - [Home Manager](#home-manager)
@@ -381,6 +382,14 @@ Used for Rust applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
+```
+
+#### Dart
+
+Used for Dart applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
 ```
 
 ### Systems

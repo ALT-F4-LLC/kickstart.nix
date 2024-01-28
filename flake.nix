@@ -79,6 +79,10 @@
             description = "Kickstart Node.js backend package flake.";
             path = ./template/nodejs-backend;
           };
+          dart = {
+            description = "Kickstart Dart package flake.";
+            path = ./template/dart;
+          };
         };
       };
 
