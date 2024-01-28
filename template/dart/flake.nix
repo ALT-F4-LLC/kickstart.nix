@@ -22,11 +22,13 @@
 
           packages = {
             default = buildDartApplication {
-              inherit name;
               inherit version;
               pname = name;
               src = ./.;
               autoPubspecLock = ./pubspec.lock;
+              dartEntryPoints = {
+                "bin/example" = "bin/example.dart";
+              };
             };
 
             docker = buildImage {
