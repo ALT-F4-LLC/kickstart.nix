@@ -22,6 +22,7 @@ jobs:
           - python-app
           - python-pkg
           - rust
+          - dart
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -42,6 +43,7 @@ jobs:
           - ocaml
           - python-app
           - rust
+          - dart
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main

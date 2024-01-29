@@ -236,5 +236,18 @@
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
+
+    dart = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "dart"
+        {
+          src = ../template/dart;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }

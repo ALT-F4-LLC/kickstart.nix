@@ -79,13 +79,17 @@
             description = "Kickstart Node.js backend package flake.";
             path = ./template/nodejs-backend;
           };
+          dart = {
+            description = "Kickstart Dart package flake.";
+            path = ./template/dart;
+          };
         };
       };
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ just ];
+            buildInputs = with pkgs; [ just jq ];
           };
         };
 
@@ -106,6 +110,7 @@
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
+          example-dart = lib.flake.dart system;
         };
       };
 
