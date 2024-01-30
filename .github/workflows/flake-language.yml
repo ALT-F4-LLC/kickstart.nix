@@ -44,6 +44,7 @@ jobs:
           - ocaml
           - python-app
           - rust
+          - dart
           - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
