@@ -1,5 +1,5 @@
 {
-  description = "Example kickstart Bash application project.";
+  description = "Example kickstart Zig application project.";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 

@@ -249,5 +249,18 @@
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
+
+    zig = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "zig"
+        {
+          src = ../template/zig;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }
