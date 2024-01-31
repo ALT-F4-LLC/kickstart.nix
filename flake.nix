@@ -87,6 +87,10 @@
             description = "Kickstart Zig package flake.";
             path = ./template/zig;
           };
+          haskell = {
+            description = "Kickstart Haskell package flake.";
+            path = ./template/haskell;
+          };
         };
       };
 
@@ -116,6 +120,7 @@
           example-rust = lib.flake.rust system;
           example-dart = lib.flake.dart system;
           example-zig = lib.flake.zig system;
+          example-haskell = lib.flake.haskell system;
         };
       };
 
