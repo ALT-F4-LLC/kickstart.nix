@@ -27,6 +27,8 @@ Kickstart your Nix environments.
     - [Rust](#rust)
     - [Dart](#dart)
     - [Zig](#zig)
+    - [Haskell](#haskell)
+
 - Systems
     - Linux
         - [Home Manager](#home-manager)
@@ -399,6 +401,14 @@ Used for Zig applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
+```
+
+#### Haskell
+
+Used for Haskell applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#haskell
 ```
 
 ### Systems
