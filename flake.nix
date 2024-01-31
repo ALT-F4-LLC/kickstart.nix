@@ -83,6 +83,10 @@
             description = "Kickstart Dart package flake.";
             path = ./template/dart;
           };
+          zig = {
+            description = "Kickstart Zig package flake.";
+            path = ./template/zig;
+          };
         };
       };
 
@@ -111,6 +115,7 @@
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
           example-dart = lib.flake.dart system;
+          example-zig = lib.flake.zig system;
         };
       };
 

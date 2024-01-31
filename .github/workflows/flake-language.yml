@@ -23,6 +23,7 @@ jobs:
           - python-pkg
           - rust
           - dart
+          - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -44,6 +45,7 @@ jobs:
           - python-app
           - rust
           - dart
+          - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
