@@ -24,6 +24,7 @@ jobs:
           - rust
           - dart
           - zig
+          - haskell
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -46,6 +47,7 @@ jobs:
           - rust
           - dart
           - zig
+          - haskell
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
