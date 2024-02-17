@@ -55,6 +55,11 @@
             path = ./template/nixos-minimal;
           };
 
+          powershell = {
+            description = "Kickstart Powershell application flake.";
+            path = ./template/powershell;
+          };
+
           python-app = {
             description = "Kickstart Python application flake.";
             path = ./template/python-app;
@@ -115,6 +120,7 @@
           example-nixos-minimal = lib.flake.nixos-minimal system;
           example-nodejs-backend = lib.flake.nodejs-backend system;
           example-ocaml = lib.flake.ocaml system;
+          example-powershell = lib.flake.powershell system;
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
