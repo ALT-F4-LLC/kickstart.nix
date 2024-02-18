@@ -31,7 +31,7 @@
               inherit name;
               tag = version;
               config = {
-                Cmd = "${self'.packages.default}/bin/${name}";
+                Cmd = [ "${self'.packages.default}/bin/${name}" ];
                 Env = [
                   "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
                 ];
