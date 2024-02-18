@@ -14,17 +14,18 @@ jobs:
         template:
           - bash
           - cpp-cmake
+          - dart
           - go-mod
           - go-pkg
+          - haskell
           - lua-app
           - nodejs-backend
           - ocaml
+          - powershell
           - python-app
           - python-pkg
           - rust
-          - dart
           - zig
-          - haskell
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
@@ -39,15 +40,16 @@ jobs:
         template:
           - bash
           - cpp-cmake
+          - dart
           - go-mod
           - go-pkg
+          - haskell
           - nodejs-backend
           - ocaml
+          - powershell
           - python-app
           - rust
-          - dart
           - zig
-          - haskell
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main

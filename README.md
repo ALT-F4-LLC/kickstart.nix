@@ -22,6 +22,7 @@ Kickstart your Nix environments.
     - [Lua (application)](#lua-application)
     - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
+    - [Powershell](#powershell)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
@@ -361,6 +362,14 @@ Used for OCaml applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#ocaml
+```
+
+#### Powershell
+
+Used for Powershell applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#powershell
 ```
 
 #### Python (application)
