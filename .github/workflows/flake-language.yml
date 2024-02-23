@@ -20,6 +20,7 @@ jobs:
           - haskell
           - lua-app
           - nodejs-backend
+          - nestjs
           - ocaml
           - powershell
           - python-app
@@ -45,6 +46,7 @@ jobs:
           - go-pkg
           - haskell
           - nodejs-backend
+          - nestjs
           - ocaml
           - powershell
           - python-app
