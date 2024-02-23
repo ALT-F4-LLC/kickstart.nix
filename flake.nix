@@ -87,14 +87,22 @@
             description = "Kickstart Node.js backend package flake.";
             path = ./template/nodejs-backend;
           };
+
+          nestjs = {
+            description = "Kickstart NestJS application flake.";
+            path = ./template/nestjs;
+          };
+
           dart = {
             description = "Kickstart Dart package flake.";
             path = ./template/dart;
           };
+
           zig = {
             description = "Kickstart Zig package flake.";
             path = ./template/zig;
           };
+
           haskell = {
             description = "Kickstart Haskell package flake.";
             path = ./template/haskell;
@@ -133,6 +141,7 @@
           example-nixos-hardware = lib.flake.nixos-hardware system;
           example-nixos-minimal = lib.flake.nixos-minimal system;
           example-nodejs-backend = lib.flake.nodejs-backend system;
+          example-nestjs = lib.flake.nestjs system;
           example-ocaml = lib.flake.ocaml system;
           example-powershell = lib.flake.powershell system;
           example-python-app = lib.flake.python-app system;

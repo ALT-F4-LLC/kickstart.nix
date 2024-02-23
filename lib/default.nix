@@ -172,9 +172,23 @@
         cat $out/flake.nix
       '';
 
-    ocaml = system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in
+    nestjs = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "nestjs"
+        {
+          src = ../template/nestjs;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
+    ocaml = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
       pkgs.runCommand "ocaml"
       {
         src = ../template/ocaml;
