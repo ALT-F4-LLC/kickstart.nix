@@ -80,6 +80,11 @@
             path = ./template/rust;
           };
 
+          swiftpm = {
+            description = "Kickstart Swift package flake.";
+            path = ./template/swiftpm;
+          };
+
           nodejs-backend = {
             description = "Kickstart Node.js backend package flake.";
             path = ./template/nodejs-backend;
@@ -133,6 +138,7 @@
           example-python-app = lib.flake.python-app system;
           example-python-pkg = lib.flake.python-pkg system;
           example-rust = lib.flake.rust system;
+          example-swiftpm = lib.flake.swiftpm system;
           example-dart = lib.flake.dart system;
           example-zig = lib.flake.zig system;
           example-haskell = lib.flake.haskell system;

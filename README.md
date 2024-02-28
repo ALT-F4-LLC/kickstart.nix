@@ -27,6 +27,7 @@ Kickstart your Nix environments.
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
+    - [Swift](#swift)
     - [Dart](#dart)
     - [Zig](#zig)
     - [Haskell](#haskell)
@@ -414,6 +415,26 @@ Used for Rust applications.
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
 ```
+
+#### Swift
+
+Used for Swift applications packages with SwiftPM.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#swiftpm
+```
+
+To update your dependencies, while in the direnv dev shell, run:
+
+```bash
+# Update current dependency lockfile (Package.resolved)
+swift package resolve
+
+# Update Nix bindings for dependency set
+swiftpm2nix
+```
+
+Then build again.
 
 #### Dart
 
