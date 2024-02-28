@@ -8,7 +8,7 @@
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          inherit (pkgs) swift clang swift-corelibs-libdispatch;
+          inherit (pkgs) swiftpm2nix swift clang swift-corelibs-libdispatch;
           inherit (pkgs.dockerTools) buildImage;
           inherit (pkgs.swiftPackages) swiftpm Foundation;
           name = "example";
@@ -16,6 +16,7 @@
         in
         {
           devShells.default = pkgs.mkShell.override { stdenv = swift.stdenv; } {
+            buildInputs = [ swiftpm2nix ];
             inputsFrom = [ self'.packages.default ];
             shellHook = ''
                 export LD_LIBRARY_PATH="${swift-corelibs-libdispatch}/lib"
@@ -24,23 +25,28 @@
           };
 
           packages = {
-            default = pkgs.stdenv.mkDerivation {
-              inherit name version;
+            default = let
+              generated = swiftpm2nix.helpers ./nix;
+            in swift.stdenv.mkDerivation {
+              pname = name;
+              inherit version;
+
               src = ./.;
 
-              stdenv = swift.stdenv;
-              buildInputs = [
-                clang
-                swift
-                swiftpm
+              nativeBuildInputs = [ swift swiftpm pkgs.pkg-config ];
+              buildInputs = pkgs.lib.optionals pkgs.stdenv.isLinux [
                 Foundation
               ];
 
-              buildHook = ''
+              configurePhase = generated.configure
+              + pkgs.lib.optionals pkgs.stdenv.isLinux ''
                 export LD_LIBRARY_PATH="${swift-corelibs-libdispatch}/lib"
-                export CC=clang
+              '';
 
-                swift build
+              installPhase = ''
+                binPath="$(swiftpmBinPath)"
+                mkdir -p $out/bin
+                cp $binPath/${name} $out/bin/
               '';
             };
 
