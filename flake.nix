@@ -80,6 +80,11 @@
             path = ./template/rust;
           };
 
+          swiftpm = {
+            description = "Kickstart Swift package flake.";
+            path = ./template/swiftpm;
+          };
+
           nodejs-backend = {
             description = "Kickstart Node.js backend package flake.";
             path = ./template/nodejs-backend;

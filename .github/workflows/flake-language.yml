@@ -26,6 +26,7 @@ jobs:
           - python-app
           - python-pkg
           - rust
+          - swift
           - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
@@ -51,6 +52,7 @@ jobs:
           - powershell
           - python-app
           - rust
+          - swift
           - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
