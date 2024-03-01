@@ -40,8 +40,8 @@ build-home-manager system="x86_64-linux": (build-template "home-manager")
 build-language template profile="default": (build-template template)
     just build "{{ temp_dir }}/{{ template }}#{{ profile }}"
 
-build-nixos-desktop system="x86_64" desktop="gnome": (build-template "nixos-desktop")
-    just build "{{ temp_dir }}/nixos-desktop#nixosConfigurations.{{ system }}.config.system.build.toplevel"
+build-nixos-desktop system="x86_64" desktop="gnome": (build-template 'nixos-desktop-'+desktop)
+    just build "{{ temp_dir }}/nixos-desktop-{{ desktop }}#nixosConfigurations.{{ system }}.config.system.build.toplevel"
 
 build-nixos-minimal system="x86_64": (build-template "nixos-minimal")
     just build "{{ temp_dir }}/nixos-minimal#nixosConfigurations.{{ system }}.config.system.build.toplevel"
