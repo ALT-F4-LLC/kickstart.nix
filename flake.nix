@@ -3,11 +3,14 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = inputs@{ flake-parts, self, ... }:
-    let
-      lib = import ./lib { inherit inputs; };
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    flake-parts,
+    self,
+    ...
+  }: let
+    lib = import ./lib {inherit inputs;};
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
       flake = {
         templates = {
           bash = {
@@ -99,10 +102,19 @@
         };
       };
 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      systems = ["aarch64-darwin" "aarch64-linux" "x86_64-linux" "x86_64-darwin"];
+
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ just jq ];
+            buildInputs = with pkgs; [just jq];
           };
         };
 
@@ -129,7 +141,5 @@
           example-haskell = lib.flake.haskell system;
         };
       };
-
-      systems = [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" "x86_64-darwin" ];
     };
 }
