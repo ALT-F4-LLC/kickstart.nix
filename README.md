@@ -22,15 +22,14 @@ Kickstart your Nix environments.
     - [Go (package)](#go-package)
     - [Haskell](#haskell)
     - [Lua (application)](#lua-application)
-    - [Node.js (backend)](#nodejs-backend)
     - [NestJS](#nestjs)
+    - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
     - [Powershell](#powershell)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
     - [Swift](#swift)
-    - [Dart](#dart)
     - [Zig](#zig)
 
 - Systems
@@ -351,6 +350,24 @@ Used for Lua script applications. This template creates a shell script wrapper w
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#lua-app
 ```
 
+#### NestJS
+
+Used for NestJS applications. The template builds using `npm`.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nestjs
+```
+
+To update your dependencies, install/upgrade them as normal via NPM, then use
+the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
+to generate a new `npmDepsHash` value for `packages.default` in the Flake.
+
+```bash
+$ nix shell 'nixpkgs#prefetch-npm-deps' -c prefetch-npm-deps package-lock.json
+...
+sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
+```
+
 #### Node.js (backend)
 
 Used for Node.js backend applications. The template builds using `npm`, and does
@@ -374,24 +391,6 @@ sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
 > To add TypeScript, install it with `npm install --save-dev typescript`, add a
 > `build` script to `package.json` that calls `tsc`, and then remove
 > `dontNpmBuild = true;` from `packages.default` in your Flake.
-
-#### NestJS
-
-Used for NestJS applications. The template builds using `npm`.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#nestjs
-```
-
-To update your dependencies, install/upgrade them as normal via NPM, then use
-the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
-to generate a new `npmDepsHash` value for `packages.default` in the Flake.
-
-```bash
-$ nix shell 'nixpkgs#prefetch-npm-deps' -c prefetch-npm-deps package-lock.json
-...
-sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
-```
 
 #### OCaml
 
@@ -452,14 +451,6 @@ swiftpm2nix
 ```
 
 Then build again.
-
-#### Dart
-
-Used for Dart applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
-```
 
 #### Zig
 
