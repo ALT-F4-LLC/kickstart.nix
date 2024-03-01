@@ -17,20 +17,20 @@ Kickstart your Nix environments.
 - Languages
     - [Bash](#bash)
     - [C++ (cmake)](#cpp-cmake)
+    - [Dart](#dart)
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
+    - [Haskell](#haskell)
     - [Lua (application)](#lua-application)
-    - [Node.js (backend)](#nodejs-backend)
     - [NestJS](#nestjs)
+    - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
     - [Powershell](#powershell)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
     - [Swift](#swift)
-    - [Dart](#dart)
     - [Zig](#zig)
-    - [Haskell](#haskell)
 
 - Systems
     - Linux
@@ -301,6 +301,14 @@ Used for C++ projects using CMake as a build system.
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#cpp-cmake
 ```
 
+#### Dart
+
+Used for Dart applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
+```
+
 #### Go (module)
 
 Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use `go-pkg` template.
@@ -323,6 +331,14 @@ Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go a
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
 ```
 
+#### Haskell
+
+Used for Haskell applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#haskell
+```
+
 #### Lua (application)
 
 Used for Lua script applications. This template creates a shell script wrapper which executes your Lua code. See `flake.nix` for more.
@@ -332,6 +348,24 @@ Used for Lua script applications. This template creates a shell script wrapper w
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#lua-app
+```
+
+#### NestJS
+
+Used for NestJS applications. The template builds using `npm`.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nestjs
+```
+
+To update your dependencies, install/upgrade them as normal via NPM, then use
+the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
+to generate a new `npmDepsHash` value for `packages.default` in the Flake.
+
+```bash
+$ nix shell 'nixpkgs#prefetch-npm-deps' -c prefetch-npm-deps package-lock.json
+...
+sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
 ```
 
 #### Node.js (backend)
@@ -357,24 +391,6 @@ sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
 > To add TypeScript, install it with `npm install --save-dev typescript`, add a
 > `build` script to `package.json` that calls `tsc`, and then remove
 > `dontNpmBuild = true;` from `packages.default` in your Flake.
-
-#### NestJS
-
-Used for NestJS applications. The template builds using `npm`.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#nestjs
-```
-
-To update your dependencies, install/upgrade them as normal via NPM, then use
-the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
-to generate a new `npmDepsHash` value for `packages.default` in the Flake.
-
-```bash
-$ nix shell 'nixpkgs#prefetch-npm-deps' -c prefetch-npm-deps package-lock.json
-...
-sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
-```
 
 #### OCaml
 
@@ -436,28 +452,12 @@ swiftpm2nix
 
 Then build again.
 
-#### Dart
-
-Used for Dart applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
-```
-
 #### Zig
 
 Used for Zig applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
-```
-
-#### Haskell
-
-Used for Haskell applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#haskell
 ```
 
 ### Systems

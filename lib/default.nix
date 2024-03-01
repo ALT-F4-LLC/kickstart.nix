@@ -1,41 +1,36 @@
-{ inputs }:
-
-{
+{inputs}: {
   flake = rec {
-    bash = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    bash = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "bash"
-        {
-          src = ../template/bash;
-        } ''
+      {
+        src = ../template/bash;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    cpp-cmake = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    cpp-cmake = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "cpp-cmake"
-        {
-          src = ../template/cpp-cmake;
-        } ''
+      {
+        src = ../template/cpp-cmake;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    darwin = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    darwin = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "darwin"
-        {
-          src = ../template/darwin;
-        } ''
+      {
+        src = ../template/darwin;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         sed -i -e "s/<enter username in flake.nix>/username/g" $out/flake.nix
@@ -44,40 +39,37 @@
         cat $out/flake.nix
       '';
 
-    go-mod = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    go-mod = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "go-mod"
-        {
-          src = ../template/go-mod;
-        } ''
+      {
+        src = ../template/go-mod;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    go-pkg = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    go-pkg = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "go-pkg"
-        {
-          src = ../template/go-pkg;
-        } ''
+      {
+        src = ../template/go-pkg;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    home-manager = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    home-manager = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "home-manager"
-        {
-          src = ../template/home-manager;
-        } ''
+      {
+        src = ../template/home-manager;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         sed -i -e "s/<enter homeDirectory in flake.nix>/\/home\/username/g" $out/flake.nix
@@ -87,28 +79,26 @@
         cat $out/flake.nix
       '';
 
-    lua-app = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    lua-app = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "lua-app"
-        {
-          src = ../template/lua-app;
-        } ''
+      {
+        src = ../template/lua-app;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    nixos-desktop = system: desktop:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    nixos-desktop = system: desktop: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "nixos-desktop"
-        {
-          hardware_configuration = nixos-hardware system;
-          src = ../template/nixos-desktop;
-        } ''
+      {
+        hardware_configuration = nixos-hardware system;
+        src = ../template/nixos-desktop;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cp --no-preserve=mode $hardware_configuration $out/system/hardware-configuration.nix
@@ -122,11 +112,10 @@
         cat $out/system/nixos.nix
       '';
 
-    nixos-hardware = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
-      pkgs.runCommand "nixos-hardware" { } ''
+    nixos-hardware = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
+      pkgs.runCommand "nixos-hardware" {} ''
         cat > $out <<EOF
         { config, lib, pkgs, modulesPath, ... }: {
           imports = [ ];
@@ -151,15 +140,14 @@
         cat $out
       '';
 
-    nixos-minimal = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    nixos-minimal = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "nixos-minimal"
-        {
-          hardware_configuration = nixos-hardware system;
-          src = ../template/nixos-minimal;
-        } ''
+      {
+        hardware_configuration = nixos-hardware system;
+        src = ../template/nixos-minimal;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cp --no-preserve=mode $hardware_configuration $out/system/hardware-configuration.nix
@@ -172,144 +160,133 @@
         cat $out/system/nixos.nix
       '';
 
-    nodejs-backend = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    nodejs-backend = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "nodejs-backend"
-        {
-          src = ../template/nodejs-backend;
-        } ''
+      {
+        src = ../template/nodejs-backend;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    nestjs = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    nestjs = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "nestjs"
-        {
-          src = ../template/nestjs;
-        } ''
+      {
+        src = ../template/nestjs;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    ocaml = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    ocaml = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "ocaml"
-        {
-          src = ../template/ocaml;
-        } ''
+      {
+        src = ../template/ocaml;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    powershell = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    powershell = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "powershell"
-        {
-          src = ../template/powershell;
-        } ''
+      {
+        src = ../template/powershell;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    python-app = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    python-app = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "python-app"
-        {
-          src = ../template/python-app;
-        } ''
+      {
+        src = ../template/python-app;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    python-pkg = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    python-pkg = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "python-pkg"
-        {
-          src = ../template/python-pkg;
-        } ''
+      {
+        src = ../template/python-pkg;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    rust = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    rust = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "rust"
-        {
-          src = ../template/rust;
-        } ''
+      {
+        src = ../template/rust;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    swiftpm = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    swiftpm = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "swiftpm"
-        {
-          src = ../template/swiftpm;
-        } ''
+      {
+        src = ../template/swiftpm;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    dart = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    dart = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "dart"
-        {
-          src = ../template/dart;
-        } ''
+      {
+        src = ../template/dart;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    zig = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    zig = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "zig"
-        {
-          src = ../template/zig;
-        } ''
+      {
+        src = ../template/zig;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
 
-    haskell = system:
-      let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-      in
+    haskell = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
       pkgs.runCommand "haskell"
-        {
-          src = ../template/haskell;
-        } ''
+      {
+        src = ../template/haskell;
+      } ''
         mkdir -p $out
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix

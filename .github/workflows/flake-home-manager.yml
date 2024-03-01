@@ -11,16 +11,22 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: extractions/setup-just@v1
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: altf4llc-os
       - uses: actions/checkout@v3
-      - run: just build-home-manager "x86_64-darwin"
+      - run: cachix use "altf4llc-os"
+      - run: nix develop -c just cache-build 'build-home-manager "x86_64-darwin"'
 
   linux:
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: extractions/setup-just@v1
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: altf4llc-os
       - uses: actions/checkout@v3
-      - run: just build-home-manager "x86_64-linux"
+      - run: cachix use "altf4llc-os"
+      - run: nix develop -c just cache-build 'build-home-manager "x86_64-linux"'

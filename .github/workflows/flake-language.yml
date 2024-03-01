@@ -30,10 +30,13 @@ jobs:
           - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: extractions/setup-just@v1
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: altf4llc-os
       - uses: actions/checkout@v3
-      - run: just build-language "${{ matrix.template }}" "default"
+      - run: cachix use "altf4llc-os"
+      - run: nix develop -c just cache-build 'build-language "${{ matrix.template }}" "default"'
 
   docker:
     runs-on: ubuntu-latest
@@ -56,7 +59,10 @@ jobs:
           - zig
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: extractions/setup-just@v1
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: altf4llc-os
       - uses: actions/checkout@v3
-      - run: just build-language "${{ matrix.template }}" "docker"
+      - run: cachix use "altf4llc-os"
+      - run: nix develop -c just cache-build 'build-language "${{ matrix.template }}" "docker"'
