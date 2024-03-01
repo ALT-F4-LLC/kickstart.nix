@@ -172,9 +172,23 @@
         cat $out/flake.nix
       '';
 
-    ocaml = system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in
+    nestjs = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "nestjs"
+        {
+          src = ../template/nestjs;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
+    ocaml = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
       pkgs.runCommand "ocaml"
       {
         src = ../template/ocaml;
@@ -232,9 +246,23 @@
         cat $out/flake.nix
       '';
 
-    dart = system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in
+    swiftpm = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+      pkgs.runCommand "swiftpm"
+        {
+          src = ../template/swiftpm;
+        } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
+
+    dart = system:
+      let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
       pkgs.runCommand "dart"
       {
         src = ../template/dart;
