@@ -118,6 +118,8 @@
           };
         };
 
+        formatter = pkgs.alejandra;
+
         packages = {
           example-bash = lib.flake.bash system;
           example-cpp-cmake = lib.flake.cpp-cmake system;

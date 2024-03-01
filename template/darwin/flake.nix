@@ -9,15 +9,19 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
   };
 
-  outputs = inputs@{ self, darwin, home-manager, nixpkgs, ... }:
-    let
-      darwin-system = import ./system/darwin.nix { inherit inputs username; };
-      username = throw "<enter username in flake.nix>"; # TODO: replace with user name and remove throw
-    in
-    {
-      darwinConfigurations = {
-        aarch64 = darwin-system "aarch64-darwin";
-        x86_64 = darwin-system "x86_64-darwin";
-      };
+  outputs = inputs @ {
+    self,
+    darwin,
+    home-manager,
+    nixpkgs,
+    ...
+  }: let
+    darwin-system = import ./system/darwin.nix {inherit inputs username;};
+    username = throw "<enter username in flake.nix>"; # TODO: replace with user name and remove throw
+  in {
+    darwinConfigurations = {
+      aarch64 = darwin-system "aarch64-darwin";
+      x86_64 = darwin-system "x86_64-darwin";
     };
+  };
 }
