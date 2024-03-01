@@ -17,7 +17,7 @@ jobs:
           name: altf4llc-os
       - uses: actions/checkout@v3
       - run: cachix use "altf4llc-os"
-      - run: just build-home-manager "x86_64-darwin"
+      - run: nix develop -c just cache-build 'build-home-manager "x86_64-darwin"'
 
   linux:
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
           name: altf4llc-os
       - uses: actions/checkout@v3
       - run: cachix use "altf4llc-os"
-      - run: just build-home-manager "x86_64-linux"
+      - run: nix develop -c just cache-build 'build-home-manager "x86_64-linux"'
