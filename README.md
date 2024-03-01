@@ -17,8 +17,10 @@ Kickstart your Nix environments.
 - Languages
     - [Bash](#bash)
     - [C++ (cmake)](#cpp-cmake)
+    - [Dart](#dart)
     - [Go (module)](#go-module)
     - [Go (package)](#go-package)
+    - [Haskell](#haskell)
     - [Lua (application)](#lua-application)
     - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
@@ -26,9 +28,7 @@ Kickstart your Nix environments.
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
-    - [Dart](#dart)
     - [Zig](#zig)
-    - [Haskell](#haskell)
 
 - Systems
     - Linux
@@ -299,6 +299,14 @@ Used for C++ projects using CMake as a build system.
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#cpp-cmake
 ```
 
+#### Dart
+
+Used for Dart applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
+```
+
 #### Go (module)
 
 Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use `go-pkg` template.
@@ -319,6 +327,14 @@ Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go a
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
+```
+
+#### Haskell
+
+Used for Haskell applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#haskell
 ```
 
 #### Lua (application)
@@ -396,28 +412,12 @@ Used for Rust applications.
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#rust
 ```
 
-#### Dart
-
-Used for Dart applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
-```
-
 #### Zig
 
 Used for Zig applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
-```
-
-#### Haskell
-
-Used for Haskell applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#haskell
 ```
 
 ### Systems
