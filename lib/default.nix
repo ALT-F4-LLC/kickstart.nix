@@ -291,5 +291,17 @@
         cp --no-preserve=mode -r $src/* $out
         cat $out/flake.nix
       '';
+
+    vite-react = system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in
+      pkgs.runCommand "vite-react"
+      {
+        src = ../template/vite-react;
+      } ''
+        mkdir -p $out
+        cp --no-preserve=mode -r $src/* $out
+        cat $out/flake.nix
+      '';
   };
 }

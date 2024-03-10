@@ -112,6 +112,11 @@
             description = "Kickstart Haskell package flake.";
             path = ./template/haskell;
           };
+
+          vite-react = {
+            description = "Kickstart Vite React package flake.";
+            path = ./template/vite-react;
+          };
         };
       };
 
@@ -156,6 +161,7 @@
           example-dart = lib.flake.dart system;
           example-zig = lib.flake.zig system;
           example-haskell = lib.flake.haskell system;
+          example-vite-react = lib.flake.vite-react system;
         };
       };
     };

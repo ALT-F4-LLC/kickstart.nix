@@ -28,6 +28,7 @@ jobs:
           - rust
           - swiftpm
           - zig
+          - vite-react
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: cachix/cachix-action@v12

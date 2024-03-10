@@ -31,6 +31,7 @@ Kickstart your Nix environments.
     - [Rust](#rust)
     - [Swift](#swift)
     - [Zig](#zig)
+    - [Vite (React)](#vite-react)
 
 - Systems
     - Linux
@@ -458,6 +459,25 @@ Used for Zig applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
+```
+
+#### Vite (React)
+
+Used for React-based frontends built with Vite. The template builds using `npm`.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#vite-react
+```
+
+To update your dependencies, install/upgrade them as normal via NPM, then use
+the [`prefetch-npm-deps` package from nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/javascript.section.md#prefetch-npm-deps-javascript-buildnpmpackage-prefetch-npm-deps)
+to generate a new `npmDepsHash` value for `packages.default` in the Flake. This
+is included in the development shell provided by the flake.
+
+```bash
+$ prefetch-npm-deps package-lock.json
+...
+sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
 ```
 
 ### Systems
