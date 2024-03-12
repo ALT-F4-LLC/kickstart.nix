@@ -480,6 +480,27 @@ $ prefetch-npm-deps package-lock.json
 sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
 ```
 
+### Docker support
+
+Language templates may have support for building and shipping the artifacts as Docker images.
+Nix Flake defines a `docker` package that takes care of describing the image.
+
+To automate the steps required for building and loading the Docker image, `just` is used to describe the steps within a `justfile`.
+
+> [!TIP]
+> If trying to build from within a dev shell.
+
+```bash
+just docker
+```
+
+> [!TIP]
+> If trying to build ad hoc and `just` is not installed system wide.
+
+```bash
+nix develop -c just docker
+```
+
 ### Systems
 
 #### Home Manager

@@ -1,0 +1,10 @@
+_default:
+    just --list
+
+_build-image:
+    nix build --json --print-build-logs ".#docker"
+
+_load:
+    docker image load -i ./result || podman image load -i ./result
+
+docker: _build-image _load
