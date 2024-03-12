@@ -14,14 +14,28 @@
         system,
         ...
       }: let
-        inherit (pkgs) swiftpm2nix swift clang swift-corelibs-libdispatch;
-        inherit (pkgs.dockerTools) buildImage;
+        inherit
+          (pkgs)
+          clang
+          curlMinimal
+          just
+          swift
+          swift-corelibs-libdispatch
+          swiftpm2nix
+          ;
+        inherit
+          (pkgs.dockerTools)
+          binSh
+          buildImage
+          caCertificates
+          usrBinEnv
+          ;
         inherit (pkgs.swiftPackages) swiftpm Foundation;
         name = "example";
         version = "0.1.0";
       in {
         devShells.default = pkgs.mkShell.override {stdenv = swift.stdenv;} {
-          buildInputs = [swiftpm2nix];
+          buildInputs = [just swiftpm2nix];
           inputsFrom = [self'.packages.default];
           shellHook = ''
             export LD_LIBRARY_PATH="${swift-corelibs-libdispatch}/lib"
@@ -60,11 +74,15 @@
           docker = buildImage {
             inherit name;
             tag = version;
+            # https://ryantm.github.io/nixpkgs/builders/images/dockertools/#ssec-pkgs-dockerTools-helpers
+            copyToRoot = [
+              binSh
+              caCertificates
+              curlMinimal
+              usrBinEnv
+            ];
             config = {
               Cmd = ["${self'.packages.default}/bin/${name}"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
             };
           };
         };

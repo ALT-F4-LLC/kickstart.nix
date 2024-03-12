@@ -15,13 +15,25 @@
         system,
         ...
       }: let
-        inherit (pkgs) dockerTools cmake;
-        inherit (dockerTools) buildImage;
+        inherit
+          (pkgs)
+          curlMinimal
+          just
+          writeShellApplication
+          ;
+        inherit
+          (pkgs.dockerTools)
+          binSh
+          buildImage
+          caCertificates
+          usrBinEnv
+          ;
         name = "example";
         version = "0.1.0";
       in {
         devShells.default = pkgs.mkShell {
           inputsFrom = [self'.packages.default];
+          buildInputs = [just];
         };
 
         packages = {
@@ -49,11 +61,15 @@
           docker = buildImage {
             inherit name;
             tag = version;
+            # https://ryantm.github.io/nixpkgs/builders/images/dockertools/#ssec-pkgs-dockerTools-helpers
+            copyToRoot = [
+              binSh
+              caCertificates
+              curlMinimal
+              usrBinEnv
+            ];
             config = {
               Cmd = ["${self'.packages.default}/bin/${name}"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
             };
           };
         };

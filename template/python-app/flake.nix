@@ -15,8 +15,19 @@
         system,
         ...
       }: let
-        inherit (pkgs) dockerTools python3Packages;
-        inherit (dockerTools) buildImage;
+        inherit
+          (pkgs)
+          curlMinimal
+          just
+          python3Packages
+          ;
+        inherit
+          (pkgs.dockerTools)
+          binSh
+          buildImage
+          caCertificates
+          usrBinEnv
+          ;
         inherit (python3Packages) buildPythonApplication;
         name = "example";
         version = "0.1.0";
@@ -24,6 +35,7 @@
         devShells = {
           default = pkgs.mkShell {
             inputsFrom = [self'.packages.default];
+            buildInputs = [just];
           };
         };
 
@@ -41,11 +53,15 @@
           docker = buildImage {
             inherit name;
             tag = version;
+            # https://ryantm.github.io/nixpkgs/builders/images/dockertools/#ssec-pkgs-dockerTools-helpers
+            copyToRoot = [
+              binSh
+              caCertificates
+              curlMinimal
+              usrBinEnv
+            ];
             config = {
               Cmd = ["${self'.packages.default}/bin/start"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
             };
           };
         };

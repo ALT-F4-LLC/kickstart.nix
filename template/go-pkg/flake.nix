@@ -15,17 +15,32 @@
         system,
         ...
       }: let
+        inherit
+          (pkgs)
+          buildGoPackage
+          curlMinimal
+          mkShell
+          just
+          ;
+        inherit
+          (pkgs.dockerTools)
+          binSh
+          buildImage
+          caCertificates
+          usrBinEnv
+          ;
         name = "example";
         version = "latest";
       in {
         devShells = {
-          default = pkgs.mkShell {
+          default = mkShell {
             inputsFrom = [self'.packages.default];
+            buildInputs = [just];
           };
         };
 
         packages = {
-          default = pkgs.buildGoPackage {
+          default = buildGoPackage {
             inherit name;
             goDeps = ./deps.nix;
             goPackagePath = "github.com/example/${name}";
@@ -33,14 +48,18 @@
             subPackages = ["cmd/example"];
           };
 
-          docker = pkgs.dockerTools.buildImage {
+          docker = buildImage {
             inherit name;
             tag = version;
+            # https://ryantm.github.io/nixpkgs/builders/images/dockertools/#ssec-pkgs-dockerTools-helpers
+            copyToRoot = [
+              binSh
+              caCertificates
+              curlMinimal
+              usrBinEnv
+            ];
             config = {
               Cmd = ["${self'.packages.default}/bin/${name}"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
             };
           };
         };

@@ -17,13 +17,14 @@
       }: let
         inherit
           (pkgs)
-          dockerTools
+          curlMinimal
+          just
           mkShell
           powershell
           writeScriptBin
           ;
         inherit
-          (dockerTools)
+          (pkgs.dockerTools)
           binSh
           buildImage
           caCertificates
@@ -35,6 +36,7 @@
         devShells = {
           default = mkShell {
             inputsFrom = [self'.packages.default];
+            buildInputs = [just];
           };
         };
 
@@ -62,10 +64,12 @@
           docker = buildImage {
             inherit name;
             tag = version;
+            # https://ryantm.github.io/nixpkgs/builders/images/dockertools/#ssec-pkgs-dockerTools-helpers
             copyToRoot = [
-              usrBinEnv
               binSh
               caCertificates
+              curlMinimal
+              usrBinEnv
             ];
             config = {
               Cmd = ["${self'.packages.default}/bin/${name}"];
