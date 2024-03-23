@@ -23,6 +23,11 @@
             path = ./template/cpp-cmake;
           };
 
+          dart = {
+            description = "Kickstart Dart package flake.";
+            path = ./template/dart;
+          };
+
           darwin = {
             description = "Kickstart macOS development environment flake.";
             path = ./template/darwin;
@@ -38,6 +43,11 @@
             path = ./template/go-pkg;
           };
 
+          haskell = {
+            description = "Kickstart Haskell package flake.";
+            path = ./template/haskell;
+          };
+
           home-manager = {
             description = "Kickstart Home Manager environment flake.";
             path = ./template/home-manager;
@@ -48,6 +58,11 @@
             path = ./template/lua-app;
           };
 
+          nestjs = {
+            description = "Kickstart NestJS application flake.";
+            path = ./template/nestjs;
+          };
+
           nixos-desktop = {
             description = "Kickstart NixOS desktop environment flake.";
             path = ./template/nixos-desktop;
@@ -56,6 +71,16 @@
           nixos-minimal = {
             description = "Kickstart NixOS minimal environment flake.";
             path = ./template/nixos-minimal;
+          };
+
+          nodejs-backend = {
+            description = "Kickstart Node.js backend package flake.";
+            path = ./template/nodejs-backend;
+          };
+
+          ocaml = {
+            description = "Kickstart OCaml package flake.";
+            path = ./template/ocaml;
           };
 
           powershell = {
@@ -73,11 +98,6 @@
             path = ./template/python-pkg;
           };
 
-          ocaml = {
-            description = "Kickstart OCaml package flake.";
-            path = ./template/ocaml;
-          };
-
           rust = {
             description = "Kickstart Rust package flake.";
             path = ./template/rust;
@@ -88,34 +108,14 @@
             path = ./template/swiftpm;
           };
 
-          nodejs-backend = {
-            description = "Kickstart Node.js backend package flake.";
-            path = ./template/nodejs-backend;
-          };
-
-          nestjs = {
-            description = "Kickstart NestJS application flake.";
-            path = ./template/nestjs;
-          };
-
-          dart = {
-            description = "Kickstart Dart package flake.";
-            path = ./template/dart;
+          vite-react = {
+            description = "Kickstart Vite React package flake.";
+            path = ./template/vite-react;
           };
 
           zig = {
             description = "Kickstart Zig package flake.";
             path = ./template/zig;
-          };
-
-          haskell = {
-            description = "Kickstart Haskell package flake.";
-            path = ./template/haskell;
-          };
-
-          vite-react = {
-            description = "Kickstart Vite React package flake.";
-            path = ./template/vite-react;
           };
         };
       };
@@ -129,39 +129,46 @@
         pkgs,
         system,
         ...
-      }: {
+      }: let
+        inherit (pkgs) alejandra callPackage just jq mkShell;
+      in {
         devShells = {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [just jq];
+          default = mkShell {
+            buildInputs = [just jq];
           };
         };
 
-        formatter = pkgs.alejandra;
+        formatter = alejandra;
 
-        packages = {
-          example-bash = lib.flake.bash system;
-          example-cpp-cmake = lib.flake.cpp-cmake system;
-          example-darwin = lib.flake.darwin system;
-          example-go-mod = lib.flake.go-mod system;
-          example-go-pkg = lib.flake.go-pkg system;
-          example-home-manager = lib.flake.home-manager system;
-          example-lua-app = lib.flake.lua-app system;
-          example-nixos-desktop-gnome = lib.flake.nixos-desktop system "gnome";
-          example-nixos-desktop-plasma5 = lib.flake.nixos-desktop system "plasma5";
-          example-nixos-hardware = lib.flake.nixos-hardware system;
-          example-nixos-minimal = lib.flake.nixos-minimal system;
-          example-nodejs-backend = lib.flake.nodejs-backend system;
-          example-nestjs = lib.flake.nestjs system;
-          example-ocaml = lib.flake.ocaml system;
-          example-powershell = lib.flake.powershell system;
-          example-python-app = lib.flake.python-app system;
-          example-python-pkg = lib.flake.python-pkg system;
-          example-rust = lib.flake.rust system;
-          example-swiftpm = lib.flake.swiftpm system;
-          example-dart = lib.flake.dart system;
-          example-zig = lib.flake.zig system;
-          example-haskell = lib.flake.haskell system;
-          example-vite-react = lib.flake.vite-react system;
+        packages = let
+          mkDarwin = callPackage lib.flake.mkDarwin;
+          mkHomeManager = callPackage lib.flake.mkHomeManager;
+          mkLanguage = callPackage lib.flake.mkLanguage;
+          mkNixosDesktop = callPackage lib.flake.mkNixosDesktop;
+          mkNixosMinimal = callPackage lib.flake.mkNixosMinimal;
+        in {
+          example-bash = mkLanguage {name = "bash";};
+          example-cpp-cmake = mkLanguage {name = "cpp-cmake";};
+          example-dart = mkLanguage {name = "dart";};
+          example-darwin = mkDarwin {};
+          example-go-mod = mkLanguage {name = "go-mod";};
+          example-go-pkg = mkLanguage {name = "go-pkg";};
+          example-haskell = mkLanguage {name = "haskell";};
+          example-home-manager = mkHomeManager {};
+          example-lua-app = mkLanguage {name = "lua-app";};
+          example-nestjs = mkLanguage {name = "nestjs";};
+          example-nixos-desktop-gnome = mkNixosDesktop {desktop = "gnome";};
+          example-nixos-desktop-plasma5 = mkNixosDesktop {desktop = "plasma5";};
+          example-nixos-minimal = mkNixosMinimal {};
+          example-nodejs-backend = mkLanguage {name = "nodejs-backend";};
+          example-ocaml = mkLanguage {name = "ocaml";};
+          example-powershell = mkLanguage {name = "powershell";};
+          example-python-app = mkLanguage {name = "python-app";};
+          example-python-pkg = mkLanguage {name = "python-pkg";};
+          example-rust = mkLanguage {name = "rust";};
+          example-swiftpm = mkLanguage {name = "swiftpm";};
+          example-vite-react = mkLanguage {name = "vite-react";};
+          example-zig = mkLanguage {name = "zig";};
         };
       };
     };
