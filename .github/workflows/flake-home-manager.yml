@@ -6,27 +6,28 @@ on:
     branches:
       - main
 
+env:
+  CACHIX_BINARY_CACHE: altf4llc-os
+
 jobs:
   darwin:
     runs-on: macos-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v14
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          name: altf4llc-os
-      - uses: actions/checkout@v3
-      - run: cachix use "altf4llc-os"
-      - run: nix develop -c just cache-build 'build-home-manager "x86_64-darwin"'
+          name: ${{ env.CACHIX_BINARY_CACHE }}
+      - uses: actions/checkout@v4
+      - run: nix develop -c just build-home-manager "x86_64-darwin"
 
   linux:
     runs-on: ubuntu-latest
     steps:
       - uses: DeterminateSystems/nix-installer-action@main
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v14
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          name: altf4llc-os
-      - uses: actions/checkout@v3
-      - run: cachix use "altf4llc-os"
-      - run: nix develop -c just cache-build 'build-home-manager "x86_64-linux"'
+          name: ${{ env.CACHIX_BINARY_CACHE }}
+      - uses: actions/checkout@v4
+      - run: nix develop -c just build-home-manager "x86_64-linux"
