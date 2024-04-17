@@ -83,6 +83,11 @@
             path = ./template/ocaml;
           };
 
+          php = {
+            description = "Kickstart PHP application flake.";
+            path = ./template/php;
+          };
+
           powershell = {
             description = "Kickstart Powershell application flake.";
             path = ./template/powershell;
@@ -162,6 +167,7 @@
           example-nixos-minimal = mkNixosMinimal {};
           example-nodejs-backend = mkLanguage {name = "nodejs-backend";};
           example-ocaml = mkLanguage {name = "ocaml";};
+          example-php = mkLanguage {name = "php";};
           example-powershell = mkLanguage {name = "powershell";};
           example-python-app = mkLanguage {name = "python-app";};
           example-python-pkg = mkLanguage {name = "python-pkg";};

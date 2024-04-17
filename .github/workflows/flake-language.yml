@@ -22,6 +22,7 @@ jobs:
           - nodejs-backend
           - nestjs
           - ocaml
+          - php
           - powershell
           - python-app
           - python-pkg
@@ -53,6 +54,7 @@ jobs:
           - nodejs-backend
           - nestjs
           - ocaml
+          - php
           - powershell
           - python-app
           - rust
