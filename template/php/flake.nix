@@ -13,14 +13,16 @@
         inputs',
         pkgs,
         system,
+        lib,
         ...
       }: let
-        inherit (pkgs) dockerTools php83;
+        inherit (pkgs) dockerTools php83 mkShell writeShellApplication;
+        inherit (lib) getExe;
         inherit (dockerTools) buildImage;
-        inherit (php83) buildComposerProject;
+        inherit (php83) buildComposerProject buildEnv;
         name = "example";
         version = "0.1.0";
-        phpEnvironment = php83.buildEnv {
+        phpEnvironment = buildEnv {
           extensions = {
             enabled,
             all,
@@ -35,9 +37,24 @@
         };
       in {
         devShells = {
-          default = pkgs.mkShell {
+          default = mkShell {
             inputsFrom = [self'.packages.default];
           };
+        };
+
+        apps.default = {
+          type = "app";
+          program = getExe (writeShellApplication {
+            inherit name;
+
+            runtimeInputs = [
+              phpEnvironment
+            ];
+
+            text = ''
+              ${getExe phpEnvironment} ${self'.packages.default}/share/php/${name}/src/index.php
+            '';
+          });
         };
 
         packages = {
@@ -50,16 +67,18 @@
             php = phpEnvironment;
 
             composerLock = ./composer.lock;
+            composerNoDev = false;
+
+            preInstall = ''
+              ls -la
+            '';
           };
 
           docker = buildImage {
             inherit name;
             tag = version;
             config = {
-              Cmd = ["${self'.packages.default}/bin/${name}"];
-              Env = [
-                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              ];
+              Cmd = ["${self'.apps.default.program}"];
             };
           };
         };
