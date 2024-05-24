@@ -25,6 +25,7 @@ Kickstart your Nix environments.
     - [NestJS](#nestjs)
     - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
+    - [PHP](#php)
     - [Powershell](#powershell)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
@@ -398,6 +399,14 @@ Used for OCaml applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#ocaml
+```
+
+#### PHP
+
+Used for PHP applications
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#php
 ```
 
 #### Powershell
