@@ -2,6 +2,8 @@ _default:
     just --list
 
 build profile:
+    #!/usr/bin/env bash
+    set -euxo pipefail
     nix build --json --no-link --print-build-logs "{{ profile }}" \
     | jq -r ".[0].outputs.out"
 
