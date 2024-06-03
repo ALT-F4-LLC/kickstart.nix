@@ -10,25 +10,25 @@ build profile:
 check:
     nix flake check
 
-build-template template:
+build-template template temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
     OUTPUT_DIR=$(just build "$PWD#example-{{ template }}")
-    TEMP_DIR=$(mktemp -d)
+    TEMP_DIR={{ temp_dir }}
     cp --no-preserve=mode -r $OUTPUT_DIR/* $TEMP_DIR/.
     echo $TEMP_DIR
 
-build-darwin system="x86_64":
+build-darwin system="x86_64" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "darwin")
+    TEMP_DIR=$(just build-template "darwin" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
-build-home-manager system="x86_64-linux":
+build-home-manager system="x86_64-linux" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "home-manager")
+    TEMP_DIR=$(just build-template "home-manager" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#homeConfigurations.{{ system }}.activationPackage"
 
