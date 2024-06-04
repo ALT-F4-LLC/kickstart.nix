@@ -32,23 +32,23 @@ build-home-manager system="x86_64-linux" temp_dir="$(mktemp -d)":
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#homeConfigurations.{{ system }}.activationPackage"
 
-build-language language profile="default":
+build-language language profile="default" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "{{ language }}")
+    TEMP_DIR=$(just build-template "{{ language }}" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR"
 
-build-nixos-desktop system="x86_64" desktop="gnome":
+build-nixos-desktop system="x86_64" desktop="gnome" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "nixos-desktop-{{ desktop }}")
+    TEMP_DIR=$(just build-template "nixos-desktop-{{ desktop }}" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#nixosConfigurations.{{ system }}.config.system.build.toplevel"
 
-build-nixos-minimal system="x86_64":
+build-nixos-minimal system="x86_64" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "nixos-minimal")
+    TEMP_DIR=$(just build-template "nixos-minimal" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#nixosConfigurations.{{ system }}.config.system.build.toplevel"
