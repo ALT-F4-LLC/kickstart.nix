@@ -8,7 +8,6 @@ on:
 
 env:
   CACHIX_BINARY_CACHE: altf4llc-os
-  TEMP_DIR: ${{ runner.temp }}/build
 
 jobs:
   default:
@@ -42,7 +41,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: nix develop -c just build-language "${{ matrix.template }}" "default" "${{ env.TEMP_DIR }}"
+      - run: mkdir -p "${{ runner.temp }}/build"
+      - run: nix develop -c just build-language "${{ matrix.template }}" "default" "${{ runner.temp }}/build"
 
   docker:
     runs-on: ubuntu-latest
@@ -72,4 +72,5 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: nix develop -c just build-language "${{ matrix.template }}" "docker" "${{ env.TEMP_DIR }}"
+      - run: mkdir -p "${{ runner.temp }}/build"
+      - run: nix develop -c just build-language "${{ matrix.template }}" "docker" "${{ runner.temp }}/build"

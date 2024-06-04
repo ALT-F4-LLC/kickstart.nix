@@ -8,7 +8,6 @@ on:
 
 env:
   CACHIX_BINARY_CACHE: altf4llc-os
-  TEMP_DIR: ${{ runner.temp }}/build
 
 jobs:
   darwin:
@@ -22,8 +21,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: mkdir -p "${{ env.TEMP_DIR }}"
-      - run: nix develop -c just build-home-manager "x86_64-darwin" "${{ env.TEMP_DIR }}"
+      - run: mkdir -p "${{ runner.temp }}/build"
+      - run: nix develop -c just build-home-manager "x86_64-darwin" "${{ runner.temp }}/build"
 
   linux:
     runs-on: ubuntu-latest
@@ -36,5 +35,5 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: mkdir -p "${{ env.TEMP_DIR }}"
-      - run: nix develop -c just build-home-manager "x86_64-linux" "${{ env.TEMP_DIR }}"
+      - run: mkdir -p "${{ runner.temp }}/build"
+      - run: nix develop -c just build-home-manager "x86_64-linux" "${{ runner.temp }}/build"
