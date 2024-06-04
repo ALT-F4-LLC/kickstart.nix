@@ -21,7 +21,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: nix develop -c just build-darwin "x86_64"
+      - run: nix develop -c just build-darwin "x86_64" "${{ runner.temp }}"
 
   nixos-desktop:
     strategy:

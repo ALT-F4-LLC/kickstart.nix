@@ -1,14 +1,14 @@
 _default:
     just --list
 
+check:
+    nix flake check
+
 build profile:
     #!/usr/bin/env bash
     set -euxo pipefail
     nix build --json --no-link --print-build-logs "{{ profile }}" \
     | jq -r ".[0].outputs.out"
-
-check:
-    nix flake check
 
 build-template template temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
@@ -18,17 +18,17 @@ build-template template temp_dir="$(mktemp -d)":
     cp --no-preserve=mode -r $OUTPUT_DIR/* $TEMP_DIR/.
     echo $TEMP_DIR
 
-build-darwin system="x86_64":
+build-darwin system="x86_64" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "darwin")
+    TEMP_DIR=$(just build-template "darwin" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
-build-home-manager system="x86_64-linux":
+build-home-manager system="x86_64-linux" temp_dir="$(mktemp -d)":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "home-manager")
+    TEMP_DIR=$(just build-template "home-manager" "{{ temp_dir }}")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#homeConfigurations.{{ system }}.activationPackage"
 
