@@ -29,11 +29,11 @@
         };
         packages = {
           default = mkDerivation {
-            pname = name;
             inherit version;
-            src = ./.;
-            license = "";
             description = "";
+            license = "";
+            pname = name;
+            src = ./.;
           };
 
           docker = buildImage {
