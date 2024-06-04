@@ -18,17 +18,17 @@ build-template template temp_dir="$(mktemp -d)":
     cp --no-preserve=mode -r $OUTPUT_DIR/* $TEMP_DIR/.
     echo $TEMP_DIR
 
-build-darwin system="x86_64" temp_dir="$(mktemp -d)":
+build-darwin system="x86_64":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "darwin" "{{ temp_dir }}")
+    TEMP_DIR=$(just build-template "darwin")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
-build-home-manager system="x86_64-linux" temp_dir="$(mktemp -d)":
+build-home-manager system="x86_64-linux":
     #!/usr/bin/env bash
     set -euxo pipefail
-    TEMP_DIR=$(just build-template "home-manager" "{{ temp_dir }}")
+    TEMP_DIR=$(just build-template "home-manager")
     ls -alh $TEMP_DIR
     just build "$TEMP_DIR#homeConfigurations.{{ system }}.activationPackage"
 

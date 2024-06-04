@@ -21,9 +21,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: ${{ env.CACHIX_BINARY_CACHE }}
       - uses: actions/checkout@v4
-      - run: mkdir -p "$PWD/.tmp"
-      - run: |
-          nix develop -c just build-home-manager "x86_64-darwin" "$PWD/.tmp"
+      - run: nix develop -c just build-home-manager "x86_64-darwin"
 
   linux:
     runs-on: ubuntu-latest
