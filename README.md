@@ -25,14 +25,14 @@ Kickstart your Nix environments.
     - [NestJS](#nestjs)
     - [Node.js (backend)](#nodejs-backend)
     - [OCaml](#ocaml)
+    - [PHP](#php)
     - [Powershell](#powershell)
     - [Python (application)](#python-application)
     - [Python (package)](#python-package)
     - [Rust](#rust)
     - [Swift](#swift)
-    - [Zig](#zig)
     - [Vite (React)](#vite-react)
-
+    - [Zig](#zig)
 - Systems
     - Linux
         - [Home Manager](#home-manager)
@@ -401,6 +401,14 @@ Used for OCaml applications.
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#ocaml
 ```
 
+#### PHP
+
+Used for PHP applications
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#php
+```
+
 #### Powershell
 
 Used for Powershell applications.
@@ -453,14 +461,6 @@ swiftpm2nix
 
 Then build again.
 
-#### Zig
-
-Used for Zig applications.
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
-```
-
 #### Vite (React)
 
 Used for React-based frontends built with Vite. The template builds using `npm`.
@@ -478,6 +478,14 @@ is included in the development shell provided by the flake.
 $ prefetch-npm-deps package-lock.json
 ...
 sha256-nTTzkQEdnwWEQ/3uy8hUbPsRvzM53xuoJHoQhR3E/zk=
+```
+
+#### Zig
+
+Used for Zig applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
 ```
 
 ### Systems

@@ -17,7 +17,6 @@
       }: let
         name = "example";
         version = "0.1.0";
-        nodejs = pkgs.nodejs_21;
       in {
         devShells = {
           default = pkgs.mkShell {
@@ -28,7 +27,7 @@
 
         packages = {
           default = pkgs.buildNpmPackage {
-            inherit version nodejs;
+            inherit version;
             pname = name;
             src = ./.;
             npmDepsHash = "sha256-KeXRIp4qNywb1sy5lXTagoUsW6EeK1kF5OWJ97w9Vfk=";

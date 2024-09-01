@@ -1,47 +1,54 @@
-temp_dir := "/tmp/kickstart.nix"
-
 _default:
     just --list
-
-build profile:
-    nix build --json --no-link --print-build-logs "{{ profile }}"
-
-cache-build recipe cache_name="altf4llc-os":
-    just {{ recipe }} | jq -r '.[].outputs | to_entries[].value' | cachix push {{ cache_name }}
-
-cache-inputs cache_name="altf4llc-os":
-    nix flake archive --json \
-      | jq -r '.path,(.inputs|to_entries[].value.path)' \
-      | cachix push "{{ cache_name }}"
-
-cache-shell cache_name="altf4llc-os":
-    nix develop --profile "dev-profile" -c true
-    cachix push "{{ cache_name }}" "dev-profile"
 
 check:
     nix flake check
 
-clean-template template:
-    rm -rf {{ temp_dir }}/{{ template }}
-    mkdir -p {{ temp_dir }}/{{ template }}
-
-build-template template: (clean-template template)
+build profile:
     #!/usr/bin/env bash
-    DERIVATION=$(just build ".#example-{{ template }}")
-    OUTPUT=$(echo $DERIVATION | jq -r ".[0].outputs.out")
-    cp --no-preserve=mode -r $OUTPUT/* {{ temp_dir }}/{{ template }}
+    set -euxo pipefail
+    nix build --json --no-link --print-build-logs "{{ profile }}" \
+    | jq -r ".[0].outputs.out"
 
-build-darwin system="x86_64": (build-template "darwin")
-    just build "{{ temp_dir }}/darwin#darwinConfigurations.{{ system }}.config.system.build.toplevel"
+build-template template temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    OUTPUT_DIR=$(just build "$PWD#example-{{ template }}")
+    TEMP_DIR={{ temp_dir }}
+    cp --no-preserve=mode -r $OUTPUT_DIR/* $TEMP_DIR/.
+    echo $TEMP_DIR
 
-build-home-manager system="x86_64-linux": (build-template "home-manager")
-    just build "{{ temp_dir }}/home-manager#homeConfigurations.{{ system }}.activationPackage"
+build-darwin system="x86_64" temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    TEMP_DIR=$(just build-template "darwin" "{{ temp_dir }}")
+    ls -alh $TEMP_DIR
+    just build "$TEMP_DIR#darwinConfigurations.{{ system }}.config.system.build.toplevel"
 
-build-language template profile="default": (build-template template)
-    just build "{{ temp_dir }}/{{ template }}#{{ profile }}"
+build-home-manager system="x86_64-linux" temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    TEMP_DIR=$(just build-template "home-manager" "{{ temp_dir }}")
+    ls -alh $TEMP_DIR
+    just build "$TEMP_DIR#homeConfigurations.{{ system }}.activationPackage"
 
-build-nixos-desktop system="x86_64" desktop="gnome": (build-template 'nixos-desktop-'+desktop)
-    just build "{{ temp_dir }}/nixos-desktop-{{ desktop }}#nixosConfigurations.{{ system }}.config.system.build.toplevel"
+build-language language profile="default" temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    TEMP_DIR=$(just build-template "{{ language }}" "{{ temp_dir }}")
+    ls -alh $TEMP_DIR
+    just build "$TEMP_DIR"
 
-build-nixos-minimal system="x86_64": (build-template "nixos-minimal")
-    just build "{{ temp_dir }}/nixos-minimal#nixosConfigurations.{{ system }}.config.system.build.toplevel"
+build-nixos-desktop system="x86_64" desktop="gnome" temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    TEMP_DIR=$(just build-template "nixos-desktop-{{ desktop }}" "{{ temp_dir }}")
+    ls -alh $TEMP_DIR
+    just build "$TEMP_DIR#nixosConfigurations.{{ system }}.config.system.build.toplevel"
+
+build-nixos-minimal system="x86_64" temp_dir="$(mktemp -d)":
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    TEMP_DIR=$(just build-template "nixos-minimal" "{{ temp_dir }}")
+    ls -alh $TEMP_DIR
+    just build "$TEMP_DIR#nixosConfigurations.{{ system }}.config.system.build.toplevel"
