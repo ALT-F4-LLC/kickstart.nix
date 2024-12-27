@@ -15,7 +15,7 @@
         system,
         ...
       }: let
-        inherit (pkgs) dockerTools stdenv zig_0_11;
+        inherit (pkgs) dockerTools stdenv zig;
         inherit (dockerTools) buildImage;
         name = "example";
         version = "0.1.0";
@@ -26,7 +26,7 @@
             inherit version;
             src = ./.;
             nativeBuildInputs = [
-              zig_0_11.hook
+              zig.hook
             ];
           };
           docker = buildImage {
