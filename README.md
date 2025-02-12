@@ -19,7 +19,6 @@ Kickstart your Nix environments.
     - [C++ (cmake)](#cpp-cmake)
     - [Dart](#dart)
     - [Go (module)](#go-module)
-    - [Go (package)](#go-package)
     - [Haskell](#haskell)
     - [Lua (application)](#lua-application)
     - [NestJS](#nestjs)
@@ -319,17 +318,6 @@ Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-mod
-```
-
-#### Go (package)
-
-Used for legacy Go apps **not** setup with `go.mod` system. To build modern Go apps, use `go-mod` template.
-
-> [!IMPORTANT]
-> Be sure to update `deps.nix` with vendor dependencies after running `init` command [(read more)](https://nixos.wiki/wiki/Go#buildGoPackage).
-
-```bash
-nix flake init -t github:ALT-F4-LLC/kickstart.nix#go-pkg
 ```
 
 #### Haskell

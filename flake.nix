@@ -38,11 +38,6 @@
             path = ./template/go-mod;
           };
 
-          go-pkg = {
-            description = "Kickstart Go language package flake.";
-            path = ./template/go-pkg;
-          };
-
           haskell = {
             description = "Kickstart Haskell package flake.";
             path = ./template/haskell;
@@ -157,7 +152,6 @@
           example-dart = mkLanguage {name = "dart";};
           example-darwin = mkDarwin {};
           example-go-mod = mkLanguage {name = "go-mod";};
-          example-go-pkg = mkLanguage {name = "go-pkg";};
           example-haskell = mkLanguage {name = "haskell";};
           example-home-manager = mkHomeManager {};
           example-lua-app = mkLanguage {name = "lua-app";};
