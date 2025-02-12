@@ -14,4 +14,5 @@
     };
   };
   programs.zsh.enable = true;
+  system.stateVersion = 6;
 }
