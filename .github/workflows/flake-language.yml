@@ -19,7 +19,6 @@ jobs:
           - cpp-cmake
           - dart
           - go-mod
-          - go-pkg
           - haskell
           - lua-app
           - nodejs-backend

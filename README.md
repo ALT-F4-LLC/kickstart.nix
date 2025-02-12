@@ -311,7 +311,7 @@ nix flake init -t github:ALT-F4-LLC/kickstart.nix#dart
 
 #### Go (module)
 
-Used for modern Go apps setup with `go.mod` system. To build legacy Go apps, use `go-pkg` template.
+Used for modern Go apps setup with `go.mod` system.
 
 > [!IMPORTANT]
 > Be sure to update `go.mod` with proper repository after running `init` command.
