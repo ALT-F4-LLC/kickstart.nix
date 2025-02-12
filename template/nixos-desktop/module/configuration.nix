@@ -65,7 +65,6 @@
   time.timeZone = "America/Los_Angeles";
 
   ## Sound settings ##
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
