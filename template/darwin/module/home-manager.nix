@@ -1,5 +1,5 @@
 {pkgs, ...}: {
   # add home-manager user settings here
   home.packages = with pkgs; [git neovim];
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 }

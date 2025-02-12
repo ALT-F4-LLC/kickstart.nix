@@ -1,16 +1,19 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":semanticCommitTypeAll(chore)"
-  ],
-  "lockFileMaintenance": {
-    "enabled": true,
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-      "schedule:weekly"
-    ]
-  },
-  "nix": {
-    "enabled": true
-  }
+        "config:base",
+        ":semanticCommitTypeAll(chore)"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "extends": [
+            "schedule:weekly"
+        ]
+    },
+    "nix": {
+        "enabled": true
+    },
+    "node": {
+        "enabled": false
+    }
 }

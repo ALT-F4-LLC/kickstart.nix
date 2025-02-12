@@ -1,8 +1,9 @@
 {
   # add more system settings here
   nix = {
+    optimise.automatic = true;
+
     settings = {
-      auto-optimise-store = true;
       builders-use-substitutes = true;
       experimental-features = ["nix-command" "flakes"];
       substituters = [
@@ -15,5 +16,6 @@
       warn-dirty = false;
     };
   };
+
   programs.zsh.enable = true;
 }

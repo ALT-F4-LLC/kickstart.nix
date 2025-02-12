@@ -17,8 +17,9 @@
   };
 
   nix = {
+    optimise.automatic = true;
+
     settings = {
-      auto-optimise-store = true;
       builders-use-substitutes = true;
       experimental-features = ["nix-command" "flakes"];
       substituters = [
@@ -65,7 +66,6 @@
   time.timeZone = "America/Los_Angeles";
 
   ## Sound settings ##
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -90,5 +90,5 @@
 
   users.mutableUsers = false;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }

@@ -9,10 +9,7 @@ in
     inherit system;
     # modules: allows for reusable code
     modules = [
-      {
-        services.nix-daemon.enable = true;
-        users.users.${username}.home = "/Users/${username}";
-      }
+      {users.users.${username}.home = "/Users/${username}";}
       system-config
 
       inputs.home-manager.darwinModules.home-manager

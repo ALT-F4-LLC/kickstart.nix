@@ -27,7 +27,7 @@ in
           isNormalUser = true;
           password = password;
         };
-        system.stateVersion = "23.11";
+        system.stateVersion = "24.11";
       }
       hardware-configuration
       configuration
