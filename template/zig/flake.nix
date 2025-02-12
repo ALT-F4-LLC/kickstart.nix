@@ -15,18 +15,27 @@
         system,
         ...
       }: let
-        inherit (pkgs) dockerTools stdenv zig_0_11;
+        inherit (pkgs) dockerTools stdenv zig;
         inherit (dockerTools) buildImage;
-        name = "example";
+        name = "zig";
         version = "0.1.0";
       in {
+        devShells = {
+          default = pkgs.mkShell {
+            inputsFrom = [self'.packages.default];
+
+            shellHook = ''
+              export ZIG_GLOBAL_CACHE_DIR=$PWD/.zig-cache
+            '';
+          };
+        };
         packages = {
           default = stdenv.mkDerivation {
             inherit name;
             inherit version;
             src = ./.;
             nativeBuildInputs = [
-              zig_0_11.hook
+              zig.hook
             ];
           };
           docker = buildImage {
