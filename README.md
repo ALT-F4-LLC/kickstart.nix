@@ -32,6 +32,7 @@ Kickstart your Nix environments.
     - [Swift](#swift)
     - [Vite (React)](#vite-react)
     - [Zig](#zig)
+    - [Nim](#nim)
 - Systems
     - Linux
         - [Home Manager](#home-manager)
@@ -474,6 +475,14 @@ Used for Zig applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#zig
+```
+
+#### Nim
+
+Used for Nim applications.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#nim
 ```
 
 ### Systems

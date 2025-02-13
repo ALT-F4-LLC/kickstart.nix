@@ -352,3 +352,13 @@ docgen_tmp/
 
 # Include .envrc used by direnv and part of each template directory
 !**/.envrc
+
+# Created by https://www.toptal.com/developers/gitignore/api/nim
+# Edit at https://www.toptal.com/developers/gitignore?templates=nim
+
+### Nim ###
+nimcache/
+nimblecache/
+htmldocs/
+
+# End of https://www.toptal.com/developers/gitignore/api/nim
