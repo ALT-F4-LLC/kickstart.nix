@@ -12,7 +12,7 @@
         pkgs,
         ...
       }: let
-        name = "c";
+        name = "nim";
         version = "0.1.0";
 
         inherit (pkgs) buildNimPackage;
