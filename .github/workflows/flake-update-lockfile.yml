@@ -1,0 +1,37 @@
+name: Update flake lockfile
+# adapted from
+# https://github.com/numtide/system-manager/blob/82d5a9ecd15ec48bcbfbacf5462066ee267d6aae/.github/workflows/update-flake-lock.yml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 8 * * 1" # runs weekly every Monday at 08:45 UTC/03:45 ET
+  push:
+    branches:
+      - ci-flake-update # TODO: remove (used to test from creation PR source branch)
+
+jobs:
+  lockfile:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout the repo"
+        uses: "actions/checkout@v4"
+      - name: "Install the Nix package manager"
+        uses: "cachix/install-nix-action@master"
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Update the lockfile"
+        run: |
+          # setup git user
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # run equivalent of `nix flake update`
+          nix --option commit-lockfile-summary "chore: update flake.lock" \
+          flake update --no-use-registries --commit-lock-file
+      - name: "Create Pull Request"
+        uses: "peter-evans/create-pull-request@v7"
+        with:
+          branch: "auto_update_flake_lockfile"
+          title: "chore: update flake.lock"
+          body: |
+            - [x] update the flake lockfile
