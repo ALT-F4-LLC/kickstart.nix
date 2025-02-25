@@ -2,12 +2,11 @@ name: Update flake lockfile
 # adapted from
 # https://github.com/numtide/system-manager/blob/82d5a9ecd15ec48bcbfbacf5462066ee267d6aae/.github/workflows/update-flake-lock.yml
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
     - cron: "45 8 * * 1" # runs weekly every Monday at 08:45 UTC/03:45 ET
   push:
-    branches:
-      - ci-flake-update # TODO: remove (used to test from creation PR source branch)
+    branches: []
 
 jobs:
   lockfile:
