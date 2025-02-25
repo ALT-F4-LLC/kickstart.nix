@@ -120,6 +120,11 @@
             description = "Kickstart Zig package flake.";
             path = ./template/zig;
           };
+
+          nim = {
+            description = "Kickstart Nim package flake.";
+            path = ./template/nim;
+          };
         };
       };
 
@@ -172,6 +177,7 @@
           example-swiftpm = mkLanguage {name = "swiftpm";};
           example-vite-react = mkLanguage {name = "vite-react";};
           example-zig = mkLanguage {name = "zig";};
+          example-nim = mkLanguage {name = "nim";};
         };
       };
     };
