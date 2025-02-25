@@ -6,6 +6,7 @@
     settings = {
       builders-use-substitutes = true;
       experimental-features = ["nix-command" "flakes"];
+      flake-registry = builtins.toFile "null-flake-registry.json" ''{"flakes":[],"version":2}'';
       substituters = [
         "https://nix-community.cachix.org"
       ];
