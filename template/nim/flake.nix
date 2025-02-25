@@ -12,10 +12,10 @@
         pkgs,
         ...
       }: let
+        inherit (pkgs) buildNimPackage;
+
         name = "nim";
         version = "0.1.0";
-
-        inherit (pkgs) buildNimPackage;
       in {
         devShells.default = pkgs.mkShell {
           inputsFrom = [self'.packages.default];

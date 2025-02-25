@@ -32,7 +32,7 @@ jobs:
           - swiftpm
           - zig
           - vite-react
-	  - nim
+          - nim
     steps:
       - uses: cachix/install-nix-action@v27
         with:
@@ -64,7 +64,7 @@ jobs:
           - rust
           - swiftpm
           - zig
-	  - nim
+          - nim
     steps:
       - uses: cachix/install-nix-action@v27
         with:
