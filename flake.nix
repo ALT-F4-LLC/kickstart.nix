@@ -1,7 +1,10 @@
 {
   description = "Kickstart templates to get started building with Nix.";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+  };
 
   outputs = inputs @ {
     flake-parts,
