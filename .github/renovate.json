@@ -10,10 +10,22 @@
             "schedule:weekly"
         ]
     },
+    "composer": {
+        "enabled": false
+    },
+    "gomod": {
+        "enabled": false
+    },
+    "haskell-cabal": {
+        "enabled": false
+    },
     "nix": {
         "enabled": true
     },
-    "node": {
+    "npm": {
+        "enabled": false
+    },
+    "swift": {
         "enabled": false
     }
 }
