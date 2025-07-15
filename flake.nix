@@ -125,6 +125,11 @@
             description = "Kickstart Nim package flake.";
             path = ./template/nim;
           };
+
+          tf = {
+            description = "Kickstart Terraform project flake.";
+            path = ./template/terraform;
+          };
         };
       };
 
@@ -178,6 +183,7 @@
           example-vite-react = mkLanguage {name = "vite-react";};
           example-zig = mkLanguage {name = "zig";};
           example-nim = mkLanguage {name = "nim";};
+          example-tf = mkLanguage {name = "terraform";};
         };
       };
     };

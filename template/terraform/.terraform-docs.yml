@@ -1,0 +1,4 @@
+formatter: "md tbl"
+
+output:
+  file: README.md

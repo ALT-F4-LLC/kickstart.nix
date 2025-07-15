@@ -33,6 +33,7 @@ Kickstart your Nix environments.
     - [Vite (React)](#vite-react)
     - [Zig](#zig)
     - [Nim](#nim)
+    - [Terraform](#terraform)
 - Systems
     - Linux
         - [Home Manager](#home-manager)
@@ -483,6 +484,14 @@ Used for Nim applications.
 
 ```bash
 nix flake init -t github:ALT-F4-LLC/kickstart.nix#nim
+```
+
+#### Terraform
+
+Used for Terraform projects.
+
+```bash
+nix flake init -t github:ALT-F4-LLC/kickstart.nix#tf
 ```
 
 ### Systems
